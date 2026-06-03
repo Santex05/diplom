@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Презентация — Docker и деплой AniHex</title>
+  <link rel="stylesheet" href="../shared/presentation.css" />
+</head>
+<body>
+
+<nav class="toc-nav no-print">
+  <a href="#hero">Титул</a>
+  <a href="#s1">Актуальность</a>
+  <a href="#s2">Цель</a>
+  <a href="#s3">Стек</a>
+  <a href="#s4">Compose</a>
+  <a href="#s5">Образы</a>
+  <a href="#s6">nginx</a>
+  <a href="#s7">Данные</a>
+  <a href="#s8">Окружение</a>
+  <a href="#s9">VPS</a>
+  <a href="#s10">Результаты</a>
+</nav>
+
+<div class="doc-wrap">
+
+  <header class="hero" id="hero">
+    <span class="hero-badge">ВКР · Docker и деплой</span>
+    <h1>Контейнеризация и автоматизация деплоя сервиса для просмотра японских мультипликационных сериалов</h1>
+    <div class="hero-meta">
+      <p>ГАПОУ «Московский университет»</p>
+      <p>Выполнил: <strong>[ФИО одногруппника]</strong></p>
+      <p>Руководитель: <strong>[ФИО руководителя]</strong></p>
+      <p>Москва, 2026</p>
+    </div>
+  </header>
+
+  <section class="section" id="s1">
+    <span class="section-num">Раздел 1</span>
+    <h1>Актуальность и проблема</h1>
+    <p>Команда разрабатывала backend и frontend отдельно. Без единого окружения на защите возникает риск «у меня работает» — разные версии Node, Postgres, пути к видео.</p>
+
+    <p class="caption"><strong>Таблица 1</strong> — Сравнение способов развёртывания</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Способ</th><th>Плюсы</th><th>Минусы</th></tr></thead>
+        <tbody>
+          <tr><td>Локально npm run dev</td><td>Быстрая разработка</td><td>Не воспроизводит production</td></tr>
+          <tr><td>Ручная установка на VPS</td><td>Гибкость</td><td>Долго, ошибки конфигурации</td></tr>
+          <tr><td>Docker Compose</td><td>Один запуск, одинаковое окружение</td><td>Требуется Docker на хосте</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-muted">Реализация REST API и React-клиента — темы соавторов. Здесь только инфраструктура: контейнеры, тома, nginx, DEPLOY.md.</p>
+  </section>
+
+  <section class="section section-alt" id="s2">
+    <span class="section-num">Раздел 2</span>
+    <h1>Цель, задачи и объект исследования</h1>
+    <p><strong>Цель:</strong> контейнеризировать и автоматизировать деплой платформы AniHex.</p>
+    <ul>
+      <li>Описать сервисы db, api, web в docker-compose.yml</li>
+      <li>Собрать образ API (Node + ffmpeg) и web (Vite → nginx)</li>
+      <li>Настроить reverse proxy и лимиты загрузки видео</li>
+      <li>Обеспечить сохранность данных в docker-data при перезапуске</li>
+      <li>Задокументировать развёртывание в DEPLOY.md</li>
+    </ul>
+    <p><strong>Объект:</strong> процесс развёртывания веб-платформы. <strong>Предмет:</strong> Docker, Compose, nginx, VPS.</p>
+  </section>
+
+  <section class="section" id="s3">
+    <span class="section-num">Раздел 3</span>
+    <h1>Состав контейнерного стека</h1>
+    <p class="caption"><strong>Таблица 2</strong> — Сервисы docker-compose.yml</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Сервис</th><th>Образ / сборка</th><th>Роль</th></tr></thead>
+        <tbody>
+          <tr><td>db</td><td>postgres:16-alpine</td><td>Реляционная БД каталога</td></tr>
+          <tr><td>api</td><td>server/Dockerfile</td><td>Node.js + ffmpeg, порт 3001 внутри сети</td></tr>
+          <tr><td>web</td><td>корневой Dockerfile</td><td>nginx: статика React + proxy</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption"><strong>Рисунок 1</strong> — Схема контейнерного стека</p>
+    <figure class="figure-wrap">
+      <div class="diagram">
+        <svg viewBox="0 0 720 280" width="720" height="280">
+          <rect x="280" y="10" width="160" height="50" rx="8" fill="#059669" stroke="#047857"/>
+          <text x="360" y="40" text-anchor="middle" fill="#fff" font-size="14">Браузер :80</text>
+          <rect x="260" y="90" width="200" height="50" rx="8" fill="#7c3aed"/>
+          <text x="360" y="120" text-anchor="middle" fill="#fff" font-size="13">web (nginx)</text>
+          <rect x="80" y="180" width="160" height="50" rx="8" fill="#2563eb"/>
+          <text x="160" y="210" text-anchor="middle" fill="#fff" font-size="12">api :3001</text>
+          <rect x="480" y="180" width="160" height="50" rx="8" fill="#2563eb"/>
+          <text x="560" y="210" text-anchor="middle" fill="#fff" font-size="12">db :5432</text>
+          <rect x="300" y="250" width="120" height="24" rx="4" fill="#f3f4f6" stroke="#9ca3af"/>
+          <text x="360" y="266" text-anchor="middle" font-size="10">docker-data/</text>
+          <line x1="360" y1="60" x2="360" y2="90" stroke="#666" stroke-width="2"/>
+          <line x1="320" y1="140" x2="160" y2="180" stroke="#666" stroke-width="2"/>
+          <line x1="400" y1="140" x2="560" y2="180" stroke="#666" stroke-width="2"/>
+          <line x1="160" y1="230" x2="360" y2="250" stroke="#666" stroke-dasharray="4"/>
+          <line x1="560" y1="230" x2="360" y2="250" stroke="#666" stroke-dasharray="4"/>
+        </svg>
+      </div>
+    </figure>
+  </section>
+
+  <section class="section section-alt" id="s4">
+    <span class="section-num">Раздел 4</span>
+    <h1>Docker Compose: зависимости и сеть</h1>
+    <ul>
+      <li><code>depends_on</code> api → db с condition: service_healthy</li>
+      <li>healthcheck db: <code>pg_isready</code> — API не стартует до готовности Postgres</li>
+      <li>Внутренняя сеть compose: api обращается к <code>db:5432</code></li>
+      <li>Наружу проброшен только <code>WEB_PORT</code> (по умолчанию 80)</li>
+      <li>Запуск: <code>docker compose up -d --build</code></li>
+    </ul>
+
+    <p class="caption"><strong>Рисунок 2</strong> — docker-compose.yml в редакторе</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: сервисы db, api, web, volumes, environment</span><span class="path">screenshots/03-compose-yml.png</span></div></figure>
+
+    <p class="caption"><strong>Рисунок 3</strong> — Диаграмма порядка запуска</p>
+    <figure class="figure-wrap">
+      <div class="diagram">
+        <svg viewBox="0 0 560 90" width="560" height="90">
+          <rect x="10" y="25" width="100" height="40" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+          <text x="60" y="50" text-anchor="middle" font-size="10">1. db healthy</text>
+          <rect x="150" y="25" width="100" height="40" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="200" y="50" text-anchor="middle" font-size="10">2. api up</text>
+          <rect x="290" y="25" width="100" height="40" rx="6" fill="#d1fae5" stroke="#059669"/>
+          <text x="340" y="50" text-anchor="middle" font-size="10">3. web up</text>
+          <rect x="430" y="25" width="120" height="40" rx="6" fill="#fef3c7" stroke="#d97706"/>
+          <text x="490" y="50" text-anchor="middle" font-size="10">localhost OK</text>
+          <polygon points="110,45 130,45 125,40 130,45 125,50" fill="#666"/>
+          <polygon points="250,45 270,45 265,40 270,45 265,50" fill="#666"/>
+          <polygon points="390,45 410,45 405,40 410,45 405,50" fill="#666"/>
+        </svg>
+      </div>
+    </figure>
+  </section>
+
+  <section class="section" id="s5">
+    <span class="section-num">Раздел 5</span>
+    <h1>Dockerfile образов api и web</h1>
+    <p class="caption"><strong>Таблица 3</strong> — Особенности образов</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Образ</th><th>Содержимое</th></tr></thead>
+        <tbody>
+          <tr><td>server/Dockerfile</td><td>Node 22 Alpine, ffmpeg, npm ci, CMD node index.js</td></tr>
+          <tr><td>Корневой Dockerfile</td><td>Stage 1: npm run build; Stage 2: nginx:alpine + dist/</td></tr>
+          <tr><td>Тома api</td><td>anime, banners, avatars → /data/* внутри контейнера</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption"><strong>Рисунок 4</strong> — server/Dockerfile (фрагмент)</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: FROM node, RUN apk add ffmpeg, COPY server</span><span class="path">screenshots/03-dockerfile-api.png</span></div></figure>
+  </section>
+
+  <section class="section section-alt" id="s6">
+    <span class="section-num">Раздел 6</span>
+    <h1>Конфигурация nginx</h1>
+    <ul>
+      <li><code>/</code> — try_files для SPA (React Router)</li>
+      <li><code>/api</code> и <code>/media</code> — proxy_pass на http://api:3001</li>
+      <li><code>client_max_body_size 512m</code> — загрузка видео через админку</li>
+      <li>Заголовки X-Real-IP, X-Forwarded-For для логов API</li>
+    </ul>
+
+    <p class="caption"><strong>Рисунок 5</strong> — deploy/nginx.conf</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: location /api и /media</span><span class="path">screenshots/03-nginx-conf.png</span></div></figure>
+
+    <p class="caption"><strong>Рисунок 6</strong> — Схема проксирования запросов</p>
+    <figure class="figure-wrap">
+      <div class="diagram">
+        <svg viewBox="0 0 500 120" width="500" height="120">
+          <rect x="10" y="40" width="80" height="40" rx="6" fill="#059669" stroke="#047857"/>
+          <text x="50" y="65" text-anchor="middle" font-size="10" fill="#fff">Браузер</text>
+          <rect x="130" y="40" width="80" height="40" rx="6" fill="#7c3aed"/>
+          <text x="170" y="65" text-anchor="middle" font-size="10" fill="#fff">nginx</text>
+          <rect x="250" y="15" width="100" height="35" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+          <text x="300" y="37" text-anchor="middle" font-size="9">/ → dist/</text>
+          <rect x="250" y="65" width="100" height="35" rx="6" fill="#fef3c7" stroke="#d97706"/>
+          <text x="300" y="87" text-anchor="middle" font-size="9">/api → api</text>
+          <rect x="390" y="40" width="90" height="40" rx="6" fill="#2563eb"/>
+          <text x="435" y="65" text-anchor="middle" font-size="10" fill="#fff">api:3001</text>
+          <polygon points="90,60 120,60 115,55 120,60 115,65" fill="#666"/>
+          <polygon points="210,60 240,60 235,55 240,60 235,65" fill="#666"/>
+          <polygon points="350,75 380,60 375,55 380,60 375,65" fill="#666"/>
+        </svg>
+      </div>
+    </figure>
+  </section>
+
+  <section class="section" id="s7">
+    <span class="section-num">Раздел 7</span>
+    <h1>Тома docker-data и переносимость</h1>
+    <p class="caption"><strong>Таблица 4</strong> — Папки docker-data на хосте</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Папка</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td>postgres/</td><td>Данные PostgreSQL (не теряются при rebuild)</td></tr>
+          <tr><td>anime/</td><td>Видеофайлы и постеры</td></tr>
+          <tr><td>banners/, avatars/</td><td>Медиа CMS</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption"><strong>Рисунок 7</strong> — docker compose ps</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: Up db, api, web</span><span class="path">screenshots/03-compose-ps.png</span></div></figure>
+
+    <p class="caption"><strong>Рисунок 8</strong> — Сайт на localhost после деплоя</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: http://localhost — главная из Docker</span><span class="path">screenshots/03-localhost.png</span></div></figure>
+  </section>
+
+  <section class="section section-alt" id="s8">
+    <span class="section-num">Раздел 8</span>
+    <h1>Переменные окружения и инициализация БД</h1>
+    <p class="caption"><strong>Таблица 5</strong> — Ключевые переменные в compose</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Переменная</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td>DATABASE_URL</td><td>postgresql://…@db:5432/anicatalog</td></tr>
+          <tr><td>ADMIN_PASSWORD</td><td>Пароль администратора (секрет на VPS)</td></tr>
+          <tr><td>ANIME_DIR</td><td>/data/anime внутри контейнера api</td></tr>
+          <tr><td>VIDEO_TRANSCODE</td><td>Включение ffmpeg при загрузке</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>schema.sql монтируется в <code>/docker-entrypoint-initdb.d/</code> — таблицы создаются при первом старте db. Импорт JSON: <code>docker compose exec api npm run db:migrate</code>.</p>
+  </section>
+
+  <section class="section" id="s9">
+    <span class="section-num">Раздел 9</span>
+    <h1>Развёртывание на VPS и проверка</h1>
+    <p class="caption"><strong>Таблица 6</strong> — Этапы деплоя (DEPLOY.md)</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Шаг</th><th>Действие</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Ubuntu VPS, установка Docker + Compose</td></tr>
+          <tr><td>2</td><td>git clone, копирование docker-data (при переносе)</td></tr>
+          <tr><td>3</td><td>.env с ADMIN_PASSWORD, docker compose up -d --build</td></tr>
+          <tr><td>4</td><td>DNS A-запись, Certbot/Caddy для HTTPS</td></tr>
+          <tr><td>5</td><td>Регулярный бэкап docker-data и pg_dump</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption"><strong>Рисунок 9</strong> — DEPLOY.md</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: инструкция запуска и VPS</span><span class="path">screenshots/03-deploy-md.png</span></div></figure>
+  </section>
+
+  <section class="section section-alt" id="s10">
+    <span class="section-num">Раздел 10</span>
+    <h1>Результаты и выводы</h1>
+    <ul>
+      <li>✓ Весь стек поднимается одной командой compose</li>
+      <li>✓ Окружение воспроизводимо на ПК, в лаборатории и на VPS</li>
+      <li>✓ Данные сохраняются в docker-data вне образов</li>
+      <li>✓ Документация DEPLOY.md для комиссии и эксплуатации</li>
+    </ul>
+    <p><strong>Вывод:</strong> контейнеризация сократила ручную настройку с часов до минут. Логика API и React-клиента разрабатывалась соавторами; моя работа — инфраструктурный слой, объединяющий их в развёртываемый продукт.</p>
+  </section>
+
+  <footer class="hero" style="border-top: 3px solid var(--accent);">
+    <h1 style="font-size: 32px;">Спасибо за внимание!</h1>
+    <p class="hero-meta"><strong>[ФИО одногруппника]</strong> · Москва, 2026</p>
+  </footer>
+</div>
+</body>
+</html>

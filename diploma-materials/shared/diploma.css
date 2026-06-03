@@ -1,0 +1,949 @@
+@page {
+
+  size: A4;
+
+  margin: 20mm 15mm 22mm 30mm;
+
+
+
+  @bottom-center {
+
+    content: counter(page);
+
+    font-family: 'Times New Roman', Times, serif;
+
+    font-size: 12pt;
+
+  }
+
+}
+
+
+
+@page :first {
+
+  @bottom-center {
+
+    content: none;
+
+  }
+
+}
+
+
+
+* { box-sizing: border-box; }
+
+
+
+html {
+
+  background: #d8d8d8;
+
+}
+
+
+
+body {
+
+  font-family: 'Times New Roman', Times, serif;
+
+  font-size: 14pt;
+
+  line-height: 1.5;
+
+  color: #000;
+
+  margin: 0;
+
+  padding: 24px 0 48px;
+
+  background: #d8d8d8;
+
+  counter-reset: figure table;
+
+}
+
+
+
+/* ——— Страница A4 (экран + печать) ——— */
+
+.doc-page {
+
+  width: 210mm;
+
+  min-height: 297mm;
+
+  margin: 0 auto 20px;
+
+  padding: 20mm 15mm 28mm 30mm;
+
+  background: #fff;
+
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.14);
+
+  position: relative;
+
+  page-break-after: always;
+
+  break-after: page;
+
+}
+
+
+
+.doc-page.no-page-num::after {
+
+  display: none;
+
+}
+
+
+
+.doc-page:has(.title-page-gost) {
+
+  padding-top: 18mm;
+
+}
+
+
+
+.doc-page.page-num {
+
+  counter-increment: page-num;
+
+}
+
+
+
+.doc-page.page-num-start {
+
+  counter-reset: page-num 2;
+
+}
+
+
+
+.doc-page.page-num::after {
+
+  content: counter(page-num);
+
+  position: absolute;
+
+  bottom: 14mm;
+
+  left: 0;
+
+  right: 0;
+
+  text-align: center;
+
+  font-size: 12pt;
+
+  color: #000;
+
+}
+
+
+
+h1, h2, h3, .struct-heading {
+
+  font-weight: bold;
+
+  text-align: center;
+
+  text-transform: uppercase;
+
+  page-break-after: avoid;
+
+}
+
+
+
+.struct-heading {
+
+  margin: 2em 0 1em;
+
+  font-size: 14pt;
+
+}
+
+
+
+.chapter-title {
+
+  text-align: justify;
+
+  text-indent: 1.25cm;
+
+  font-weight: bold;
+
+  text-transform: uppercase;
+
+  margin: 1.5em 0 1em;
+
+  page-break-before: always;
+
+}
+
+
+
+.doc-page .chapter-title {
+
+  page-break-before: auto;
+
+  margin-top: 0;
+
+}
+
+
+
+.section-title {
+
+  text-align: justify;
+
+  text-indent: 1.25cm;
+
+  font-weight: bold;
+
+  margin: 1em 0 0.5em;
+
+}
+
+
+
+p {
+
+  text-align: justify;
+
+  text-indent: 1.25cm;
+
+  margin: 0 0 0.5em;
+
+}
+
+
+
+p.no-indent { text-indent: 0; }
+
+
+
+ul, ol {
+
+  margin: 0.5em 0;
+
+  padding-left: 1.25cm;
+
+}
+
+
+
+li { margin-bottom: 0.25em; text-align: justify; }
+
+
+
+.table-block {
+
+  margin: 1.2em 0 1.5em;
+
+  page-break-inside: avoid;
+
+}
+
+
+
+.table-block table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  font-size: 12pt;
+
+}
+
+
+
+.table-block th,
+
+.table-block td {
+
+  border: 1px solid #000;
+
+  padding: 5px 8px;
+
+  vertical-align: top;
+
+}
+
+
+
+.table-caption {
+
+  text-indent: 0;
+
+  font-weight: bold;
+
+  margin-bottom: 0.35em;
+
+  text-align: left;
+
+}
+
+
+
+.table-block.auto-num .table-caption::before {
+
+  content: 'Таблица ' counter(table) ' — ';
+
+  counter-increment: table;
+
+}
+
+
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  margin: 0.5em 0 0;
+
+  font-size: 12pt;
+
+  page-break-inside: avoid;
+
+}
+
+
+
+th, td {
+
+  border: 1px solid #000;
+
+  padding: 4px 8px;
+
+  vertical-align: top;
+
+}
+
+
+
+.figure-block {
+
+  margin: 1.2em 0 1.5em;
+
+  page-break-inside: avoid;
+
+}
+
+
+
+.figure-block img,
+
+.diagram-box,
+
+.screenshot-placeholder {
+
+  display: block;
+
+  width: 100%;
+
+  max-width: 100%;
+
+  margin: 0 auto;
+
+}
+
+
+
+.diagram-box {
+
+  border: 1px solid #333;
+
+  padding: 12px;
+
+  background: #fafafa;
+
+}
+
+
+
+.screenshot-placeholder {
+
+  min-height: 140px;
+
+  border: 2px dashed #666;
+
+  background: #f5f5f5;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 16px;
+
+  font-size: 11pt;
+
+  color: #444;
+
+  text-indent: 0;
+
+}
+
+
+
+.figure-caption {
+
+  text-align: center;
+
+  text-indent: 0;
+
+  font-size: 12pt;
+
+  margin: 0.5em 0 0;
+
+}
+
+
+
+.figure-block.auto-num .figure-caption::before {
+
+  content: 'Рисунок ' counter(figure) ' — ';
+
+  counter-increment: figure;
+
+}
+
+
+
+.toc { list-style: none; padding: 0; }
+
+.toc li { display: flex; justify-content: space-between; text-indent: 0; margin: 0.3em 0; }
+
+.toc-dots { flex: 1; border-bottom: 1px dotted #000; margin: 0 0.5em 0.2em; }
+
+
+
+/* ——— Титульный лист (Приложение 6, как в шаблоне НГОК) ——— */
+
+.title-page,
+.title-page-gost {
+
+  font-family: 'Times New Roman', Times, serif;
+
+  font-size: 14pt;
+
+  line-height: 1.2;
+
+  min-height: 252mm;
+
+  display: flex;
+
+  flex-direction: column;
+
+  position: relative;
+
+  padding: 0;
+
+  text-align: center;
+
+}
+
+
+
+.title-page p,
+.title-page-gost p {
+
+  text-indent: 0;
+
+  margin: 0;
+
+}
+
+
+
+/* Шапка: логотип + вуз по центру, допуск — справа (как на эталоне) */
+
+.title-top {
+
+  position: relative;
+
+  min-height: 5.2cm;
+
+  margin-bottom: 2.2cm;
+
+}
+
+
+
+.title-logo-wrap {
+
+  margin: 0 0 0.45cm;
+
+}
+
+
+
+.title-logo {
+
+  width: 4.2cm;
+
+  height: auto;
+
+  display: block;
+
+  margin: 0 auto;
+
+}
+
+
+
+.title-org {
+
+  font-weight: bold;
+
+  font-size: 14pt;
+
+  line-height: 1.22;
+
+  max-width: 11cm;
+
+  margin: 0 auto;
+
+  padding: 0;
+
+}
+
+
+
+.title-org p { margin: 0 0 0.1em; }
+
+
+
+.title-approve {
+
+  position: absolute;
+
+  top: 2.1cm;
+
+  right: 0;
+
+  width: 7.4cm;
+
+  text-align: right;
+
+  font-size: 14pt;
+
+  line-height: 1.22;
+
+  font-weight: normal;
+
+}
+
+
+
+.title-approve p {
+
+  text-align: right;
+
+  margin: 0 0 0.15em;
+
+}
+
+
+
+.title-approve .approve-lead {
+
+  margin-bottom: 0.25em;
+
+}
+
+
+
+.title-approve .approve-sign {
+
+  margin-top: 0.35em;
+
+  white-space: nowrap;
+
+}
+
+
+
+.title-approve .approve-line {
+
+  display: inline-block;
+
+  width: 3.6cm;
+
+  border-bottom: 1px solid #000;
+
+  height: 1em;
+
+  vertical-align: baseline;
+
+  margin-right: 0.25em;
+
+}
+
+
+
+.title-approve .approve-person { white-space: nowrap; }
+
+
+
+.title-approve .approve-date { margin-top: 0.3em; }
+
+
+
+/* Центральный блок: тип работы, специальность, тема */
+
+.title-body-center {
+
+  margin: 0 0 1.6cm;
+
+}
+
+
+
+.title-diploma {
+
+  font-weight: bold;
+
+  font-size: 14pt;
+
+  text-transform: uppercase;
+
+  margin: 0 0 0.5em;
+
+}
+
+
+
+.title-spec-head {
+
+  font-weight: bold;
+
+  font-size: 14pt;
+
+  margin: 0 0 0.75em;
+
+}
+
+
+
+.title-field {
+
+  width: 14.5cm;
+
+  max-width: 100%;
+
+  margin: 0 auto 1em;
+
+}
+
+
+
+.title-field-topic { margin-bottom: 1.2em; }
+
+
+
+.title-field-value {
+
+  font-weight: bold;
+
+  font-size: 14pt;
+
+  line-height: 1.25;
+
+  margin: 0 0 0.2em;
+
+  padding: 0 0.5cm;
+
+}
+
+
+
+.title-field-line {
+
+  border-bottom: 1px solid #000;
+
+  height: 0;
+
+  margin: 0;
+
+}
+
+
+
+.title-field-hint {
+
+  font-size: 8pt;
+
+  line-height: 1.15;
+
+  margin: 0.1em 0 0;
+
+}
+
+
+
+/* Подписи — таблица как в бланке */
+
+.title-sig-table {
+
+  width: 16cm;
+
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  border-collapse: collapse;
+
+  font-size: 14pt;
+
+  text-align: left;
+
+}
+
+
+
+.title-sig-table td {
+
+  border: none;
+
+  padding: 0 0.15cm 0 0;
+
+  vertical-align: bottom;
+
+  text-indent: 0;
+
+}
+
+
+
+.title-sig-table .sig-label {
+
+  white-space: nowrap;
+
+  width: 1%;
+
+  padding-right: 0.25cm;
+
+  vertical-align: bottom;
+
+}
+
+
+
+.title-sig-table .sig-label-narrow {
+
+  white-space: nowrap;
+
+  width: 1%;
+
+  padding: 0 0.2cm;
+
+  text-align: center;
+
+}
+
+
+
+.title-sig-table .sig-cell { width: 32%; }
+
+
+
+.title-sig-table .sig-cell-short { width: 18%; }
+
+
+
+.title-sig-table .sig-line {
+
+  border-bottom: 1px solid #000;
+
+  height: 1.05em;
+
+  min-width: 2cm;
+
+}
+
+
+
+.title-sig-table tr.sig-main td { padding-top: 0.45em; }
+
+
+
+.title-sig-table tr.sig-main:first-child td { padding-top: 0; }
+
+
+
+.title-sig-table tr.sig-hint td {
+
+  font-size: 8pt;
+
+  line-height: 1.1;
+
+  padding-top: 0.05em;
+
+  padding-bottom: 0.15em;
+
+  vertical-align: top;
+
+}
+
+
+
+.title-sig-table .hint { text-align: center; }
+
+
+
+.title-sig-table .hint-center { text-align: center; }
+
+
+
+.title-sig-table .sig-done-row {
+
+  padding-top: 0.45em;
+
+  text-align: left;
+
+  white-space: nowrap;
+
+}
+
+
+
+.title-sig-table .sig-inline-line {
+
+  display: inline-block;
+
+  width: 5.5cm;
+
+  border-bottom: 1px solid #000;
+
+  height: 1em;
+
+  vertical-align: baseline;
+
+  margin: 0 0.2cm;
+
+}
+
+
+
+.title-sig-table .sig-inline-short { width: 3.2cm; }
+
+
+
+.title-city {
+
+  margin-top: auto;
+
+  padding-top: 1.5cm;
+
+  font-size: 14pt;
+
+  text-align: center;
+
+}
+
+
+
+pre.code-block {
+
+  font-family: Consolas, 'Courier New', monospace;
+
+  font-size: 11pt;
+
+  line-height: 1.35;
+
+  text-indent: 0;
+
+  margin: 0.5em 0 1em;
+
+  padding: 0.4em 0.6em;
+
+  background: #f5f5f5;
+
+  border: 1px solid #ccc;
+
+  white-space: pre-wrap;
+
+  overflow-x: auto;
+
+}
+
+
+
+.sources ol { padding-left: 0; list-style: none; counter-reset: src; }
+
+.sources li { counter-increment: src; text-indent: 0; padding-left: 0; margin-bottom: 0.35em; }
+
+.sources li::before { content: counter(src) ". "; }
+
+
+
+article.diploma {
+
+  all: unset;
+
+  display: contents;
+
+}
+
+
+
+@media print {
+
+  html { background: #fff; }
+
+
+
+  body {
+
+    padding: 0;
+
+    background: #fff;
+
+  }
+
+
+
+  .doc-page {
+
+    width: auto;
+
+    min-height: auto;
+
+    margin: 0;
+
+    padding: 0;
+
+    box-shadow: none;
+
+    page-break-after: always;
+
+  }
+
+
+
+  .doc-page.page-num::after {
+
+    display: none;
+
+  }
+
+
+
+  .no-print { display: none !important; }
+
+}
+
+

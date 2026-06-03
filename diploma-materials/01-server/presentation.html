@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Презентация — серверная логика AniHex</title>
+  <link rel="stylesheet" href="../shared/presentation.css" />
+</head>
+<body>
+
+<nav class="toc-nav no-print">
+  <a href="#hero">Титул</a>
+  <a href="#s1">Актуальность</a>
+  <a href="#s2">Цель</a>
+  <a href="#s3">Методы</a>
+  <a href="#s4">Архитектура</a>
+  <a href="#s5">БД</a>
+  <a href="#s6">API</a>
+  <a href="#s7">Админка</a>
+  <a href="#s8">Видео</a>
+  <a href="#s9">Безопасность</a>
+  <a href="#s10">Тестирование</a>
+  <a href="#s11">Результаты</a>
+</nav>
+
+<div class="doc-wrap">
+
+  <header class="hero" id="hero">
+    <span class="hero-badge">ВКР · Серверная логика</span>
+    <h1>Разработка серверной логики веб-платформы для просмотра японских мультипликационных сериалов</h1>
+    <div class="hero-meta">
+      <p>ГАПОУ «Московский университет»</p>
+      <p>Специальность: <strong>[код и название]</strong></p>
+      <p>Выполнил: <strong>[ФИО студента]</strong></p>
+      <p>Руководитель: <strong>[ФИО руководителя]</strong></p>
+      <p>Москва, 2026</p>
+    </div>
+</header>
+
+  <section class="section" id="s1">
+    <span class="section-num">Раздел 1</span>
+    <h1>Актуальность и проблема</h1>
+    <p>Онлайн-просмотр аниме требует централизованного каталога, учёта пользователей и безопасной выдачи видео. JSON-файлы подходят только для прототипа.</p>
+
+    <div class="compare-cards">
+      <div class="compare-card">
+        <h3>JSON (прототип)</h3>
+        <ul>
+          <li>Быстрый старт без СУБД</li>
+          <li>Нет транзакций</li>
+          <li>Сложно работать команде</li>
+        </ul>
+      </div>
+      <div class="compare-card highlight">
+        <h3>PostgreSQL + API (AniHex)</h3>
+        <ul>
+          <li>Целостность данных</li>
+          <li>REST для клиента и админки</li>
+          <li>Готовность к продакшену</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="caption"><strong>Таблица 1</strong> — Сравнение способов хранения данных на сервере</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Критерий</th><th>JSON-файлы</th><th>PostgreSQL</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Целостность связей</td><td>Низкая</td><td>Высокая (FK, транзакции)</td></tr>
+          <tr><td>Совместная работа</td><td>Конфликты при записи</td><td>Одновременный доступ</td></tr>
+          <tr><td>Масштаб каталога</td><td>Ограничен</td><td>Тысячи записей</td></tr>
+          <tr><td>Использование в AniHex</td><td>Режим разработки</td><td>Основной режим (DATABASE_URL)</td></tr>
+        </tbody>
+      </table>
+    </div>
+</section>
+
+  <section class="section section-alt" id="s2">
+    <span class="section-num">Раздел 2</span>
+    <h1>Цель, задачи, методы</h1>
+    <p><strong>Цель:</strong> разработать серверную логику платформы AniHex.</p>
+    <ul>
+      <li>Спроектировать схему БД и REST API</li>
+      <li>Реализовать пользователей: регистрация, избранное, коллекция</li>
+      <li>Разработать админ-API с отдельной авторизацией</li>
+      <li>Загрузка и перекодирование серий (ffmpeg)</li>
+    </ul>
+    <p><strong>Стек backend:</strong> Node.js, Express 5, PostgreSQL, Multer, ffmpeg.</p>
+    <p class="note-muted">Клиентское приложение и развёртывание — отдельные темы соавторов; здесь только сервер и API.</p>
+</section>
+
+  <section class="section" id="s3">
+    <span class="section-num">Раздел 3</span>
+    <h1>Объект, предмет и методы</h1>
+    <p class="caption"><strong>Таблица 2</strong> — Паспорт исследования</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Показатель</th><th>Содержание</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Объект</td><td>Процесс разработки серверной части веб-платформы просмотра аниме</td></tr>
+          <tr><td>Предмет</td><td>REST API, PostgreSQL, админ-контур, обработка медиа на Node.js</td></tr>
+          <tr><td>Методы</td><td>Анализ литературы, проектирование схемы БД, программирование, экспериментальная проверка API</td></tr>
+          <tr><td>Практическая база</td><td>Каталог <code>server/</code> репозитория vite-project</td></tr>
+        </tbody>
+      </table>
+    </div>
+</section>
+
+  <section class="section section-alt" id="s4">
+    <span class="section-num">Раздел 4</span>
+    <h1>Архитектура сервера</h1>
+    <p>Точка входа — <code>server/index.js</code>. Три уровня доступа: публичный, пользовательский, административный.</p>
+
+    <p class="caption"><strong>Рисунок 1</strong> — Логическая схема серверной архитектуры AniHex</p>
+    <figure class="figure-wrap">
+      <div class="diagram">
+        <svg viewBox="0 0 720 320" width="720" height="320" xmlns="http://www.w3.org/2000/svg">
+          <rect x="280" y="10" width="160" height="44" rx="8" fill="#7c3aed" stroke="#5b21b6"/>
+          <text x="360" y="38" text-anchor="middle" fill="#fff" font-size="14" font-family="Inter,sans-serif">Express API</text>
+          <rect x="40" y="90" width="120" height="40" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="100" y="115" text-anchor="middle" font-size="12" font-family="Inter,sans-serif">Публичное API</text>
+          <rect x="300" y="90" width="120" height="40" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="360" y="115" text-anchor="middle" font-size="12" font-family="Inter,sans-serif">User API</text>
+          <rect x="560" y="90" width="120" height="40" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="620" y="115" text-anchor="middle" font-size="12" font-family="Inter,sans-serif">Admin API</text>
+          <line x1="360" y1="54" x2="100" y2="90" stroke="#9ca3af" stroke-width="2"/>
+          <line x1="360" y1="54" x2="360" y2="90" stroke="#9ca3af" stroke-width="2"/>
+          <line x1="360" y1="54" x2="620" y2="90" stroke="#9ca3af" stroke-width="2"/>
+          <rect x="80" y="170" width="140" height="44" rx="6" fill="#d1fae5" stroke="#059669"/>
+          <text x="150" y="198" text-anchor="middle" font-size="11" font-family="Inter,sans-serif">store / userStore</text>
+          <rect x="290" y="170" width="140" height="44" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+          <text x="360" y="198" text-anchor="middle" font-size="11" font-family="Inter,sans-serif">PostgreSQL</text>
+          <rect x="500" y="170" width="140" height="44" rx="6" fill="#fef3c7" stroke="#d97706"/>
+          <text x="570" y="198" text-anchor="middle" font-size="11" font-family="Inter,sans-serif">/media + ffmpeg</text>
+          <line x1="150" y1="130" x2="150" y2="170" stroke="#9ca3af" stroke-width="2"/>
+          <line x1="360" y1="130" x2="360" y2="170" stroke="#9ca3af" stroke-width="2"/>
+          <line x1="620" y1="130" x2="570" y2="170" stroke="#9ca3af" stroke-width="2"/>
+          <rect x="260" y="250" width="200" height="36" rx="6" fill="#f3f4f6" stroke="#6b7280"/>
+          <text x="360" y="273" text-anchor="middle" font-size="11" font-family="Inter,sans-serif">Клиент SPA (отдельная тема)</text>
+          <line x1="360" y1="286" x2="360" y2="54" stroke="#9ca3af" stroke-width="2" stroke-dasharray="4"/>
+        </svg>
+      </div>
+    </figure>
+
+    <p class="caption"><strong>Рисунок 2</strong> — Структура каталога server/ (скриншот)</p>
+    <figure class="figure-wrap">
+      <div class="screenshot-slot">
+        <span class="icon">🖼</span>
+        <span class="hint">Вставьте скриншот: дерево папок server/ в VS Code (index.js, store.js, db/, userStore.js)</span>
+        <span class="path">screenshots/01-server-folder.png</span>
+      </div>
+    </figure>
+</section>
+
+  <section class="section" id="s5">
+    <span class="section-num">Раздел 5</span>
+    <h1>База данных PostgreSQL</h1>
+    <p class="caption"><strong>Таблица 3</strong> — Основные таблицы схемы AniHex</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Таблица</th><th>Назначение</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>anime, episodes, episode_sources</td><td>Каталог и качества видео</td></tr>
+          <tr><td>users, user_sessions</td><td>Аккаунты зрителей</td></tr>
+          <tr><td>favorites, collection_entries</td><td>Избранное и коллекция</td></tr>
+          <tr><td>admin_sessions</td><td>Сессии администратора (отдельно!)</td></tr>
+          <tr><td>home_banner_slides</td><td>Баннеры главной страницы</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption"><strong>Рисунок 3</strong> — ER-диаграмма (фрагмент каталога)</p>
+    <figure class="figure-wrap">
+      <div class="diagram">
+        <svg viewBox="0 0 640 200" width="640" height="200">
+          <rect x="20" y="70" width="100" height="50" rx="4" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="70" y="100" text-anchor="middle" font-size="12">anime</text>
+          <rect x="180" y="70" width="100" height="50" rx="4" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="230" y="100" text-anchor="middle" font-size="12">episodes</text>
+          <rect x="340" y="70" width="120" height="50" rx="4" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="400" y="100" text-anchor="middle" font-size="11">episode_sources</text>
+          <rect x="520" y="70" width="100" height="50" rx="4" fill="#d1fae5" stroke="#059669"/>
+          <text x="570" y="100" text-anchor="middle" font-size="12">users</text>
+          <line x1="120" y1="95" x2="180" y2="95" stroke="#666" marker-end="url(#ar)"/>
+          <line x1="280" y1="95" x2="340" y2="95" stroke="#666"/>
+          <defs><marker id="ar" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#666"/></marker></defs>
+        </svg>
+      </div>
+    </figure>
+    <p>JSON-режим без DATABASE_URL — только для локальной отладки разработчика backend. Миграция: <code>npm run db:migrate</code>.</p>
+</section>
+
+  <section class="section section-alt" id="s6">
+    <span class="section-num">Раздел 6</span>
+    <h1>Публичное и пользовательское API</h1>
+    <p class="caption"><strong>Таблица 4</strong> — Примеры endpoints</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Метод</th><th>Маршрут</th><th>Назначение</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>GET</td><td>/api/anime</td><td>Каталог для сайта</td></tr>
+          <tr><td>POST</td><td>/api/auth/register</td><td>Регистрация</td></tr>
+          <tr><td>GET</td><td>/api/user/collection</td><td>Коллекция пользователя</td></tr>
+          <tr><td>GET</td><td>/media/…</td><td>Раздача видео и постеров</td></tr>
+          <tr><td>GET</td><td>/api/health</td><td>Диагностика (ok, apiVersion: 2)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption"><strong>Рисунок 4</strong> — Поток авторизации пользователя</p>
+    <figure class="figure-wrap">
+      <div class="diagram">
+        <svg viewBox="0 0 640 100" width="640" height="100">
+          <rect x="10" y="30" width="100" height="40" rx="6" fill="#fef3c7" stroke="#d97706"/>
+          <text x="60" y="55" text-anchor="middle" font-size="10">POST register</text>
+          <rect x="140" y="30" width="100" height="40" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="190" y="55" text-anchor="middle" font-size="10">scrypt hash</text>
+          <rect x="270" y="30" width="100" height="40" rx="6" fill="#d1fae5" stroke="#059669"/>
+          <text x="320" y="55" text-anchor="middle" font-size="10">usr_ token</text>
+          <rect x="400" y="30" width="120" height="40" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+          <text x="460" y="55" text-anchor="middle" font-size="10">Bearer в запросах</text>
+          <polygon points="110,50 130,50 125,45 130,50 125,55" fill="#666"/>
+          <polygon points="240,50 260,50 255,45 260,50 255,55" fill="#666"/>
+          <polygon points="370,50 390,50 385,45 390,50 385,55" fill="#666"/>
+        </svg>
+      </div>
+    </figure>
+</section>
+
+  <section class="section" id="s7">
+    <span class="section-num">Раздел 7</span>
+    <h1>Административное API</h1>
+    <p>Я выбрал <strong>REST API + отдельные токены adm_</strong>, потому что:</p>
+    <ul>
+      <li>Админка — SPA, ей нужен JSON API, а не HTML-формы</li>
+      <li>Админ и пользователь не должны делить сессии</li>
+      <li>CRUD через HTTP: POST/PUT/DELETE для аниме, серий, баннеров</li>
+    </ul>
+
+    <p class="caption"><strong>Рисунок 5</strong> — Страница входа в админ-панель</p>
+    <figure class="figure-wrap">
+      <div class="screenshot-slot">
+        <span class="icon">🖼</span>
+        <span class="hint">Скриншот: /admin/login — форма входа администратора</span>
+        <span class="path">screenshots/01-admin-login.png</span>
+      </div>
+    </figure>
+
+    <p class="caption"><strong>Рисунок 6</strong> — Форма добавления аниме и загрузки серии</p>
+    <figure class="figure-wrap">
+      <div class="screenshot-slot">
+        <span class="icon">🖼</span>
+        <span class="hint">Скриншот: AdminAnimeForm — поля аниме, загрузка видео, прогресс %</span>
+        <span class="path">screenshots/01-admin-anime-form.png</span>
+      </div>
+    </figure>
+
+    <p class="caption"><strong>Рисунок 7</strong> — Дашборд админки со списком аниме</p>
+    <figure class="figure-wrap">
+      <div class="screenshot-slot">
+        <span class="icon">🖼</span>
+        <span class="hint">Скриншот: /admin — AdminDashboard, список тайтлов</span>
+        <span class="path">screenshots/01-admin-dashboard.png</span>
+      </div>
+    </figure>
+</section>
+
+  <section class="section section-alt" id="s8">
+    <span class="section-num">Раздел 8</span>
+    <h1>Загрузка и перекодирование видео</h1>
+    <p>Multer → ffmpeg (H.264, AAC) → запись в episode_sources.</p>
+
+    <p class="caption"><strong>Рисунок 8</strong> — Диаграмма обработки загружаемого видео</p>
+    <figure class="figure-wrap">
+      <div class="diagram">
+        <svg viewBox="0 0 700 120" width="700" height="120">
+          <rect x="10" y="40" width="90" height="40" rx="6" fill="#fef3c7" stroke="#d97706"/>
+          <text x="55" y="65" text-anchor="middle" font-size="11">Upload</text>
+          <rect x="130" y="40" width="90" height="40" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="175" y="65" text-anchor="middle" font-size="11">Multer</text>
+          <rect x="250" y="40" width="90" height="40" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+          <text x="295" y="65" text-anchor="middle" font-size="11">ffmpeg</text>
+          <rect x="370" y="40" width="100" height="40" rx="6" fill="#d1fae5" stroke="#059669"/>
+          <text x="420" y="65" text-anchor="middle" font-size="10">ANIME_DIR</text>
+          <rect x="500" y="40" width="90" height="40" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="545" y="65" text-anchor="middle" font-size="11">PostgreSQL</text>
+          <polygon points="100,60 120,60 115,55 120,60 115,65" fill="#666"/>
+          <polygon points="220,60 240,60 235,55 240,60 235,65" fill="#666"/>
+          <polygon points="340,60 360,60 355,55 360,60 355,65" fill="#666"/>
+          <polygon points="470,60 490,60 485,55 490,60 485,65" fill="#666"/>
+        </svg>
+      </div>
+    </figure>
+
+    <p class="caption"><strong>Рисунок 9</strong> — Прогресс загрузки в админке</p>
+    <figure class="figure-wrap">
+      <div class="screenshot-slot">
+        <span class="icon">🖼</span>
+        <span class="hint">Скриншот: полоска «Загрузка 47%» при upload серии</span>
+        <span class="path">screenshots/01-upload-progress.png</span>
+      </div>
+    </figure>
+</section>
+
+  <section class="section" id="s9">
+    <span class="section-num">Раздел 9</span>
+    <h1>Безопасность серверного API</h1>
+    <p class="caption"><strong>Таблица 5</strong> — Меры защиты backend</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Угроза</th><th>Решение в AniHex</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Утечка паролей</td><td>Хеширование scrypt (crypto Node.js)</td></tr>
+          <tr><td>Доступ к admin API</td><td>Middleware requireAdmin, токены adm_</td></tr>
+          <tr><td>Path traversal в /media</td><td>Проверка isInsideBase для пути файла</td></tr>
+          <tr><td>Прямое скачивание</td><td>Маршрут /download возвращает 403</td></tr>
+          <tr><td>Смешение ролей</td><td>Отдельные таблицы admin_sessions и user_sessions</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption"><strong>Рисунок 10</strong> — Три контура доступа к API</p>
+    <figure class="figure-wrap">
+      <div class="diagram">
+        <svg viewBox="0 0 600 160" width="600" height="160">
+          <rect x="20" y="20" width="160" height="50" rx="6" fill="#d1fae5" stroke="#059669"/>
+          <text x="100" y="50" text-anchor="middle" font-size="11">Публичный — без токена</text>
+          <rect x="220" y="20" width="160" height="50" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+          <text x="300" y="50" text-anchor="middle" font-size="11">User — Bearer usr_</text>
+          <rect x="420" y="20" width="160" height="50" rx="6" fill="#fef3c7" stroke="#d97706"/>
+          <text x="500" y="50" text-anchor="middle" font-size="11">Admin — Bearer adm_</text>
+          <rect x="180" y="100" width="240" height="40" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="300" y="125" text-anchor="middle" font-size="11">Express → store / userStore</text>
+          <line x1="100" y1="70" x2="240" y2="100" stroke="#666"/>
+          <line x1="300" y1="70" x2="300" y2="100" stroke="#666"/>
+          <line x1="500" y1="70" x2="360" y2="100" stroke="#666"/>
+        </svg>
+      </div>
+    </figure>
+</section>
+
+  <section class="section section-alt" id="s10">
+    <span class="section-num">Раздел 10</span>
+    <h1>Тестирование backend</h1>
+    <ul>
+      <li><strong>Автотесты:</strong> <code>npm run test:server</code> — 5 проверок episodeSources.js</li>
+      <li><strong>Ручной чек-лист:</strong> каталог, регистрация, admin CRUD, upload MP4</li>
+      <li><strong>Инструменты:</strong> Postman, вкладка Network, GET /api/health</li>
+      <li><strong>Граничные случаи:</strong> admin без токена (401), usr_ на admin-маршруте, лимит Multer</li>
+    </ul>
+
+    <p class="caption"><strong>Рисунок 11</strong> — Ответ GET /api/health или Postman</p>
+    <figure class="figure-wrap">
+      <div class="screenshot-slot">
+        <span class="icon">🖼</span>
+        <span class="hint">Скриншот: { ok: true, apiVersion: 2 } или список /api/anime</span>
+        <span class="path">screenshots/01-api-health.png</span>
+      </div>
+    </figure>
+</section>
+
+  <section class="section" id="s11">
+    <span class="section-num">Раздел 11</span>
+    <h1>Результаты и выводы</h1>
+    <ul>
+      <li>✓ REST API для каталога и пользователей</li>
+      <li>✓ PostgreSQL + миграция JSON</li>
+      <li>✓ Админ-API с изолированной авторизацией</li>
+      <li>✓ Перекодирование серий ffmpeg</li>
+      <li>✓ Автотесты server/tests (npm run test:server)</li>
+    </ul>
+    <p><strong>Вывод:</strong> цель достигнута — серверный REST API готов к использованию клиентским приложением. Контейнеризация и UI админки — в работах соавторов.</p>
+</section>
+
+  <footer class="hero" style="border-top: 3px solid var(--accent); border-bottom: none;">
+    <h1 style="font-size: 32px; margin-bottom: 16px;">Спасибо за внимание!</h1>
+    <p class="hero-meta"><strong>[ФИО студента]</strong> · Москва, 2026</p>
+  </footer>
+
+</div>
+</body>
+</html>

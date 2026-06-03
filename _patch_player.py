@@ -1,0 +1,175 @@
+import re
+from pathlib import Path
+
+snippet = r'''
+        {qualityLoading && (
+          <div className="absolute inset-0 z-[22] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+            <div className="flex flex-col items-center gap-3">
+              <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/20 border-t-accent" />
+              <p className="text-sm text-white/80">Загрузка качества…</p>
+            </div>
+          </div>
+        )}
+
+        {episodesOpen && anime && (
+          <PlayerEpisodesPanel
+            anime={anime}
+            episodes={allEpisodes}
+            currentEpisodeId={epId}
+            fullscreen={isFullscreen}
+            onSelect={(ep) => {
+              setEpisodesOpen(false)
+              onSelectEpisode?.(ep)
+            }}
+            onClose={() => setEpisodesOpen(false)}
+          />
+        )}
+
+        <PlayerSpeedToast rate={playbackRate} onReset={resetSpeed} />
+
+        <div
+          className={`absolute inset-x-0 top-0 z-10 bg-gradient-to-b from-black/80 via-black/30 to-transparent px-4 pb-8 pt-4 transition-opacity duration-200 ${
+            controlsVisible ? 'opacity-100' : 'pointer-events-none opacity-0'
+          }`}
+        >
+          <div className="flex items-start gap-3">
+            {onBack && (
+              <button
+                type="button"
+                onClick={onBack}
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20"
+                aria-label="Назад к списку"
+              >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            )}
+            <div className="min-w-0 pt-0.5">
+              <p className="line-clamp-1 text-sm font-bold text-white">{animeTitle}</p>
+              <p className="line-clamp-1 text-xs text-white/65">
+                Эпизод {episodeNumber}
+                {episodeTitle ? ` · ${episodeTitle}` : ''}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={`absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black via-black/80 to-transparent px-4 pb-4 pt-12 transition-opacity duration-200 ${
+            controlsVisible ? 'opacity-100' : 'pointer-events-none opacity-0'
+          }`}
+        >
+          <PlayerRange
+            variant="progress"
+            min={0}
+            max={duration || 0}
+            value={currentTime}
+            onChange={(e) => seek(Number(e.target.value))}
+            className="mb-3"
+            aria-label="Прогресс просмотра"
+          />
+
+          <div className="mb-2 flex items-center justify-between gap-2 text-xs tabular-nums text-white/80">
+            <span className="min-w-0 flex-1 truncate text-white/70">
+              Эпизод {episodeNumber}
+              {episodeTitle ? ` · ${episodeTitle}` : ''}
+            </span>
+            <span className="shrink-0">
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </span>
+          </div>
+
+          {settingsOpen && (
+            <PlayerSettingsMenu
+              open={settingsOpen}
+              onClose={() => {
+                setSettingsOpen(false)
+                setSettingsView('main')
+              }}
+              view={settingsView}
+              onViewChange={setSettingsView}
+              playbackRate={playbackRate}
+              onSpeed={changeSpeed}
+              speedOptions={SPEED_OPTIONS}
+              multiQuality={multiQuality}
+              sourceList={sourceList}
+              activeQuality={activeQuality}
+              onQuality={switchQuality}
+              qualityLabel={qualityLabel}
+            />
+          )}
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            {anime && allEpisodes.length > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  setEpisodesOpen((v) => !v)
+                  setSettingsOpen(false)
+                }}
+                className="flex items-center gap-1.5 rounded-lg bg-white/15 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition hover:bg-white/25"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 10h16M4 14h10" />
+                </svg>
+                Эпизоды
+              </button>
+            )}
+
+            <div className="mx-auto flex items-center gap-1 sm:gap-2">
+              <button type="button" onClick={onPrev} disabled={!hasPrev} className="p-1 text-white/90 transition hover:text-accent disabled:opacity-30" title="Предыдущий эпизод">
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" /></svg>
+              </button>
+              <button type="button" onClick={togglePlay} className="p-1 text-white transition hover:text-accent" aria-label={playing ? 'Пауза' : 'Play'}>
+                {playing ? (
+                  <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" /></svg>
+                ) : (
+                  <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                )}
+              </button>
+              <button type="button" onClick={onNext} disabled={!hasNext} className="p-1 text-white/90 transition hover:text-accent disabled:opacity-30" title="Следующий эпизод">
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M16 18h2V6h-2M6 18l8.5-6L6 6z" /></svg>
+              </button>
+              <button type="button" onClick={() => { setEpisodesOpen(true); setSettingsOpen(false) }} className="ml-1 rounded-lg bg-white/15 px-2.5 py-1 text-xs font-semibold text-white/90 backdrop-blur-sm hover:bg-white/25">
+                Эпизод {episodeNumber}
+              </button>
+            </div>
+
+            <div className="ml-auto flex items-center gap-1 sm:gap-2">
+              <div onMouseEnter={() => setVolumeHover(true)} onMouseLeave={() => setVolumeHover(false)}>
+                <PlayerVolumeControl volume={volume} muted={muted} visible={volumeHover || volumeFlash} onToggleMute={toggleMute} onChange={changeVolume} />
+              </div>
+              {playbackRate !== 1 && (
+                <button type="button" onClick={() => { setSettingsView('speed'); setSettingsOpen(true); setEpisodesOpen(false) }} className="rounded-lg bg-white/15 px-2 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                  {playbackRate}x
+                </button>
+              )}
+              <button type="button" onClick={() => { setSettingsOpen((v) => !v); setSettingsView('main'); setEpisodesOpen(false) }} className={`relative flex h-9 w-9 items-center justify-center rounded-lg text-white/90 transition hover:bg-white/10 hover:text-white ${settingsOpen ? 'bg-white/10' : ''}`} aria-label="Настройки">
+                {settingsOpen && <span className="absolute right-1 top-1 h-1.5 w-1.5 rounded-full bg-emerald-400" />}
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </button>
+              <button type="button" onClick={async () => { const v = videoRef.current; if (!v) return; try { if (document.pictureInPictureElement) await document.exitPictureInPicture(); else if (document.pictureInPictureEnabled) await v.requestPictureInPicture() } catch: pass }} className="flex h-9 w-9 items-center justify-center rounded-lg text-white/80 hover:bg-white/10 hover:text-white" aria-label="Картинка в картинке">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7 4h10a2 2 0 012 2v10M7 16H5a2 2 0 01-2-2V6a2 2 0 012-2h2" /></svg>
+              </button>
+              <button type="button" onClick={toggleFullscreen} className="flex h-9 w-9 items-center justify-center rounded-lg text-white/80 hover:bg-white/10 hover:text-white" aria-label="Полный экран">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+'''
+
+player = Path('src/components/VideoPlayer.jsx').read_text(encoding='utf-8')
+start = player.find('        <div\n          className={`absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black')
+if start < 0:
+    raise SystemExit('start not found')
+end = player.find('      </div>\n    </div>\n  )\n}', start)
+if end < 0:
+    raise SystemExit('end not found')
+
+Path('src/components/VideoPlayer.jsx').write_text(player[:start] + snippet + player[end:], encoding='utf-8')
+print('ok')

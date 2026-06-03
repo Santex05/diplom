@@ -1,0 +1,564 @@
+@import 'tailwindcss';
+
+:root {
+  --header-height: 4.5rem;
+  --catalog-filter-inset: 1.5rem;
+
+  /* Тёмная тема (по умолчанию) */
+  --app-bg-page: #0a0a0c;
+  --app-bg-card: #12121a;
+  --app-bg-elevated: #181824;
+  --app-bg-footer: #08080a;
+  --app-text: #ffffff;
+  --app-text-muted: #9ca3af;
+  --app-border: rgba(255, 255, 255, 0.08);
+  --app-header-bg: rgba(10, 10, 12, 0.95);
+  --app-input-bg: rgba(18, 18, 26, 0.8);
+  --app-overlay-bg: rgba(12, 12, 16, 0.92);
+  --app-surface-hover: rgba(255, 255, 255, 0.06);
+
+  --accent-main: #d8b4fe;
+  --accent-btn: #e9d5ff;
+  --accent-dim: #a78bfa;
+  --accent-glow-rgb: 167, 139, 250;
+  --accent-glow-deep-rgb: 139, 92, 246;
+  --app-range-track: rgba(255, 255, 255, 0.22);
+  color-scheme: dark;
+}
+
+@theme {
+  --color-bg-dark: var(--app-bg-page);
+  --color-bg-card: var(--app-bg-card);
+  --color-bg-elevated: var(--app-bg-elevated);
+  --color-bg-footer: var(--app-bg-footer);
+  --color-accent: var(--accent-main);
+  --color-accent-btn: var(--accent-btn);
+  --color-accent-dim: var(--accent-dim);
+  --color-text-muted: var(--app-text-muted);
+  --color-border-subtle: var(--app-border);
+  --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--app-bg-page);
+  color: var(--app-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+[data-dropdown-menu] {
+  overscroll-behavior: contain;
+}
+
+/* Страница просмотра — на весь экран */
+html.watch-cinema-active,
+html.watch-cinema-active body,
+html.watch-cinema-active #root {
+  overflow: hidden;
+  height: 100%;
+}
+
+.watch-cinema {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+
+
+/* Декоративный фон главной */
+.home-page {
+  position: relative;
+}
+
+.home-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 20% -10%,
+      rgba(var(--accent-glow-rgb), 0.14),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 90% 20%,
+      rgba(var(--accent-glow-deep-rgb), 0.09),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 50% 30% at 50% 100%,
+      rgba(var(--accent-glow-deep-rgb), 0.1),
+      transparent 45%
+    );
+}
+
+.home-page > *:not(header) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Общий фон внутренних страниц (детали, просмотр) */
+.page-mesh {
+  position: relative;
+}
+
+.page-mesh::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse 70% 45% at 10% 0%,
+      rgba(var(--accent-glow-rgb), 0.12),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 50% 35% at 100% 30%,
+      rgba(var(--accent-glow-deep-rgb), 0.08),
+      transparent 45%
+    );
+}
+
+.page-mesh > *:not(header) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Закреплённая шапка */
+.app-header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+/* Колонка фильтра = высота списка (как на AniLibria — контейнер для sticky) */
+.catalog-filter-column {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-height: 0;
+}
+
+/*
+ * Фильтр каталога (desktop): dual-sticky через useCatalogFilterSticky.
+ * CSS sticky — только до гидрации.
+ */
+@media (min-width: 1024px) {
+  .catalog-filter-sticky:not(.catalog-filter-sticky--fixed) {
+    position: -webkit-sticky;
+    position: sticky;
+    /* topLimit в JS = getBoundingClientRect().bottom шапки + inset */
+    top: calc(var(--header-height) + var(--catalog-filter-inset));
+    bottom: var(--catalog-filter-inset);
+    z-index: 40;
+    width: 100%;
+    height: fit-content;
+    align-self: flex-start;
+    flex-shrink: 0;
+  }
+
+  .catalog-filter-sticky--fixed {
+    transition: none;
+  }
+}
+
+/* Обёртка плеера на странице просмотра — одно скругление, без «вылезания» видео */
+.player-shell {
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: #000;
+  isolation: isolate;
+}
+
+.player-shell .group\/player {
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.player-shell .group\/player > div {
+  overflow: hidden;
+}
+
+.player-shell video {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+@keyframes home-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-fade-up {
+  animation: home-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hero-ken-burns {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+.hero-ken-burns {
+  animation: hero-ken-burns 22s ease-in-out infinite alternate;
+}
+
+@keyframes hero-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+.hero-glow-pulse {
+  animation: hero-glow-pulse 6s ease-in-out infinite;
+}
+
+/* Видеоплеер: полоса прогресса и громкость */
+.player-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  width: 100%;
+  border-radius: 9999px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.player-range--progress {
+  height: 8px;
+}
+
+/* Громкость — компактный трек, выровнен по центру в капсуле */
+.player-volume-slider {
+  line-height: 0;
+}
+
+.player-range--volume {
+  width: 100%;
+  min-width: 4.25rem;
+  height: 4px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.player-range--volume::-webkit-slider-runnable-track {
+  height: 5px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    var(--accent-main) 0%,
+    var(--accent-main) var(--fill, 0%),
+    var(--app-range-track) var(--fill, 0%),
+    var(--app-range-track) 100%
+  );
+}
+
+.player-range--volume::-moz-range-track {
+  height: 5px;
+  border-radius: 9999px;
+  background: var(--app-range-track);
+}
+
+.player-range--volume::-moz-range-progress {
+  height: 5px;
+  border-radius: 9999px;
+  background: var(--accent-main);
+}
+
+.player-range--volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 11px;
+  height: 11px;
+  margin-top: -3.5px;
+  border-radius: 50%;
+  background: var(--accent-btn);
+  border: 2px solid #1a1028;
+  box-shadow: 0 0 0 1px rgba(var(--accent-glow-rgb), 0.4);
+}
+
+.player-range--volume::-moz-range-thumb {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent-btn);
+  border: 2px solid #1a1028;
+  box-shadow: 0 0 0 1px rgba(var(--accent-glow-rgb), 0.4);
+}
+
+.player-range--volume:hover::-webkit-slider-thumb {
+  transform: scale(1.08);
+}
+
+@keyframes player-center-flash {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  15% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+}
+
+.player-center-flash {
+  animation: player-center-flash 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.player-range:not(.player-range--volume)::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    var(--accent-main) 0%,
+    var(--accent-main) var(--fill, 0%),
+    var(--app-range-track) var(--fill, 0%),
+    var(--app-range-track) 100%
+  );
+}
+
+.player-range--progress::-webkit-slider-runnable-track {
+  height: 8px;
+}
+
+.player-range:not(.player-range--volume)::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.player-range:not(.player-range--volume)::-moz-range-progress {
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--accent-main);
+}
+
+.player-range:not(.player-range--volume)::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--accent-btn);
+  border: 2px solid #1a1028;
+  box-shadow: 0 0 0 2px rgba(216, 180, 254, 0.35);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.player-range--progress::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  margin-top: -5px;
+}
+
+.player-range:hover::-webkit-slider-thumb {
+  transform: scale(1.12);
+  background: #fff;
+}
+
+.player-range:not(.player-range--volume)::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-btn);
+  border: 2px solid #1a1028;
+  box-shadow: 0 0 0 2px rgba(216, 180, 254, 0.35);
+}
+
+.player-range:focus {
+  outline: none;
+}
+
+.player-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px rgba(216, 180, 254, 0.55);
+}
+
+.dual-range-thumb {
+  pointer-events: none;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0;
+  margin: 0;
+}
+
+.dual-range-thumb {
+  height: 24px;
+}
+
+.dual-range-thumb::-webkit-slider-runnable-track {
+  height: 6px;
+  background: transparent;
+}
+
+.dual-range-thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: auto;
+  height: 16px;
+  width: 16px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--accent-btn);
+  border: 2px solid #1a1028;
+  box-shadow: 0 0 0 2px rgba(216, 180, 254, 0.35);
+  cursor: pointer;
+}
+
+.dual-range-thumb::-moz-range-thumb {
+  pointer-events: auto;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--accent-btn);
+  border: 2px solid #1a1028;
+  cursor: pointer;
+}
+
+.player-range--thin {
+  height: 3px;
+}
+
+.player-range--thin::-webkit-slider-runnable-track {
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    #fff 0%,
+    #fff var(--fill, 0%),
+    rgba(255, 255, 255, 0.28) var(--fill, 0%),
+    rgba(255, 255, 255, 0.28) 100%
+  );
+}
+
+.player-range--thin::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  margin-top: -4.5px;
+  background: #fff;
+  border: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.45);
+}
+
+.player-range--thin::-moz-range-track {
+  height: 3px;
+}
+
+.player-range--thin::-moz-range-progress {
+  background: #fff;
+}
+
+.catalog-scroll {
+  scrollbar-color: #3f3f46 transparent;
+  scrollbar-width: thin;
+}
+
+.catalog-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.catalog-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.catalog-scroll::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 999px;
+}
+
+.catalog-scroll::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+html {
+  scrollbar-color: #3f3f46 transparent;
+  scrollbar-width: thin;
+}
+
+html::-webkit-scrollbar {
+  width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* Плавные переходы для интерактивных элементов */
+button,
+a,
+[role='button'] {
+  transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input,
+textarea,
+select {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.top-below-navbar {
+  top: var(--header-height);
+}
+
+@keyframes content-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content-reveal {
+  animation: content-reveal 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}

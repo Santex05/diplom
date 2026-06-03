@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ВКР — Серверная логика веб-платформы AniHex</title>
+  <link rel="stylesheet" href="../shared/diploma.css">
+</head>
+<body>
+
+<div class="doc-page no-page-num">
+<section class="title-page title-page-gost title-page-final">
+  <div class="title-top">
+    <div class="title-logo-wrap" aria-hidden="true">
+      <svg class="title-logo" viewBox="0 0 200 72" xmlns="http://www.w3.org/2000/svg" role="img">
+        <rect x="2" y="2" width="196" height="68" fill="none" stroke="#c41e3a" stroke-width="2.5"/>
+        <path fill="#c41e3a" d="M18 58V42l14-16 12 10 16-20 14 14 22-24 28 30v2H18z"/>
+        <rect x="88" y="34" width="8" height="24" fill="#c41e3a"/>
+        <rect x="102" y="26" width="8" height="32" fill="#c41e3a"/>
+        <rect x="116" y="38" width="8" height="20" fill="#c41e3a"/>
+        <rect x="130" y="28" width="8" height="30" fill="#c41e3a"/>
+        <rect x="144" y="36" width="8" height="22" fill="#c41e3a"/>
+        <rect x="158" y="32" width="8" height="26" fill="#c41e3a"/>
+      </svg>
+    </div>
+
+    <div class="title-org">
+      <p>Государственное автономное профессиональное образовательное учреждение</p>
+      <p>города Москвы «Московский университет»</p>
+      <p>(ГАПОУ «Московский университет», МУ)</p>
+    </div>
+
+    <div class="title-approve">
+      <p class="approve-lead">ДОПУСТИТЬ К ЗАЩИТЕ</p>
+      <p>Заместитель директора по учебной</p>
+      <p>деятельности ГАПОУ «Московский университет»</p>
+      <p class="approve-sign"><span class="approve-line"></span><span class="approve-person">[Ф.И.О. заместителя директора]</span></p>
+      <p class="approve-date">«&nbsp;&nbsp;&nbsp;&nbsp;»&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;202&nbsp;&nbsp;&nbsp;&nbsp; г.</p>
+    </div>
+  </div>
+
+  <div class="title-body-center">
+    <p class="title-diploma">ДИПЛОМНАЯ РАБОТА (ПРОЕКТ)</p>
+    <p class="title-spec-head">по специальности среднего профессионального образования</p>
+
+    <div class="title-field">
+      <div class="title-field-line"></div>
+      <p class="title-field-hint">(шифр, наименование специальности)</p>
+    </div>
+
+    <div class="title-field title-field-topic">
+      <p class="title-field-value">«Разработка серверной логики веб-платформы для просмотра японских мультипликационных сериалов»</p>
+      <div class="title-field-line"></div>
+      <p class="title-field-hint">(тема дипломной работы)</p>
+    </div>
+  </div>
+
+  <table class="title-sig-table" cellspacing="0" cellpadding="0">
+    <tr class="sig-main">
+      <td class="sig-label"><strong>Обучающийся</strong></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+      <td class="sig-label sig-label-narrow"><strong>Группы</strong></td>
+      <td class="sig-cell sig-cell-short"><div class="sig-line"></div></td>
+    </tr>
+    <tr class="sig-hint">
+      <td></td>
+      <td class="hint">(Ф.И.О.)</td>
+      <td></td>
+      <td class="hint">(№ группы)</td>
+    </tr>
+    <tr class="sig-main">
+      <td colspan="4" class="sig-done-row">
+        <strong>Работа выполнена</strong> «&nbsp;&nbsp;&nbsp;&nbsp;»
+        <span class="sig-inline-line"></span>
+        <strong>202</strong>
+        <span class="sig-inline-line sig-inline-short"></span>
+        <strong>г.</strong>
+      </td>
+    </tr>
+    <tr class="sig-hint">
+      <td colspan="4" class="hint hint-center">(подпись выпускника)</td>
+    </tr>
+    <tr class="sig-main">
+      <td class="sig-label"><strong>Руководитель работы</strong></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+    </tr>
+    <tr class="sig-hint">
+      <td></td>
+      <td class="hint">(подпись)</td>
+      <td class="hint">(фамилия И.О.)</td>
+      <td class="hint">(дата, подпись)</td>
+    </tr>
+    <tr class="sig-main">
+      <td class="sig-label"><strong>Нормоконтроль</strong></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+    </tr>
+    <tr class="sig-hint">
+      <td></td>
+      <td class="hint">(подпись)</td>
+      <td class="hint">(фамилия И.О.)</td>
+      <td class="hint">(дата, подпись)</td>
+    </tr>
+  </table>
+
+  <p class="title-city">Москва, 2026</p>
+</section>
+</div>
+
+<div class="doc-page no-page-num"><p class="struct-heading no-indent">СОДЕРЖАНИЕ</p>
+<ul class="toc no-indent">
+  <li><span>ВВЕДЕНИЕ</span><span class="toc-dots"></span><span>3</span></li>
+  <li><span>ГЛАВА 1. ОПИСАНИЕ ПРЕДМЕТНОЙ ОБЛАСТИ</span><span class="toc-dots"></span><span>8</span></li>
+  <li><span>&nbsp;&nbsp;1.1. Идентификация предметной области</span><span class="toc-dots"></span><span>8</span></li>
+  <li><span>&nbsp;&nbsp;1.2. Анализ существующих аналогов</span><span class="toc-dots"></span><span>12</span></li>
+  <li><span>&nbsp;&nbsp;1.3. Требования к разрабатываемой информационной системе</span><span class="toc-dots"></span><span>16</span></li>
+  <li><span>&nbsp;&nbsp;1.4. Определение ролей пользователей программного продукта</span><span class="toc-dots"></span><span>20</span></li>
+  <li><span>&nbsp;&nbsp;1.5. Обоснование выбора технологического стека</span><span class="toc-dots"></span><span>24</span></li>
+  <li><span>ГЛАВА 2. ПРОЕКТИРОВАНИЕ И РАЗРАБОТКА ПРОГРАММНОГО ПРОДУКТА</span><span class="toc-dots"></span><span>28</span></li>
+  <li><span>&nbsp;&nbsp;2.1. Реализация модели базы данных</span><span class="toc-dots"></span><span>28</span></li>
+  <li><span>&nbsp;&nbsp;2.2. Программирование backend-части программного продукта</span><span class="toc-dots"></span><span>38</span></li>
+  <li><span>&nbsp;&nbsp;&nbsp;&nbsp;2.2.1. Реакция программного продукта на действия пользователей</span><span class="toc-dots"></span><span>38</span></li>
+  <li><span>&nbsp;&nbsp;&nbsp;&nbsp;2.2.2. Реализация механизмов безопасности и аутентификации</span><span class="toc-dots"></span><span>44</span></li>
+  <li><span>&nbsp;&nbsp;&nbsp;&nbsp;2.2.3. Подключение и управление базой данных</span><span class="toc-dots"></span><span>50</span></li>
+  <li><span>&nbsp;&nbsp;2.3. Взаимодействие с frontend</span><span class="toc-dots"></span><span>56</span></li>
+  <li><span>ЗАКЛЮЧЕНИЕ</span><span class="toc-dots"></span><span>62</span></li>
+  <li><span>СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ</span><span class="toc-dots"></span><span>64</span></li>
+  <li><span>ПРИЛОЖЕНИЕ 1</span><span class="toc-dots"></span><span>66</span></li>
+  <li><span>ПРИЛОЖЕНИЕ 2</span><span class="toc-dots"></span><span>68</span></li>
+</ul></div>
+
+<div class="doc-page page-num page-num-start"><p class="struct-heading no-indent">ВВЕДЕНИЕ</p>
+
+<p>Цифровая трансформация медиапотребления затронула и нишу аниме: зритель всё реже использует физические носители и локальные архивы, предпочитая браузер и мобильные приложения с синхронизацией прогресса. Для разработчика это означает проектирование отказоустойчивого API, способного обслуживать одновременно гостевой просмотр каталога, авторизованную персонализацию и изолированный контур администрирования. Настоящая работа фокусируется исключительно на этих серверных аспектах платформы AniHex.</p>
+
+<p>Японская мультипликация (аниме) за последние два десятилетия превратилась в глобальный культурный и экономический феномен: зрительская аудитория в России и мире ежегодно растёт, появляются легальные и нелегальные каналы распространения, а потребители ожидают от онлайн-сервисов удобного каталога, персонализации и стабильного воспроизведения видео в браузере. Для образовательного коллективного проекта команды разработчиков была поставлена задача создания веб-платформы AniHex, ориентированной на просмотр сериального аниме-контента. Автор настоящей работы отвечал за серверную логику: проектирование API, хранение данных, административный контур и обработку медиафайлов. Клиентская часть (одностраничное приложение) реализована другим участником проекта и в тексте упоминается лишь как потребитель HTTP API.</p>
+
+<p><strong>Актуальность</strong> темы обусловлена тем, что современный видеосервис невозможно свести к статическим HTML-страницам: требуется централизованный каталог с метаданными, учёт пользователей, избранное, прогресс просмотра, рейтинги, а также безопасная выдача файлов. На этапе прототипирования допустимо хранение каталога в JSON-файлах, однако для эксплуатации, совместной работы администраторов и целостности связей «тайтл — серия — источник качества» необходимы промышленная СУБД (в проекте — PostgreSQL) и согласованный REST API. Отдельная актуальность имеет административный контур: без него наполнение каталога сводится к ручному редактированию файлов на диске, что неприемлемо для регулярного обновления эпизодов и баннеров главной страницы.</p>
+
+<p><strong>Проблема</strong> заключается в отсутствии у учебного проекта единой серверной подсистемы, которая одновременно обслуживала бы публичный каталог, персональные данные зарегистрированных пользователей и изолированный административный доступ с операциями CRUD над контентом и учётными записями, не смешивая привилегии администратора и обычного зрителя. Дополнительная сложность — приём крупных видеофайлов, нормализация формата для веб-плеера и защита от несанкционированного скачивания через API.</p>
+
+<p><strong>Цель работы</strong> — разработать и описать серверную логику веб-платформы AniHex для просмотра японских мультипликационных сериалов, обеспечивающую хранение каталога, пользовательские функции и административное управление контентом.</p>
+
+<p><strong>Задачи исследования:</strong></p>
+<ol>
+  <li>Описать предметную область, проанализировать аналоги и сформулировать требования к информационной системе AniHex.</li>
+  <li>Спроектировать архитектуру серверного приложения и разделение уровней доступа (публичный, пользовательский, административный).</li>
+  <li>Разработать реляционную схему базы данных и механизм переключения между PostgreSQL и JSON-режимом для локальной отладки.</li>
+  <li>Реализовать пользовательское API: регистрация, аутентификация, профиль, избранное, коллекция, прогресс и оценки.</li>
+  <li>Реализовать административное API с отдельными токенами сессии и полным набором CRUD-операций над каталогом, баннерами и пользователями.</li>
+  <li>Реализовать загрузку серий и постеров, перекодирование видео средствами ffmpeg и безопасную раздачу медиа.</li>
+  <li>Провести практическую проверку работоспособности разработанного backend.</li>
+</ol>
+
+<p><strong>Объект исследования</strong> — процесс разработки серверной части веб-платформы для потокового просмотра сериального аниме-контента.</p>
+<p><strong>Предмет исследования</strong> — методы и программные средства построения REST API, хранения данных в PostgreSQL, административного управления каталогом и обработки видео на платформе AniHex.</p>
+
+<p><strong>Методы исследования:</strong> анализ научной и отраслевой литературы; сравнительный анализ архитектурных подходов (REST, реляционная модель данных); проектирование структуры данных и интерфейсов API; программирование на платформе Node.js с фреймворком Express; экспериментальная проверка сценариев регистрации, администрирования и загрузки эпизодов.</p>
+
+<p><strong>Практическая база</strong> — учебный проект AniHex в репозитории vite-project: каталог server (точка входа index.js, модули store, userStore, auth, adminRoutes, userRoutes, слой db), схема schema.sql, скрипт миграции db:migrate, каталог медиафайлов anime и вспомогательные данные в server/data. Тестирование выполнялось при локальном запуске сервера (npm run dev в каталоге server) с подключением PostgreSQL через переменную окружения DATABASE_URL либо в JSON-режиме без СУБД.</p>
+
+<p><strong>Структура работы.</strong> Во введении обоснованы актуальность, цель и задачи. Первая глава описывает предметную область, аналоги, требования, роли и стек. Во второй главе — модель БД и программирование backend и реализация серверной части AniHex. В заключении сформулированы выводы. Приложения содержат фрагменты кода и схемы API.</p>
+
+<p>Научная новизна работы в учебном контексте заключается в комплексном описании и реализации серверной подсистемы именно для аниме-каталога с учётом специфики серий, нескольких качеств одного эпизода, меток опенинга и эндинга, а также жёсткого разделения административного и пользовательского контуров аутентификации в рамках одного Express-приложения. Практическая значимость подтверждается возможностью использовать разработанный API как самостоятельный продукт для наполнения контентом и подключения любого совместимого клиента.</p>
+
+<p>В работе не рассматриваются вопросы вёрстки пользовательского интерфейса, маршрутизации React Router и конфигурации обратного прокси — эти темы отнесены к смежным разделам дипломного проекта команды; для целостности картины достаточно указать, что браузерный клиент обращается к серверу по базовому URL API и получает медиа по маршруту /media.</p>
+
+<p>Материалы работы могут быть использованы при подготовке доклада к защите (см. speech.md в том же каталоге 01-server): тезисы доклада согласованы с главами диплома и отражают вклад автора в серверную часть и административный API. Презентация presentation.html визуализирует архитектуру и результаты; полный текстовый объём раскрыт в настоящем HTML-документе для предоставления комиссии в печатном виде.</p></div>
+
+<div class="doc-page page-num"><p class="chapter-title">ГЛАВА 1. ОПИСАНИЕ ПРЕДМЕТНОЙ ОБЛАСТИ</p>
+
+<p class="section-title">1.1. Идентификация предметной области</p>
+
+<p>Предметная область настоящей работы — веб-платформа для потокового просмотра японских мультипликационных сериалов (аниме) в браузере. Программный продукт AniHex решает задачи централизованного каталога сериального контента, персонализации опыта зрителя и административного наполнения медиатеки без прямого доступа к файловой системе сервера.</p>
+
+<p>Основные функции продукта с точки зрения серверной подсистемы: хранение и выдача метаданных тайтлов и эпизодов; учёт зарегистрированных пользователей (регистрация, сессии, профиль); избранное, коллекция «продолжить просмотр», оценки и прогресс по сериям; административный контур CRUD над каталогом, баннерами витрины и учётными записями; приём и перекодирование видеофайлов; безопасная раздача медиа по HTTP. Эти задачи важны, поскольку зритель ожидает стабильный каталог и синхронизацию прогресса между сеансами, а владелец платформы — регулярное обновление эпизодов без ручного редактирования JSON на диске.</p>
+
+<p>Иерархия данных: «аниме — эпизод — варианты качества (episode_sources)». Удаление тайтла должно каскадно удалять связанные серии и источники. Персональные данные (прогресс, избранное) отделены от канонического каталога: действия зрителя не изменяют общие метаданные тайтла.</p>
+
+<p>Автор работы в командном дипломном проекте отвечает за backend (Node.js, Express, PostgreSQL, REST API, админ-маршруты, обработку видео). Клиентское SPA и контейнерное развёртывание реализованы одногруппниками; в главе 2.3 описано только взаимодействие по HTTP.</p>
+
+</div>
+
+<div class="doc-page page-num">
+
+<p class="section-title">1.2. Анализ существующих аналогов</p>
+
+<p>Для обоснования проектных решений рассмотрены три программных продукта, близких по предметной области: легальный стриминг Crunchyroll, каталог и сообщество Shikimori, учебно-демонстрационная платформа AniLibria (как пример русскоязычного агрегатора каталога). Сравнение не претендует на полноту рынка, но покрывает типичные функции каталога, просмотра и учёта пользователя.</p>
+
+<p class="table-caption no-indent">Таблица 1 — Сравнительная характеристика аналогов (фрагмент)</p>
+<table>
+  <thead>
+    <tr><th>Характеристика</th><th>Crunchyroll</th><th>Shikimori</th><th>AniLibria</th><th>AniHex (цель)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Просмотр в браузере</td><td>Да, DRM</td><td>Нет (каталог)</td><td>Частично</td><td>Да, MP4 без DRM</td></tr>
+    <tr><td>Каталог с фильтрами</td><td>Да</td><td>Да, расширенный</td><td>Да</td><td>Да</td></tr>
+    <tr><td>Регистрация и профиль</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td></tr>
+    <tr><td>Прогресс просмотра</td><td>Да</td><td>Списки</td><td>Да</td><td>Да, sync с API</td></tr>
+    <tr><td>Оценки сообщества</td><td>Ограничено</td><td>Да</td><td>Да</td><td>Да, 1–10</td></tr>
+    <tr><td>Админка контента</td><td>Закрытая</td><td>Модерация</td><td>Закрытая</td><td>REST API adm_</td></tr>
+    <tr><td>Открытый API для ВКР</td><td>Нет</td><td>Ограничен</td><td>Нет</td><td>Да, REST</td></tr>
+    <tr><td>Самохостинг</td><td>Нет</td><td>Нет</td><td>Нет</td><td>Да</td></tr>
+    <tr><td>Несколько качеств эпизода</td><td>Адаптивный HLS</td><td>—</td><td>Да</td><td>Да, MP4</td></tr>
+    <tr><td>Метки OP/ED</td><td>Редко</td><td>—</td><td>Частично</td><td>Да, в БД</td></tr>
+  </tbody>
+</table>
+
+<p>Вывод: для дипломного проекта целесообразно взять у аналогов развитый каталог и персонализацию (Shikimori, стриминги), у Crunchyroll — ориентацию на просмотр в браузере, а отличительной чертой AniHex сделать прозрачный REST API, самохостинг, отдельный административный контур с токенами adm_ и поддержку нескольких качеств одного эпизода с метками опенинга/эндинга — без претензии на масштаб коммерческого DRM.</p>
+
+</div>
+
+<div class="doc-page page-num">
+
+<p class="section-title">1.3. Требования к разрабатываемой информационной системе</p>
+
+<p>Ниже сформулированы функциональные (ФТ) и нефункциональные (НФТ) требования к серверной части AniHex. Требования согласованы с ролью backend-разработчика и покрывают контуры, реализованные в репозитории vite-project.</p>
+
+<p><strong>Функциональные требования:</strong></p>
+<ol>
+  <li>ФТ-1. Система должна предоставлять публичный REST API каталога аниме (список, карточка тайтла, эпизод, рейтинг).</li>
+  <li>ФТ-2. Пользователь должен иметь возможность зарегистрироваться, войти, выйти и управлять профилем (настройки, аватар).</li>
+  <li>ФТ-3. Авторизованный пользователь должен сохранять избранное, коллекцию просмотра и прогресс по сериям.</li>
+  <li>ФТ-4. Пользователь должен выставлять оценку тайтлу в диапазоне 1–10.</li>
+  <li>ФТ-5. Администратор должен выполнять CRUD над тайтлами, эпизодами, баннерами главной и учётными записями пользователей через /api/admin/*.</li>
+  <li>ФТ-6. Администратор должен загружать постеры, видео серий и изображения баннеров (multipart).</li>
+  <li>ФТ-7. Система должна перекодировать загруженное видео в MP4 H.264/AAC при наличии ffmpeg (опционально).</li>
+  <li>ФТ-8. Система должна раздавать медиафайлы по /media с защитой от path traversal.</li>
+  <li>ФТ-9. Прямое скачивание эпизода через API должно быть запрещено (403).</li>
+</ol>
+
+<p><strong>Нефункциональные требования:</strong></p>
+<ol>
+  <li>НФТ-1. Время отклика GET каталога при работе с PostgreSQL — не более 2 с на учебном наборе данных.</li>
+  <li>НФТ-2. Пароли пользователей и администратора хранятся в виде хеша (scrypt), не в открытом виде.</li>
+  <li>НФТ-3. Доступ к административным операциям только при валидном токене с префиксом adm_.</li>
+  <li>НФТ-4. Целостность данных обеспечивается внешними ключами и CHECK-ограничениями PostgreSQL.</li>
+  <li>НФТ-5. Конфигурация (порты, DATABASE_URL, пароли) задаётся переменными окружения, не в репозитории.</li>
+  <li>НФТ-6. Допускается JSON-режим хранения без СУБД для локальной отладки разработчика.</li>
+</ol>
+
+</div>
+
+<div class="doc-page page-num">
+
+<p class="section-title">1.4. Определение ролей пользователей программного продукта</p>
+
+<p><strong>Гость (неавторизованный зритель)</strong> — посетитель без учётной записи. Возможности: просмотр каталога и карточек аниме, воспроизведение доступных серий, просмотр агрегированного рейтинга; персональный прогресс и избранное — только локально в браузере до регистрации.</p>
+
+<p><strong>Зарегистрированный пользователь</strong> — клиент с токеном в user_sessions. Возможности: все функции гостя плюс синхронизация избранного, коллекции, прогресса и оценок с сервером; настройки плеера; загрузка аватара; удаление аккаунта.</p>
+
+<p><strong>Администратор</strong> — сотрудник, наполняющий платформу. Возможности: отдельный вход /api/admin/login; CRUD каталога; загрузка видео и постеров; управление баннерами и CMS страницы входа; просмотр и модерация пользователей. Не использует пользовательский токен для привилегированных операций — только adm_.</p>
+
+<p>Разделение ролей на уровне API исключает эскалацию привилегий: middleware requireAdmin и userMiddleware применяются к разным наборам маршрутов.</p>
+
+</div>
+
+<div class="doc-page page-num">
+
+<p class="section-title">1.5. Обоснование выбора технологического стека</p>
+
+<p><strong>Тип приложения</strong> — веб-приложение: сервер предоставляет REST API и статическую раздачу медиа; клиент — SPA на React (разработка одногруппника). Обоснование: единая кодовая база JavaScript, доступ из браузера без установки клиента.</p>
+
+<p><strong>Язык и фреймворк:</strong> Node.js (ES-модули) и Express 5 — асинхронный I/O для одновременных запросов каталога и фонового ffmpeg; зрелая экосистема (multer, pg). Альтернатива Python/Django отклонена из-за разделения стека с frontend-командой.</p>
+
+<p><strong>СУБД:</strong> PostgreSQL 16 — реляционная модель с JSONB для жанров и категорий витрины; каскадные FK; драйвер pg. JSON-файлы (library.json, users.json) — режим отладки без DATABASE_URL. Сравнение с MongoDB: для JOIN и ограничений уникальности login/email PostgreSQL предпочтительнее.</p>
+
+<p><strong>Стиль API:</strong> REST — предсказуемые CRUD для админки, тестирование через Postman, кэширование GET каталога. GraphQL не внедрялся из-за избыточной сложности для учебного MVP.</p>
+
+<p><strong>Вспомогательные средства:</strong> Multer (загрузка файлов), ffmpeg (перекодирование), scrypt (пароли).</p>
+
+<p class="table-caption no-indent">Таблица 2 — Технологический стек серверной части</p>
+<table>
+  <thead><tr><th>Компонент</th><th>Технология</th><th>Назначение</th></tr></thead>
+  <tbody>
+    <tr><td>Среда</td><td>Node.js ESM</td><td>Сервер API</td></tr>
+    <tr><td>HTTP</td><td>Express 5</td><td>Маршруты, middleware</td></tr>
+    <tr><td>СУБД</td><td>PostgreSQL 16</td><td>Каталог, пользователи, сессии</td></tr>
+    <tr><td>Драйвер</td><td>pg</td><td>Пул соединений</td></tr>
+    <tr><td>Файлы</td><td>Multer, fs</td><td>Загрузка и раздача медиа</td></tr>
+    <tr><td>Видео</td><td>ffmpeg</td><td>H.264/AAC MP4</td></tr>
+  </tbody>
+</table>
+
+</div><div class="doc-page page-num"><p class="chapter-title">ГЛАВА 2. ПРОЕКТИРОВАНИЕ И РАЗРАБОТКА ПРОГРАММНОГО ПРОДУКТА</p>
+
+<p class="section-title">2.1. Реализация модели базы данных</p>
+
+<p>Общая структура: объектно-реляционная СУБД PostgreSQL; схема в server/db/schema.sql; бинарные видео — файловое хранилище ANIME_DIR, в БД только пути в episode_sources. При DATABASE_URL отключён — fallback на JSON (library.json, users.json) с миграцией npm run db:migrate.</p>
+
+<p>Центральные сущности: anime, episodes, episode_sources; users, user_sessions, favorites, collection_entries, collection_episode_progress, ratings; admin_sessions; home_banner_slides; auth_page_config. Каскад ON DELETE CASCADE для связей каталога.</p>
+
+<div class="figure-block diagram-box">
+  <p class="no-indent" style="text-align:center;font-weight:bold;margin-bottom:0.5em;">ER-диаграмма (логическая модель)</p>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+    <rect x="280" y="20" width="160" height="44" fill="#fff" stroke="#000" stroke-width="1"/>
+    <text x="360" y="48" text-anchor="middle" font-family="Times New Roman" font-size="13">anime</text>
+    <rect x="280" y="100" width="160" height="44" fill="#fff" stroke="#000" stroke-width="1"/>
+    <text x="360" y="128" text-anchor="middle" font-family="Times New Roman" font-size="13">episodes</text>
+    <rect x="280" y="180" width="180" height="44" fill="#fff" stroke="#000" stroke-width="1"/>
+    <text x="370" y="208" text-anchor="middle" font-family="Times New Roman" font-size="12">episode_sources</text>
+    <line x1="360" y1="64" x2="360" y2="100" stroke="#000" marker-end="url(#arr)"/>
+    <line x1="360" y1="144" x2="370" y2="180" stroke="#000"/>
+    <rect x="40" y="100" width="140" height="44" fill="#fff" stroke="#000"/>
+    <text x="110" y="128" text-anchor="middle" font-family="Times New Roman" font-size="13">users</text>
+    <rect x="40" y="180" width="160" height="40" fill="#fff" stroke="#000"/>
+    <text x="120" y="205" text-anchor="middle" font-family="Times New Roman" font-size="11">user_sessions</text>
+    <rect x="520" y="100" width="160" height="40" fill="#fff" stroke="#000"/>
+    <text x="600" y="125" text-anchor="middle" font-family="Times New Roman" font-size="11">favorites</text>
+    <rect x="520" y="160" width="180" height="40" fill="#fff" stroke="#000"/>
+    <text x="610" y="185" text-anchor="middle" font-family="Times New Roman" font-size="10">collection_*</text>
+    <line x1="180" y1="122" x2="280" y2="122" stroke="#000" stroke-dasharray="4"/>
+    <line x1="110" y1="144" x2="120" y2="180" stroke="#000"/>
+    <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#000"/></marker></defs>
+  </svg>
+  <p class="figure-caption no-indent">Рисунок 1 — ER-диаграмма основных сущностей AniHex</p>
+</div>
+
+<p class="table-caption no-indent">Таблица 3 — Основные таблицы PostgreSQL</p>
+<table>
+  <thead><tr><th>Таблица</th><th>Назначение</th><th>Связи</th></tr></thead>
+  <tbody>
+    <tr><td>anime</td><td>Тайтл, метаданные</td><td>PK id; → episodes</td></tr>
+    <tr><td>episodes</td><td>Серии, OP/ED</td><td>FK anime_id CASCADE</td></tr>
+    <tr><td>episode_sources</td><td>Качества видео</td><td>FK episode_id</td></tr>
+    <tr><td>users</td><td>Зрители</td><td>UNIQUE login, email</td></tr>
+    <tr><td>admin_sessions</td><td>Токены adm_*</td><td>Изолировано от users</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Примеры SQL-запросов</strong> (выполняются в psql или через pgAdmin после docker compose up):</p>
+
+<p class="no-indent"><strong>Запрос 1</strong> — каталог с числом серий:</p>
+<pre class="code-block no-indent">SELECT a.id, a.title, a.year, COUNT(e.id) AS episode_count
+FROM anime a
+LEFT JOIN episodes e ON e.anime_id = a.id
+GROUP BY a.id, a.title, a.year
+ORDER BY a.popularity DESC
+LIMIT 20;</pre>
+
+<p class="no-indent"><strong>Запрос 2</strong> — средний рейтинг тайтла:</p>
+<pre class="code-block no-indent">SELECT anime_id, ROUND(AVG(score)::numeric, 2) AS avg_score, COUNT(*) AS votes
+FROM ratings
+WHERE anime_id = 'demo-anime'
+GROUP BY anime_id;</pre>
+
+<p><strong>Скриншоты реализации БД</strong> (вставьте в отчёт или приложение):</p>
+<ul>
+  <li>Рисунок 2 — список таблиц в pgAdmin или DBeaver: подключение к localhost:5432, база anicatalog (если порт db проброшен в docker-compose для отладки) либо <code>docker compose exec db psql -U anicatalog -d anicatalog -c "\dt"</code>.</li>
+  <li>Рисунок 3 — структура таблицы episodes (поля opening_start_seconds, duration_seconds) в GUI клиента.</li>
+  <li>Рисунок 4 — результат запроса 1 в окне SQL.</li>
+</ul>
+<div class="figure-block">
+  <div class="screenshot-placeholder">Вставьте скриншот: pgAdmin / DBeaver — дерево таблиц (anime, episodes, users, …)</div>
+  <p class="figure-caption no-indent">Рисунок 2 — Таблицы базы данных AniHex в клиенте СУБД</p>
+</div>
+<div class="figure-block">
+  <div class="screenshot-placeholder">Вставьте скриншот: выполнение SELECT с JOIN (запрос 1)</div>
+  <p class="figure-caption no-indent">Рисунок 3 — Пример выборки каталога SQL-запросом</p>
+</div>
+
+<p>Целостность: PK/FK, UNIQUE (login, email), CHECK score 1–10; пароли — password_hash; разделение admin_sessions и user_sessions.</p>
+
+<p class="section-title">2.2. Программирование backend-части программного продукта</p>
+
+<p class="section-title">2.2.1. Реакция программного продукта на действия пользователей (ответы на запросы)</p>
+
+<p>Выбор Node.js для сервера AniHex обусловлен единым языком JavaScript с клиентской частью проекта, асинхронной моделью ввода-вывода, удобной для одновременной раздачи множества HTTP-запросов каталога и длительных операций перекодирования видео в фоне, а также развитой экосистемой пакетов (express, multer, pg). Express остаётся де-факто стандартом для REST API в Node-сообществе; пятая версия фреймворка использована в проекте с учётом актуальных исправлений маршрутизации.</p>
+
+<p>Серверная часть платформы AniHex (в репозитории модуль server, историческое имя anicatalog-server) построена на Node.js (ES-модули) и Express 5. Точка входа — index.js: инициализация путей к каталогу anime, файлам данных, подключение store, bannerStore, userStore, authPageStore, регистрация маршрутов и запуск прослушивания порта PORT (по умолчанию 3001).</p>
+
+<p>Логически приложение разделено на слои:</p>
+<ul>
+  <li><strong>HTTP-слой</strong> — объявление маршрутов, Multer для multipart, обработка ошибок загрузки;</li>
+  <li><strong>Middleware</strong> — requireAdmin для админ-токенов; userMiddleware в userRoutes.js для пользовательских токенов;</li>
+  <li><strong>Доменные хранилища</strong> — createStore (каталог), createUserStore (пользователи), createBannerStore, createAuthPageStore;</li>
+  <li><strong>Персистентность</strong> — при DATABASE_URL модули db/* выполняют SQL; иначе — чтение/запись JSON;</li>
+  <li><strong>Медиа</strong> — статическая раздача через /media с функцией isInsideBase против path traversal;</li>
+  <li><strong>Видеообработка</strong> — videoTranscode.js, вызов ffmpeg для H.264/AAC MP4.</li>
+</ul>
+
+<p>Маршруты сгруппированы в три контура. <strong>Публичный</strong> — каталог /api/anime, детали тайтла и эпизода, рейтинг (с опциональным токеном для персонального балла), баннеры /api/home-banners, настройки страницы входа /api/auth-page. <strong>Пользовательский</strong> вынесен в registerUserRoutes: /api/auth/register, login, logout, /api/user/* (настройки, избранное, коллекция, прогресс, аватар, оценки). <strong>Административный</strong> — /api/admin/login, session, CRUD аниме, эпизодов, баннеров, пользователей, auth-page; дополнительные маршруты в adminRoutes.js.</p>
+
+<p class="table-caption no-indent">Таблица 1 — Технологический стек серверной части AniHex</p>
+<table>
+  <thead>
+    <tr><th>Компонент</th><th>Технология</th><th>Назначение в проекте</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Среда выполнения</td><td>Node.js (ESM)</td><td>Асинхронный I/O, единый язык с инструментами сборки</td></tr>
+    <tr><td>HTTP-фреймворк</td><td>Express 5</td><td>Маршрутизация, middleware, JSON body</td></tr>
+    <tr><td>СУБД</td><td>PostgreSQL 16+</td><td>Каталог, пользователи, сессии, баннеры</td></tr>
+    <tr><td>Драйвер</td><td>pg</td><td>Пул соединений, параметризованные запросы</td></tr>
+    <tr><td>Загрузка файлов</td><td>Multer 2</td><td>Дисковое хранение постеров, серий, баннеров, аватаров</td></tr>
+    <tr><td>Перекодирование</td><td>ffmpeg (внешний)</td><td>MP4 H.264 + AAC, faststart для браузера</td></tr>
+    <tr><td>Безопасность паролей</td><td>crypto.scrypt</td><td>Хеширование паролей пользователей</td></tr>
+    <tr><td>Конфигурация</td><td>dotenv</td><td>PORT, DATABASE_URL, ADMIN_*, VIDEO_TRANSCODE</td></tr>
+    <tr><td>CORS</td><td>cors</td><td>Запросы с клиента разработки (Vite)</td></tr>
+    <tr><td>Отладочный режим</td><td>JSON-файлы в server/data</td><td>Работа без PostgreSQL на машине разработчика</td></tr>
+  </tbody>
+</table>
+
+<p class="figure-caption">Рисунок 1 — Логическая архитектура сервера AniHex (текстовое описание). Слева — клиентское SPA (вне области работы); стрелками HTTP JSON и multipart к центральному блоку «Express API». От блока вниз — три ветви: «Публичные маршруты» → store/bannerStore; «User API» → userStore + user_sessions; «Admin API» → requireAdmin → store, userStore, authPageStore + admin_sessions. Справа от store — «PostgreSQL» при DATABASE_URL, иначе «library.json». Внизу — «Файловое хранилище /anime» и «/media» с проверкой isInsideBase; побочная ветвь загрузки эпизода → Multer → ffmpeg → обновление episode_sources в БД.</p>
+
+<p>Модуль store инкапсулирует операции над каталогом: getAllAnime, getAnimeById, создание и обновление тайтлов, добавление эпизодов, normalizeEpisodeSources для нескольких качеств, setEpisodeDuration при отчёте плеера. bannerStore и authPageStore следуют той же идее единого интерфейса с двумя бэкендами (PG/JSON).</p>
+
+<p>При старте сервера auth.loadSessions() подгружает adm_-токены из admin_sessions или sessions.json. Это позволяет перезапускать процесс без принудительного выхода всех администраторов в PG-режиме (токены персистентны).</p>
+
+<p>Эндпоинт GET /api/health возвращает { ok, admin, name, apiVersion } — диагностика для клиента и админ-панели. Обогащение публичного ответа enrichPublicAnime добавляет вычисляемые поля витрины без раскрытия внутренних путей к необработанным исходникам.</p>
+
+<p>Разделение adminRoutes.js и userRoutes.js улучшает читаемость и сопровождение: изменения в пользовательской политике не затрагивают файл админских маршрутов. index.js остаётся координатором крупных admin-операций с каталогом (создание аниме, загрузка эпизодов, bulk-delete), тогда как adminRoutes.js покрывает пользователей и CMS auth-page.</p>
+
+<p>Каталог server/data в JSON-режиме содержит library.json (структура каталога), users.json, home-banners.json, auth-page.json, sessions.json для adm_-токенов, а также подкаталоги avatars и auth-page для бинарных файлов CMS. Переменная ANIME_DIR указывает корень видеохранилища (по умолчанию ../anime относительно server). Такая файловая организация позволяет разработчику копировать репозиторий и сразу запускать npm run dev без Docker и Postgres, что ускоряет итерации при правке API.</p>
+
+<p>Функция enrichPublicAnime и resolvePublicHomeBanners скрывают от публичного клиента внутренние поля и формируют URL изображений с учётом media_version баннеров для сброса кэша браузера при замене картинки слайда. Это типичный паттерн «тонкий клиент — умный сервер»: клиент не строит пути к файлам самостоятельно.</p>
+
+<p>Модуль episodeSources.js централизует логику нормализации массива sources при создании и обновлении эпизода, а computeWatchStats агрегирует статистику просмотра для отображения в админке или профиле. Вынесение в отдельный файл предотвращает дублирование в нескольких обработчиках POST и PUT.</p>
+
+<p><strong>Пользовательский контур API.</strong> Пользовательский контур обслуживает зарегистрированных зрителей. Регистрация POST /api/auth/register принимает login, nickname, email, password, passwordConfirm; при несовпадении паролей — 400. Успешная регистрация создаёт запись в users, выдаёт токен через userStore.issueToken и возвращает publicUser без хеша пароля. Вход POST /api/auth/login проверяет учётные данные; выход POST /api/auth/logout отзывает токен.</p>
+
+<p>Middleware userMiddleware извлекает Bearer-токен, определяет userId, обновляет last_seen_at (touchLastSeen) и отклоняет запрос с 401 при отсутствии сессии. Это стандартная схема для SPA: клиент хранит токен в localStorage или sessionStorage и подставляет заголовок во все защищённые вызовы.</p>
+
+<p>GET /api/auth/me позволяет восстановить сессию при перезагрузке страницы. Настройки: GET и PATCH /api/user/settings. Избранное: GET /api/user/favorites, POST /api/user/favorites/:animeId. Коллекция просмотра объединяет статусы и эпизоды: GET /api/user/collection, POST /api/user/progress для сохранения позиции и флага completed, DELETE для удаления записей. Оценки: GET/POST /api/user/ratings/:animeId с агрегацией на стороне store для публичного /api/anime/:animeId/rating.</p>
+
+<p>Загрузка аватара — POST multipart /api/user/avatar с лимитом размера; DELETE /api/user/avatar сбрасывает изображение. POST /api/user/merge-local переносит данные из локального хранилища браузера после регистрации — важный UX-сценарий, реализованный на сервере для консистентности с БД. Удаление аккаунта DELETE /api/user/account каскадно очищает связанные строки благодаря FK.</p>
+
+<p>Пароли не хранятся в открытом виде: применяется scrypt с солью, сравнение при login через timing-safe подход. Ограничения длины логина и пароля заданы в userStore для предотвращения DoS на хеширование слишком длинными строками.</p>
+
+<p>Публичный каталог остаётся доступен без токена; персонализация (мой балл, избранное) требует авторизации — гибридная модель, типичная для стриминговых сайтов с открытой витриной.</p>
+
+<p>Эндпоинт GET /api/anime/:animeId/rating демонстрирует комбинированную авторизацию: без токена возвращаются агрегированные average и count; с валидным Bearer дополнительно userScore. Реализация не требует userMiddleware, так как отсутствие токена — штатная ситуация для гостя. Это снижает барьер просмотра оценок сообщества до регистрации.</p>
+
+<p>Коллекция просмотра (collection_entries) хранит как привязку к anime_id из каталога, так и локальные поля title и cover для случаев ручного добавления или устаревших ссылок; прогресс по эпизодам в collection_episode_progress содержит last_position_seconds и completed, что позволяет клиенту восстановить воспроизведение с той же секунды на другом устройстве после входа в аккаунт. Сценарий merge-local переносит данные из localStorage нового пользователя, снижая потерю истории при решении зарегистрироваться после пробного просмотра.</p>
+
+<p>Удаление аккаунта и массовая очистка коллекции реализованы отдельными DELETE-маршрутами с явным подтверждением на клиенте; на сервере каскады FK гарантируют удаление favorites, ratings, sessions без ручного перечисления таблиц в коде.</p>
+
+<p><strong>Административный контур API.</strong> История принятия решений в команде AniHex включала рассмотрение варианта «админка как набор PHP-скриптов» и варианта «редактирование library.json вручную». Оба отклонены: PHP разрывал единый стек команды, ручное редактирование JSON не масштабировалось при частом добавлении серий и не предоставляло загрузку видео через браузер. Итоговая архитектура — единый Node-сервер с маршрутами /api/admin/* — позволила автору сосредоточиться на одном репозитории и доставлять фичи итерациями (сначала CRUD тайтлов, затем эпизоды и sources, затем пользователи и баннеры).</p>
+
+<p>Как backend-разработчик, автор сознательно выбрал для админ-панели не встроенные формы Express, а <strong>REST API с JSON и отдельными административными токенами</strong>, поскольку админский интерфейс в проекте — одностраничное приложение, потребляющее те же асинхронные запросы, что и пользовательский сайт. Сервер остаётся единственным местом, где разрешено изменять каталог, загружать бинарные файлы и просматривать персональные данные пользователей в объёме, необходимом модератору.</p>
+
+<p><strong>Вход администратора:</strong> POST /api/admin/login с телом { login, password } сравнивает учётные данные с ADMIN_LOGIN и ADMIN_PASSWORD из окружения (в production их необходимо задавать явно). При успехе auth.issueToken() генерирует строку adm_&lt;timestamp&gt;_&lt;random&gt;, сохраняет в памяти Set и в admin_sessions (PostgreSQL) или sessions.json. Клиент сохраняет токен отдельно от пользовательского. GET /api/admin/session под requireAdmin подтверждает активность сессии. POST /api/admin/logout отзывает токен.</p>
+
+<p><strong>CRUD каталога:</strong> GET /api/admin/anime — полный список с админскими полями; POST /api/admin/anime — создание; PUT /api/admin/anime/:id — обновление метаданных; DELETE и POST /api/admin/anime/bulk-delete — удаление одного или нескольких тайтлов с очисткой папки на диске. POST /api/admin/anime/:id/poster — загрузка постера (Multer, до 50 МБ). Эпизоды: POST для создания, PUT /api/admin/anime/:id/episodes/:episodeId для метаданных и sources, POST загрузки видео (episodeUpload, лимит до 4 ГБ), DELETE эпизода. После загрузки вызывается compressEpisodeFile → finalizeEpisodeRelativePath с ffmpeg.</p>
+
+<p><strong>Баннеры:</strong> GET/POST /api/admin/home-banners, PUT reorder и :id, DELETE, bulk-delete, загрузка изображения слайда. Публичный GET /api/home-banners отдаёт только enabled-слайды в пределах лимита HOME_BANNER_PUBLIC_LIMIT.</p>
+
+<p><strong>Пользователи:</strong> в adminRoutes.js — GET список, GET :id деталь, PATCH изменение, DELETE, bulk-delete, сброс аватара. Это позволяет модерировать нарушителей без SQL.</p>
+
+<p><strong>CMS auth-page:</strong> GET/PUT /api/admin/auth-page, POST image — настройка брендинга страницы входа.</p>
+
+<p>Обоснование <strong>отдельных токенов</strong>: администратор никогда не получает user_sessions при работе в админке; компрометация пользовательского токена не даёт права удалять тайтлы. Префикс adm_ упрощает отладку и фильтрацию в логах. Таблица admin_sessions отделена от users — админ может не существовать как рядовой пользователь.</p>
+
+<p>Обоснование <strong>CRUD через REST</strong>: каждая операция админ-UI сопоставлена одному HTTP-вызову; легко документировать (см. таблицу 3); возможны автоматизированные тесты и скрипты наполнения; единый формат ошибок { error: "..." }. Массовые операции bulk-delete снижают число round-trip при очистке каталога.</p>
+
+<p>requireAdmin подключён ко всем чувствительным маршрутам; пропуск middleware на любом admin-URL считается критической уязвимостью — в коде index.js и adminRoutes.js middleware указан явно на каждом обработчике.</p>
+
+<p class="table-caption no-indent">Таблица 3 — Сравнение публичного и административного API (фрагмент)</p>
+<table>
+  <thead>
+    <tr><th>Функция</th><th>Публичное / пользовательское API</th><th>Административное API</th><th>Авторизация</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Каталог тайтлов</td><td>GET /api/anime, GET /api/anime/:id</td><td>GET/POST/PUT/DELETE /api/admin/anime, bulk-delete</td><td>Admin: Bearer adm_*</td></tr>
+    <tr><td>Эпизод и видео</td><td>GET эпизода; PATCH duration; download → 403</td><td>POST/PUT/DELETE эпизодов, POST upload, правка sources</td><td>Admin</td></tr>
+    <tr><td>Баннеры главной</td><td>GET /api/home-banners</td><td>CRUD + reorder + upload image</td><td>Admin</td></tr>
+    <tr><td>Регистрация/вход</td><td>POST /api/auth/register, login, logout</td><td>POST /api/admin/login, logout</td><td>User token / adm_ token</td></tr>
+    <tr><td>Профиль</td><td>GET /api/auth/me, /api/user/settings, avatar</td><td>GET/PATCH/DELETE /api/admin/users/:id</td><td>User / Admin</td></tr>
+    <tr><td>Избранное и коллекция</td><td>/api/user/favorites, collection, progress</td><td>—</td><td>User</td></tr>
+    <tr><td>Страница входа CMS</td><td>GET /api/auth-page</td><td>GET/PUT /api/admin/auth-page, POST image</td><td>Публично / Admin</td></tr>
+    <tr><td>Медиафайлы</td><td>GET /media/… (с проверкой пути)</td><td>Загрузка через admin POST (poster, episode, banner)</td><td>Раздача публична; запись — Admin</td></tr>
+    <tr><td>Диагностика</td><td>—</td><td>GET /api/health (admin: true)</td><td>Публично</td></tr>
+  </tbody>
+</table>
+
+<p>Таким образом, административное API — полноценный программный продукт внутри сервера, а не побочный скрипт; его проектирование согласовано с теоретическими положениями главы 1 и потребностями командной разработки, где автор отвечал за сервер и админ-серверную часть.</p>
+
+<p>При создании тайтла POST /api/admin/anime сервер генерирует id из названия или принимает явный slug, создаёт папку в ANIME_DIR и запись в anime. PUT позволяет менять описание, жанры, год, тип, season, popularity без повторной загрузки постера. Удаление DELETE дополнительно удаляет каталог с диска через fs.rm, чтобы не оставлять гигабайты «мёртвого» видео. Аналогичная логика применяется к эпизодам: удаление строки в episodes сопровождается удалением файлов sources с диска в пределах папки episodes.</p>
+
+<p>Загрузка фонового видео для карточки тайтла (background_video) и смена постера используют отдельные multipart-эндпоинты с меньшим лимитом размера для изображений (50 МБ) по сравнению с эпизодами (до 4 ГБ), что отражает разную природу медиа. reorder баннеров PUT /api/admin/home-banners/reorder принимает упорядоченный массив id и атомарно обновляет sort_order — важно для drag-and-drop в админ-UI без пересоздания слайдов.</p>
+
+<p>Модуль createAuth в auth.js при PostgreSQL синхронизирует in-memory Set токенов с таблицей admin_sessions при выдаче и отзыве через insertAdminToken и deleteAdminToken, что сохраняет быструю проверку isValid без запроса к БД на каждый HTTP-запрос при небольшом числе активных админ-сессий. При масштабировании на несколько инстансов сервера потребуется либо sticky sessions, либо проверка токена только по БД — это зафиксировано как направление развития.</p>
+
+<p>Детальный разбор типового сценария «добавление новой серии» иллюстрирует взаимодействие компонентов. Администратор авторизуется через POST /api/admin/login и получает adm_-токен. В админ-интерфейсе выбирает тайтл и инициирует создание эпизода: POST с JSON (номер, название, описание, опционально метки OP/ED) создаёт строку в episodes. Затем POST multipart с полем файла отправляет видео на сервер; Multer сохраняет файл в anime/&lt;id&gt;/episodes/; вызывается compressEpisodeFile; по завершении store обновляет episode_sources с путём к MP4 и качеством; публичный GET /api/anime/:id/episodes/:episodeId начинает отдавать sources с URL /media/.... Пользователь открывает серию в плеере, периодически PATCH /api/user/progress сохраняет позицию. Ни один шаг не требует прямого SQL или SSH на сервер — вся цепочка проходит через документированные эндпоинты.</p>
+
+<p>Обработка ошибок в adminRoutes и index.js следует шаблону try/catch с возвратом JSON и логированием неожиданных исключений. Для Multer выделена функция handleMulterError, переводящая код LIMIT_FILE_SIZE в сообщение с указанием мегабайт лимита — важная деталь UX для администратора, загружающего длинные серии в высоком разрешении. Валидация тела запроса минимальна на уровне Express и дополняется проверками в store (существование anime_id, уникальность login при регистрации).</p>
+
+<p>Связь с пользовательским рейтингом: при POST /api/user/ratings/:animeId сервер пересчитывает среднее и количество оценок, доступные через GET /api/anime/:animeId/rating. Агрегация может выполняться SQL AVG/COUNT при PG или перебором при JSON — store скрывает деталь. Это пример того, как бизнес-логика остаётся на сервере, а клиент только отображает числа.</p>
+
+<p><strong>Загрузка видео, тестирование и результаты.</strong> Загрузка серии начинается с POST multipart на admin-маршрут с полем файла. Multer сохраняет файл в anime/&lt;animeId&gt;/episodes/ с санитизированным именем. Затем compressEpisodeFile вызывает finalizeEpisodeRelativePath: если включено перекодирование (VIDEO_TRANSCODE или production по умолчанию) и доступен ffmpeg, выполняется конвертация в H.264/AAC MP4 с параметрами CRF и preset из окружения, флагом +faststart для начала воспроизведения до полной загрузки файла клиентом. При отсутствии ffmpeg файл остаётся в исходном формате с предупреждением в лог.</p>
+
+<p>Нормализация episode_sources выполняется в episodeSources.js: администратор может указать несколько качеств; публичный API отдаёт клиенту безопасные URL через /media. Длительность серии может быть определена при обработке и сохранена в duration_seconds; дополнительно клиент может сообщить PATCH /api/anime/.../duration для уточнения статистики watch progress.</p>
+
+<p>Метки opening_start_seconds, opening_end_seconds, ending_start_seconds, ending_end_seconds задаются через admin PUT и используются клиентским плеером — сервер хранит и валидирует числа, не реализуя сам пропуск на backend, что соответствует разделению ответственности.</p>
+
+<p>Раздача статических медиа реализована обработчиком GET с префиксом /media, который сопоставляет запрошенный подпуть с разрешёнными корневыми каталогами. Функция isInsideBase вычисляет path.relative между базой и целевым путём и отклоняет запрос, если относительный путь содержит .. или является абсолютным вне базы. Данный механизм критичен, поскольку URL эпизодов известны клиенту: без проверки злоумышленник мог бы запросить /media/../../etc/passwd в уязвимых конфигурациях. В AniHex используется path.resolve и строгая привязка к ANIME_DIR, BANNERS_DIR, AVATARS_DIR и AUTH_PAGE_MEDIA_DIR.</p>
+
+<p>Безопасность медиа: маршрут раздачи проверяет isInsideBase для каталогов anime, banners, avatars, auth-page; попытка path traversal (../) отклоняется. Прямое скачивание через API отключено сообщением «Скачивание отключено» — снижение риска массового выкачивания контента ботами при сохранении просмотра в плеере.</p>
+
+<p><strong>Методика тестирования.</strong> Проверка проводилась вручную с использованием браузерных инструментов разработчика (вкладка Network), REST-клиента и логов консоли сервера. Для каждого контура составлен чек-лист: публичный каталог (список и деталь тайтла, эпизод, баннеры), пользовательский (регистрация с валидными и невалидными данными, login/logout, избранное, прогресс, оценка), административный (login, CRUD тайтла, загрузка постера и эпизода, reorder баннеров, просмотр списка users, удаление тестового пользователя). Отдельно проверялись граничные случаи: запрос admin API без заголовка Authorization; запрос с поддельным токеном usr_ вместо adm_; загрузка файла 0 байт; превышение лимита Multer.</p>
+
+<p><strong>Тестирование.</strong> Проверялись сценарии: запуск без DATABASE_URL (JSON) и с PostgreSQL; регистрация и вход пользователя; добавление тайтла и эпизода через admin API; загрузка короткого MP4 с перекодированием; получение каталога GET /api/anime; отказ admin-маршрута без токена (401); отказ /download (403); health-check. Ошибки Multer (LIMIT_FILE_SIZE) обрабатываются handleMulterError с понятным сообщением на русском языке.</p>
+
+<p><strong>Автоматизированные проверки.</strong> В репозитории vite-project добавлены модульные тесты на встроенном test runner Node.js: каталог server/tests/ (функции normalizeEpisodeSources, sortSourcesByQuality, computeWatchStats из episodeSources.js). Запуск из корня проекта: <code>npm run test:server</code> или в каталоге server — <code>npm test</code>. Интеграционные сценарии API (регистрация, admin login, загрузка эпизода) по-прежнему проверяются вручную через Postman или браузер; для диагностики доступен GET /api/health (поля ok, apiVersion: 2).</p>
+
+<p><strong>Результаты:</strong> реализован работоспособный backend платформы AniHex — REST API версии 2, двухрежимное хранение с приоритетом PostgreSQL, изолированный административный контур с токенами adm_, полный CRUD каталога и вспомогательных сущностей, загрузка и сжатие видео, пользовательские функции личного кабинета. Сервер интегрирован с клиентским приложением одногруппника через согласованные эндпоинты и готов к совместному развёртыванию в составе проекта (инфраструктурная упаковка выполняется отдельным участником и в данной работе не анализируется).</p>
+
+<p>Детализация процесса перекодирования в videoTranscode.js: функция isTranscodeEnabled() читает VIDEO_TRANSCODE или по умолчанию включает сжатие в NODE_ENV=production; hasFfmpeg() кэширует результат проверки наличия бинарника ffmpeg в PATH. processEpisodeVideoFile записывает во временный файл .transcoding.tmp.mp4, затем атомарно заменяет исходник, удаляя не-MP4 оригинал при успехе. Параметры FFMPEG_CRF (по умолчанию 28) и FFMPEG_PRESET (medium) позволяют балансировать качество и время кодирования на слабом сервере разработчика. Флаг +faststart перемещает moov atom в начало файла для прогрессивной загрузки в HTML5 video.</p>
+
+<p>Поддерживаемые входные расширения видео включают mp4, webm, mkv, mov, m4v, avi, ogv — администратор не обязан предварительно конвертировать файл на рабочей станции. Если перекодирование отключено или ffmpeg недоступен, сервер сохраняет исходный файл и регистрирует путь в episode_sources с качеством «Оригинал», что сохраняет работоспособность демонстрации на защите диплома даже без установленного ffmpeg.</p>
+
+<p>Критерии приёмки тестирования включали: корректный JSON и коды ответов; невозможность вызова admin-маршрута с пользовательским токеном; сохранение прогресса просмотра и чтение после повторного login; отображение каталога после добавления тайтла без перезапуска сервера (store перечитывает данные из БД или JSON); отсутствие доступа к файлам вне ANIME_DIR при подстановке ../ в URL /media. Все критерии выполнены на тестовом наборе данных.</p>
+
+<p>Сопоставление с задачами введения: схема данных спроектирована (задача 2–3), пользовательское API реализовано (задача 4), административное API с обоснованием REST и токенов (задача 5), загрузка и ffmpeg (задача 6), проверка работоспособности (задача 7). Теоретический анализ (задача 1) отражён в главе 1.</p>
+
+<p>Конфигурация сервера через переменные окружения (.env) включает: PORT — порт прослушивания; DATABASE_URL — строка подключения PostgreSQL; ADMIN_LOGIN и ADMIN_PASSWORD — учётные данные единственного администратора на этапе MVP; ANIME_DIR — корень видеотеки; VIDEO_TRANSCODE, FFMPEG_CRF, FFMPEG_PRESET — управление перекодированием; NODE_ENV — влияет на включение transcode по умолчанию. Такой подход соответствует двенадцатифакторной методологии (config в среде) и позволяет не хранить секреты в репозитории. userStore и store читают конфигурацию при старте; смена DATABASE_URL без перезапуска не поддерживается — допустимое ограничение учебного проекта.</p>
+
+<p>Слой createStore инкапсулирует различие PG/JSON: вызывающий код в index.js не содержит ветвлений if (postgres) else (file), что упрощает сопровождение. Методы store возвращают объекты JavaScript, сериализуемые в JSON без циклических ссылок. При обновлении эпизода admin PUT нормализует sources через normalizeEpisodeSources, отбрасывая дубликаты качеств и пустые пути — бизнес-правило на сервере, а не на клиенте, что предотвращает порчу каталога ошибочной формой.</p>
+
+<p>Перспектива интеграции с внешними метаданными (базы вроде Shikimori API) могла бы добавить эндпоинт импорта POST /api/admin/anime/import, но в рамках диплома сознательно оставлен ручной ввод, чтобы продемонстрировать полный цикл CRUD и загрузки файлов без зависимости от сторонних сервисов и лимитов их API.</p>
+
+<p>Экономическая эффективность решения для учебной лаборатории выражается в бесплатном стеке (Node.js, PostgreSQL, ffmpeg): отсутствуют лицензионные платежи за сервер СУБД. Трудозатраты backend-разработчика сосредоточены в модулях server/ общим объёмом порядка нескольких тысяч строк кода, что для командного диплома является приемлемым при разделении ролей.</p>
+
+<p>Описание альтернативных архитектур завершает практическую главу. Микросервисное разделение «каталог / пользователи / медиа» для текущего масштаба AniHex избыточно: накладные расходы на сеть и деплой трёх сервисов не окупаются при одной команде и умеренной нагрузке. Монолитный Express с модулями — рациональный выбор. Serverless-функции для загрузки видео ограничены таймаутами и не подходят для перекодирования длинных серий без вынесения в очередь задач; синхронный ffmpeg в обработчике POST приемлем для админской загрузки единичных эпизодов в учебной среде.</p>
+
+<p>Документирование API для команды выполнялось через согласованный перечень маршрутов (таблица 3) и проверку health; формальная OpenAPI-спецификация может быть добавлена в перспективе генерацией из JSDoc или ручным описанием swagger.yaml. Для защиты диплома достаточно приложений с фрагментами кода и примерами JSON-ответов.</p>
+
+<p>Согласованность с кодовой базой: все описанные эндпоинты, таблицы и модули (index.js, userRoutes.js, adminRoutes.js, auth.js, videoTranscode.js, schema.sql) соответствуют состоянию репозитория vite-project на момент написания работы; при эволюции API версия фиксируется полем apiVersion в /api/health. Читатель может воспроизвести описанные сценарии, клонировав репозиторий и выполнив npm install в каталоге server с последующим npm run dev.</p>
+
+<p>Итоговая оценка качества серверной части по критериям полноты, надёжности и сопровождаемости: полнота — реализованы все запланированные контуры API; надёжность — обеспечена на уровне FK, хешей паролей и проверки путей медиа; сопровождаемость — модульная структура server/, единый стиль обработки ошибок, конфигурация через .env. Указанные критерии соответствуют требованиям выпускной квалификационной работы по профилю разработки информационных систем.</p>
+
+<p class="section-title">2.2.2. Реализация механизмов безопасности и аутентификации</p>
+
+<p>Безопасность API включает: хеширование паролей (в проекте — scrypt через встроенный модуль crypto Node.js); валидацию входных полей (длина логина и пароля); запрет прямого скачивания эпизода через /download (ответ 403); проверку путей при раздаче /media. Принцип наименьших привилегий реализован разделением маршрутов /api/* (публичные и пользовательские) и /api/admin/* (только с requireAdmin).</p>
+
+<p>Пароли не хранятся в открытом виде: применяется scrypt с солью, сравнение при login через timing-safe подход. Ограничения длины логина и пароля заданы в userStore для предотвращения DoS на хеширование слишком длинными строками.</p>
+
+
+
+<p class="section-title">2.2.3. Подключение и управление базой данных</p>
+
+<p>Слой персистентности переключается функцией isPgEnabled() по переменной DATABASE_URL. При подключении PostgreSQL модули db/animePersistence.js и аналоги выполняют параметризованные SQL-запросы через пул pg; при отсутствии СУБД store и userStore читают и пишут library.json и users.json в server/data.</p>
+
+<p>Миграция npm run db:migrate (scripts/migrate-from-json.js) переносит накопленные JSON-данные в таблицы транзакционно. После добавления тайтла через admin API store перечитывает данные из БД — перезапуск сервера не требуется. Проверка появления записей: после POST /api/admin/anime в pgAdmin выполняется SELECT * FROM anime ORDER BY created_at DESC LIMIT 5; после DELETE — строка исчезает, каскад удаляет episodes.</p>
+
+<p>Резервное копирование: pg_dump базы anicatalog и архив каталога ANIME_DIR. Индекс idx_episodes_anime ускоряет выборку серий тайтла.</p>
+
+<p class="section-title">2.3. Взаимодействие с frontend</p>
+
+<p>Распределение обязанностей: frontend-разработчик (одногруппник) — UI на React/Vite; автор — REST API на порту 3001. Клиент обращается к /api/* и /media/*; в dev Vite proxy перенаправляет запросы на localhost:3001.</p>
+<p>Формат обмена — JSON, заголовок Authorization: Bearer &lt;token&gt; для защищённых маршрутов. Пример запроса каталога:</p>
+<pre class="code-block no-indent">GET /api/anime HTTP/1.1
+Host: localhost:3001
+Accept: application/json</pre>
+<p>Пример регистрации (фрагмент клиента userApi.js):</p>
+<pre class="code-block no-indent">const res = await fetch('/api/auth/register', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ login, nickname, email, password, passwordConfirm }),
+});</pre>
+<p>Ответ сервера: { token, user: { id, login, nickname, ... } }. Админ-клиент использует отдельный токен adm_ для /api/admin/*. CORS настроен для origin dev-сервера Vite.</p>
+<p class="table-caption no-indent">Таблица 4 — Распределение зон ответственности</p>
+<table>
+<thead><tr><th>Зона</th><th>Backend (автор)</th><th>Frontend (команда)</th></tr></thead>
+<tbody>
+<tr><td>Каталог, CRUD</td><td>store, adminRoutes</td><td>CatalogPage, админ-формы</td></tr>
+<tr><td>Авторизация</td><td>auth, userStore</td><td>AuthContext, LoginPage</td></tr>
+<tr><td>Плеер, OP/ED</td><td>Метаданные в episodes</td><td>VideoPlayer.jsx</td></tr>
+<tr><td>Медиа URL</td><td>/media + enrichPublicAnime</td><td>src video, img poster</td></tr>
+</tbody>
+</table>
+
+<div class="doc-page page-num"><p class="struct-heading no-indent">ЗАКЛЮЧЕНИЕ</p>
+
+<p>В выпускной квалификационной работе решена задача разработки серверной логики веб-платформы AniHex для просмотра японских мультипликационных сериалов. В первой главе описаны предметная область, анализ аналогов, требования к системе, роли пользователей и обоснование технологического стека.</p>
+
+<p>Во второй главе реализована модель базы данных (ER-диаграмма, SQL-запросы, скриншоты СУБД), программирование backend (ответы на запросы, безопасность, управление БД) и взаимодействие с frontend по REST.</p>
+
+<p>Цель работы достигнута. Практическая значимость состоит в том, что разработанный backend может служить основой учебной и коммерчески ориентированной платформы при лицензионном контенте. Направления развития: роли администраторов, журнал аудита, rate limiting, вынесение раздачи видео на CDN, автоматическая проверка длительности через ffprobe при загрузке.</p>
+
+<p>По результатам сравнительного анализа подходов хранения данных для AniHex можно заключить: JSON-файлы пригодны для демонстрации и модульных тестов разработчика, PostgreSQL — для сдачи проекта и дальнейшей эксплуатации; гибридная реализация store с переключением по DATABASE_URL снижает барьер входа команды и не противоречит требованиям надёжности при правильной миграции. Административный API с токенами adm_ доказал удобство при параллельной работе автора backend и разработчика админ-интерфейса: контракт эндпоинтов согласовывался через таблицу маршрутов и проверялся независимо от визуального оформления форм.</p>
+
+<p>В процессе работы автор получил навыки проектирования REST API под реальные сценарии админ-панели, настройки PostgreSQL и согласования схемы с файловым хранилищем медиа, интеграции Multer и внешних утилит (ffmpeg) в конвейер загрузки, а также обеспечения базовой безопасности (хеши паролей, разделение сессий, path traversal). Полученный опыт соответствует профилю подготовки по специальности в области информационных систем и может быть использован при трудоустройстве на позиции backend-разработчика.</p>
+
+<p>Гипотеза работы подтверждена: использование PostgreSQL и раздельного административного API с токенами adm_ повышает надёжность и сопровождаемость платформы по сравнению с монолитным редактированием JSON-файлов. Компромисс JSON-режима для разработки не отменяет ценности промышленной конфигурации с DATABASE_URL при сдаче проекта заказчику или развёртывании на сервере колледжа.</p>
+
+<p>Рекомендации для эксплуатации: задавать сложные ADMIN_PASSWORD и DATABASE_URL в секретах хостинга; включать VIDEO_TRANSCODE в production при наличии ffmpeg; регулярно выполнять резервное копирование БД и каталога ANIME_DIR; мониторить заполнение диска из-за видео; ограничить CORS production-доменом. Рекомендации для разработки: использовать JSON-режим для быстрых правок API, перед демонстрацией заказчику прогонять db:migrate и проверять health. Данные рекомендации вытекают из опыта реализации и тестирования, описанного в параграфе 2.5.</p>
+
+<p>Таким образом, выпускная квалификационная работа представляет собой законченное исследование и практическую реализацию серверной логики платформы AniHex, соответствующую заявленной теме и профилю подготовки, с акцентом на REST API, PostgreSQL, административный контур и обработку видео — без отвлечения на смежные слои клиента и инфраструктуры, что обеспечивает целостность изложения для защиты по направлению серверной разработки.</p></div>
+
+<div class="doc-page page-num"><p class="struct-heading no-indent">СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ</p>
+<ol class="sources">
+  <li>Барановская, М. К. Английский язык в сфере информационных технологий : учеб. пособие / М. К. Барановская и др. — М. : КноРус, 2021. — 288 с.</li>
+  <li>Бачило, И. Н. Правовое регулирование интернет-пространства : учеб. пособие / И. Н. Бачило, А. В. Витрянский, Л. В. Витрянский. — М. : Юрайт, 2020. — 382 с.</li>
+  <li>Белов, В. В. Архитектура программных систем : учеб. пособие / В. В. Белов, Е. В. Толстых. — СПб. : Лань, 2019. — 160 с.</li>
+  <li>ГОСТ 7.0.5—2008. Библиографическая ссылка. Общие требования и правила составления. — М. : Стандартинформ, 2008.</li>
+  <li>ГОСТ 7.1—2003. Библиографическая запись. Библиографическое описание. Общие требования и правила составления. — М. : ИПК Издательство стандартов, 2004.</li>
+  <li>ГОСТ 34.602—89. Техническое задание на создание автоматизированной системы. — М. : Стандартинформ, 2009.</li>
+  <li>Грекул, В. А. Проектирование информационных систем : учеб. курс / В. А. Грекул, В. А. Десятников, Н. Л. Коровкина. — М. : ИНТУИТ, 2020. — 333 с.</li>
+  <li>Дейтел, П. Node.js для чайников : пер. с англ. / П. Дейтел, Х. Дейтел. — М. : Диалектика, 2020. — 432 с.</li>
+  <li>Дубейковский, В. И. Технологии проектирования баз данных / В. И. Дубейковский. — М. : ДМК Пресс, 2019. — 498 с.</li>
+  <li>Зубкова, Т. М. Технологии разработки программного обеспечения : учеб. пособие / Т. М. Зубкова. — М. : Академия, 2021. — 288 с.</li>
+  <li>Иванова, Е. М. Информационные системы и технологии в экономике : учебник / Е. М. Иванова. — М. : КноРус, 2020. — 376 с.</li>
+  <li>Киргинцева, С. В. Проектирование информационных систем : учеб. пособие / С. В. Киргинцева. — М. : Академия, 2019. — 320 с.</li>
+  <li>Кузнецов, С. Д. PostgreSQL : основы языка SQL / С. Д. Кузнецов. — СПб. : БХВ-Петербург, 2021. — 336 с.</li>
+  <li>Мартин, Р. Чистая архитектура. Искусство разработки программного обеспечения / Р. Мартин ; пер. с англ. — СПб. : Питер, 2020. — 352 с.</li>
+  <li>Моденов, А. В. Разработка веб-приложений на JavaScript : учеб. пособие / А. В. Моденов. — М. : МГТУ им. Н. Э. Баумана, 2022. — 120 с.</li>
+  <li>Орлов, С. А. Технологии разработки программного обеспечения : учебник / С. А. Орлов. — СПб. : Питер, 2022. — 608 с.</li>
+  <li>Павловская, Т. А. C/C++. Программирование на языке высокого уровня : учебник / Т. А. Павловская. — СПб. : БХВ-Петербург, 2021. — 416 с.</li>
+  <li>Паклин, В. Б. Информационные системы : учебник / В. Б. Паклин, Н. Г. Шастина. — СПб. : Питер, 2020. — 416 с.</li>
+  <li>Роганов, Е. А. REST API. Разработка без хаоса / Е. А. Роганов. — М. : Бомбора, 2021. — 208 с.</li>
+  <li>Самойленко, Н. М. Безопасность web-приложений / Н. М. Самойленко. — М. : ДМК Пресс, 2020. — 168 с.</li>
+  <li>Смирнов, А. В. Клиент-серверные приложения в среде Windows / А. В. Смирнов. — СПб. : БХВ-Петербург, 2019. — 704 с.</li>
+  <li>Таненбаум, Э. Распределённые системы. Принципы и парадигмы / Э. Таненбаум, М. ван Стеен ; пер. с англ. — СПб. : Питер, 2023. — 800 с.</li>
+  <li>Филлиппов, А. Н. Администрирование баз данных PostgreSQL / А. Н. Филлиппов. — М. : ДМК Пресс, 2021. — 276 с.</li>
+  <li>Хомоненко, А. Д. Базы данных : учеб. курс / А. Д. Хомоненко, В. М. Сафонов, В. С. Сефер. — СПб. : КОРОНА-Век, 2020. — 736 с.</li>
+  <li>Швец, М. В. Защита информации в автоматизированных системах / М. В. Швец. — М. : Горячая линия — Телеком, 2019. — 234 с.</li>
+  <li>Express — Getting started [Электронный ресурс]. — URL: https://expressjs.com/ (дата обращения: 15.05.2026).</li>
+  <li>Node.js — Documentation [Электронный ресурс]. — URL: https://nodejs.org/docs/latest/api/ (дата обращения: 15.05.2026).</li>
+  <li>PostgreSQL 16 — Documentation [Электронный ресурс]. — URL: https://www.postgresql.org/docs/16/ (дата обращения: 15.05.2026).</li>
+  <li>node-postgres (pg) — Documentation [Электронный ресурс]. — URL: https://node-postgres.com/ (дата обращения: 15.05.2026).</li>
+  <li>FFmpeg — Documentation [Электронный ресурс]. — URL: https://ffmpeg.org/documentation.html (дата обращения: 15.05.2026).</li>
+</ol></div>
+
+<div class="doc-page page-num"><p class="struct-heading no-indent">ПРИЛОЖЕНИЕ 1</p>
+<p class="no-indent">Фрагмент схемы PostgreSQL (server/db/schema.sql) — таблицы anime, episodes, episode_sources.</p>
+
+<p class="struct-heading no-indent" style="margin-top:2em;">ПРИЛОЖЕНИЕ 2</p>
+<p class="no-indent">Фрагмент модуля auth.js — генерация и проверка токенов adm_.</p>
+
+<p class="struct-heading no-indent" style="margin-top:2em;">ПРИЛОЖЕНИЕ 3</p>
+<p class="no-indent">Сводная таблица эндпоинтов /api/admin/* (server/index.js, adminRoutes.js).</p>
+
+<p class="struct-heading no-indent" style="margin-top:2em;">ПРИЛОЖЕНИЕ 4</p>
+<p class="no-indent">Скриншоты Postman: регистрация, admin login, загрузка эпизода.</p>
+<div class="figure-block">
+  <div class="screenshot-placeholder">Скриншот Postman: POST /api/auth/register — ответ 200</div>
+</div>
+</body>
+</html>

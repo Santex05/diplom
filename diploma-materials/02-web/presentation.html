@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Презентация — веб-платформа AniHex</title>
+  <link rel="stylesheet" href="../shared/presentation.css" />
+</head>
+<body>
+
+<nav class="toc-nav no-print">
+  <a href="#hero">Титул</a>
+  <a href="#s1">Актуальность</a>
+  <a href="#s2">Цель</a>
+  <a href="#s3">Стек</a>
+  <a href="#s4">Страницы</a>
+  <a href="#s5">Каталог</a>
+  <a href="#s6">Плеер</a>
+  <a href="#s7">Аккаунт</a>
+  <a href="#s8">UX</a>
+  <a href="#s9">Тестирование</a>
+  <a href="#s10">Результаты</a>
+</nav>
+
+<div class="doc-wrap">
+
+  <header class="hero" id="hero">
+    <span class="hero-badge">ВКР · Веб-платформа (клиент)</span>
+    <h1>Разработка веб-платформы для просмотра японских мультипликационных сериалов</h1>
+    <div class="hero-meta">
+      <p>ГАПОУ «Московский университет»</p>
+      <p>Выполнил: <strong>[ФИО студента]</strong></p>
+      <p>Руководитель: <strong>[ФИО руководителя]</strong></p>
+      <p>Москва, 2026</p>
+    </div>
+  </header>
+
+  <section class="section" id="s1">
+    <span class="section-num">Раздел 1</span>
+    <h1>Актуальность и проблема</h1>
+    <p>Зрителю нужен удобный интерфейс: поиск тайтла, просмотр серии, личные списки. Без продуманного клиента даже хороший API не превращается в сервис.</p>
+
+    <div class="compare-cards">
+      <div class="compare-card">
+        <h3>Многостраничный сайт (MPA)</h3>
+        <ul>
+          <li>Полная перезагрузка страницы</li>
+          <li>Медленные переходы</li>
+          <li>Сложно сохранять состояние UI</li>
+        </ul>
+      </div>
+      <div class="compare-card highlight">
+        <h3>SPA на React (AniHex)</h3>
+        <ul>
+          <li>Мгновенная навигация</li>
+          <li>Единый стиль и контексты</li>
+          <li>Кэш данных на клиенте</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="caption"><strong>Таблица 1</strong> — Сравнение подходов к построению клиента</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Критерий</th><th>MPA</th><th>SPA React</th></tr></thead>
+        <tbody>
+          <tr><td>Навигация</td><td>Перезагрузка документа</td><td>React Router без reload</td></tr>
+          <tr><td>Состояние UI</td><td>На сервере</td><td>React Context</td></tr>
+          <tr><td>Данные каталога</td><td>В шаблоне</td><td>fetch JSON с REST API</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-muted">Серверная логика, БД и Docker — отдельные темы соавторов. Здесь только браузерный клиент для зрителя.</p>
+  </section>
+
+  <section class="section section-alt" id="s2">
+    <span class="section-num">Раздел 2</span>
+    <h1>Цель, задачи и объект исследования</h1>
+    <p><strong>Цель:</strong> разработать клиентскую часть веб-платформы AniHex для просмотра аниме.</p>
+    <ul>
+      <li>Спроектировать маршруты и структуру страниц</li>
+      <li>Реализовать каталог с фильтрами и поиском</li>
+      <li>Разработать HTML5-видеоплеер и страницу просмотра</li>
+      <li>Внедрить авторизацию, избранное, коллекцию, прогресс</li>
+      <li>Оптимизировать UX загрузки (скелетоны, кэш API)</li>
+    </ul>
+    <p><strong>Объект:</strong> веб-клиент стриминговой платформы. <strong>Предмет:</strong> SPA на React с интеграцией REST API.</p>
+  </section>
+
+  <section class="section" id="s3">
+    <span class="section-num">Раздел 3</span>
+    <h1>Технологии и архитектура SPA</h1>
+    <p class="caption"><strong>Таблица 2</strong> — Стек frontend AniHex</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Технология</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td>React 19</td><td>Компонентный UI</td></tr>
+          <tr><td>Vite 8</td><td>Сборка, dev-сервер, proxy /api</td></tr>
+          <tr><td>React Router 7</td><td>Маршруты, lazy loading</td></tr>
+          <tr><td>Tailwind CSS 4</td><td>Адаптивная тёмная вёрстка</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption"><strong>Рисунок 1</strong> — Архитектура клиентского приложения</p>
+    <figure class="figure-wrap">
+      <div class="diagram">
+        <svg viewBox="0 0 680 240" width="680" height="240">
+          <rect x="240" y="8" width="200" height="40" rx="8" fill="#7c3aed"/>
+          <text x="340" y="33" text-anchor="middle" fill="#fff" font-size="13">BrowserRouter</text>
+          <rect x="60" y="70" width="110" height="36" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="115" y="92" text-anchor="middle" font-size="11">AuthContext</text>
+          <rect x="190" y="70" width="110" height="36" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="245" y="92" text-anchor="middle" font-size="11">AnimeContext</text>
+          <rect x="320" y="70" width="110" height="36" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="375" y="92" text-anchor="middle" font-size="11">PlayerUi</text>
+          <rect x="450" y="70" width="110" height="36" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="505" y="92" text-anchor="middle" font-size="11">QueueContext</text>
+          <rect x="120" y="140" width="440" height="40" rx="6" fill="#d1fae5" stroke="#059669"/>
+          <text x="340" y="165" text-anchor="middle" font-size="12">Pages: Home, Catalog, Watch, Profile…</text>
+          <rect x="200" y="200" width="280" height="32" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+          <text x="340" y="220" text-anchor="middle" font-size="11">api.js → fetch /api/* (контракт сервера)</text>
+        </svg>
+      </div>
+    </figure>
+
+    <p class="caption"><strong>Рисунок 2</strong> — Структура каталога src/ (скриншот)</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: pages/, components/, context/, utils/ в VS Code</span><span class="path">screenshots/02-src-folder.png</span></div></figure>
+  </section>
+
+  <section class="section section-alt" id="s4">
+    <span class="section-num">Раздел 4</span>
+    <h1>Страницы и маршрутизация</h1>
+    <p class="caption"><strong>Таблица 3</strong> — Маршруты пользовательского интерфейса</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>URL</th><th>Страница</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td>/</td><td>HomePage</td><td>Баннеры, подборки сезона</td></tr>
+          <tr><td>/catalog</td><td>CatalogPage</td><td>Каталог с фильтрами</td></tr>
+          <tr><td>/anime/:id</td><td>AnimeDetailPage</td><td>Карточка, список серий</td></tr>
+          <tr><td>/watch/:id/:ep</td><td>WatchPage</td><td>Видеоплеер</td></tr>
+          <tr><td>/favorites, /collection</td><td>Личные разделы</td><td>Избранное и коллекция</td></tr>
+          <tr><td>/auth, /profile</td><td>AuthPage, ProfilePage</td><td>Вход и профиль</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption"><strong>Рисунок 3</strong> — Главная страница</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: / — баннер, блок «Новинки сезона»</span><span class="path">screenshots/02-home.png</span></div></figure>
+
+    <p class="caption"><strong>Рисунок 4</strong> — Страница каталога</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: /catalog — фильтры и сетка карточек</span><span class="path">screenshots/02-catalog.png</span></div></figure>
+  </section>
+
+  <section class="section" id="s5">
+    <span class="section-num">Раздел 5</span>
+    <h1>Каталог и фильтрация</h1>
+    <p>Фильтрация выполняется на клиенте функциями <code>filterAnimeList</code> и <code>parseGenresParam</code> — данные приходят одним запросом GET /api/anime.</p>
+    <ul>
+      <li>Жанры (логика AND), тип, сезон, год, возрастной рейтинг</li>
+      <li>Поиск с debounce, состояние фильтров в URL</li>
+      <li>Подгрузка карточек при скролле (infinite scroll)</li>
+      <li>CatalogSkeleton при первой загрузке</li>
+    </ul>
+
+    <p class="caption"><strong>Рисунок 5</strong> — Панель фильтров каталога</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: открытая панель фильтров слева</span><span class="path">screenshots/02-catalog-filters.png</span></div></figure>
+
+    <p class="caption"><strong>Рисунок 6</strong> — Диаграмма потока данных каталога</p>
+    <figure class="figure-wrap">
+      <div class="diagram">
+        <svg viewBox="0 0 620 100" width="620" height="100">
+          <rect x="10" y="30" width="90" height="40" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+          <text x="55" y="55" text-anchor="middle" font-size="10">GET /api/anime</text>
+          <rect x="130" y="30" width="90" height="40" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="175" y="55" text-anchor="middle" font-size="10">apiCache</text>
+          <rect x="250" y="30" width="90" height="40" rx="6" fill="#d1fae5" stroke="#059669"/>
+          <text x="295" y="55" text-anchor="middle" font-size="10">AnimeContext</text>
+          <rect x="370" y="30" width="100" height="40" rx="6" fill="#fef3c7" stroke="#d97706"/>
+          <text x="420" y="55" text-anchor="middle" font-size="10">filterAnimeList</text>
+          <rect x="500" y="30" width="100" height="40" rx="6" fill="#f3f4f6" stroke="#6b7280"/>
+          <text x="550" y="55" text-anchor="middle" font-size="10">CatalogPage</text>
+          <polygon points="100,50 120,50 115,45 120,50 115,55" fill="#666"/>
+          <polygon points="220,50 240,50 235,45 240,50 235,55" fill="#666"/>
+          <polygon points="340,50 360,50 355,45 360,50 355,55" fill="#666"/>
+          <polygon points="470,50 490,50 485,45 490,50 485,55" fill="#666"/>
+        </svg>
+      </div>
+    </figure>
+  </section>
+
+  <section class="section section-alt" id="s6">
+    <span class="section-num">Раздел 6</span>
+    <h1>Видеоплеер и страница просмотра</h1>
+    <ul>
+      <li>HTML5 &lt;video&gt;, переключение качества из episode_sources API</li>
+      <li>Skip OP/ED по меткам с сервера, горячие клавиши (пробел, F, M)</li>
+      <li>Resume с сохранённой позиции, autoplay next episode</li>
+      <li>PlaybackQueueBar — очередь просмотра (QueueContext)</li>
+    </ul>
+
+    <p class="caption"><strong>Рисунок 7</strong> — Страница просмотра</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: /watch/… — плеер, контролы, кнопки OP/ED</span><span class="path">screenshots/02-watch-player.png</span></div></figure>
+
+    <p class="caption"><strong>Рисунок 8</strong> — Карточка аниме со списком серий</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: /anime/:id — описание и сетка серий</span><span class="path">screenshots/02-anime-detail.png</span></div></figure>
+  </section>
+
+  <section class="section" id="s7">
+    <span class="section-num">Раздел 7</span>
+    <h1>Авторизация и персональные разделы</h1>
+    <p class="caption"><strong>Таблица 4</strong> — Пользовательские функции клиента</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Функция</th><th>Реализация на клиенте</th></tr></thead>
+        <tbody>
+          <tr><td>Регистрация / вход</td><td>AuthPage → userApi.js, token в localStorage</td></tr>
+          <tr><td>Избранное</td><td>FavoritesPage, синхронизация после login</td></tr>
+          <tr><td>Коллекция и прогресс</td><td>CollectionPage, watch progress с сервера</td></tr>
+          <tr><td>Оценки</td><td>RatingBlock на карточке аниме</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption"><strong>Рисунок 9</strong> — Страница входа и регистрации</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: /auth — форма входа и регистрации</span><span class="path">screenshots/02-auth.png</span></div></figure>
+
+    <p class="caption"><strong>Рисунок 10</strong> — Страница коллекции</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: /collection — прогресс просмотра по тайтлам</span><span class="path">screenshots/02-collection.png</span></div></figure>
+  </section>
+
+  <section class="section section-alt" id="s8">
+    <span class="section-num">Раздел 8</span>
+    <h1>UX загрузки и кэш API</h1>
+    <p>Модуль <code>apiCache.js</code> снижает число повторных запросов; <code>PageLoader</code> и скелетоны делают загрузку предсказуемой.</p>
+    <p class="caption"><strong>Таблица 5</strong> — TTL кэша на клиенте</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Данные</th><th>TTL</th></tr></thead>
+        <tbody>
+          <tr><td>Каталог</td><td>45 сек</td></tr>
+          <tr><td>Страница аниме</td><td>30 сек</td></tr>
+          <tr><td>Баннеры</td><td>60 сек</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption"><strong>Рисунок 11</strong> — Скелетоны загрузки каталога</p>
+    <figure class="figure-wrap"><div class="screenshot-slot"><span class="icon">🖼</span><span class="hint">Скриншот: CatalogSkeleton при первой загрузке</span><span class="path">screenshots/02-skeleton.png</span></div></figure>
+  </section>
+
+  <section class="section" id="s9">
+    <span class="section-num">Раздел 9</span>
+    <h1>Тестирование клиентской части</h1>
+    <ul>
+      <li><strong>Автотесты:</strong> <code>npm run test:client</code> — нормализация жанров (tests/genres.test.js)</li>
+      <li><strong>Линтер:</strong> <code>npm run lint</code> — ESLint для src/</li>
+      <li><strong>Production:</strong> <code>npm run build</code> → статика в dist/</li>
+      <li><strong>Ручной чек-лист:</strong> все маршруты, фильтры URL, watch resume, skip OP, favorites sync</li>
+    </ul>
+    <p>Интеграция проверялась при работающем REST API (локально npm run dev:server + npm run dev).</p>
+  </section>
+
+  <section class="section section-alt" id="s10">
+    <span class="section-num">Раздел 10</span>
+    <h1>Результаты и выводы</h1>
+    <ul>
+      <li>✓ Полный UI для зрителя (каталог, плеер, личные разделы)</li>
+      <li>✓ VideoPlayer с OP/ED, очередью и hotkeys</li>
+      <li>✓ Кэш API и скелетоны загрузки</li>
+      <li>✓ npm run test:client и npm run build</li>
+    </ul>
+    <p><strong>Вывод:</strong> клиентская часть AniHex реализована; frontend отделён от backend через REST. Админ-UI, PostgreSQL и Docker — не входят в данную работу.</p>
+  </section>
+
+  <footer class="hero" style="border-top: 3px solid var(--accent);">
+    <h1 style="font-size: 32px;">Спасибо за внимание!</h1>
+    <p class="hero-meta"><strong>[ФИО студента]</strong> · Москва, 2026</p>
+  </footer>
+</div>
+</body>
+</html>

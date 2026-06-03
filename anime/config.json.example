@@ -1,0 +1,23 @@
+{
+  "id": "naruto",
+  "title": "Naruto",
+  "description": "История о пареньке-ниндзя, который мечтает стать Хокаге.",
+  "genres": ["Action", "Adventure", "Shounen"],
+  "categories": {
+    "isNew": false,
+    "isPopular": true,
+    "isRecommended": true
+  },
+  "year": 2002,
+  "poster": "cover.jpg",
+  "episodes": [
+    {
+      "id": "ep1",
+      "number": 1,
+      "title": "Серия 1: Начало пути",
+      "description": "Наруто заканчивает академию.",
+      "file": "01.mp4",
+      "durationSeconds": 1400
+    }
+  ]
+}

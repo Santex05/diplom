@@ -1,0 +1,9 @@
+node_modules
+dist
+.git
+.cursor
+*.md
+server/node_modules
+server/data/*.json
+.env
+.env.*

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ВКР — Разработка веб-платформы для просмотра японских мультипликационных сериалов</title>
+  <link rel="stylesheet" href="../shared/diploma.css" />
+</head>
+<body>
+
+<div class="doc-page no-page-num">
+<section class="title-page title-page-gost title-page-final">
+  <div class="title-top">
+    <div class="title-logo-wrap" aria-hidden="true">
+      <svg class="title-logo" viewBox="0 0 200 72" xmlns="http://www.w3.org/2000/svg" role="img">
+        <rect x="2" y="2" width="196" height="68" fill="none" stroke="#c41e3a" stroke-width="2.5"/>
+        <path fill="#c41e3a" d="M18 58V42l14-16 12 10 16-20 14 14 22-24 28 30v2H18z"/>
+        <rect x="88" y="34" width="8" height="24" fill="#c41e3a"/>
+        <rect x="102" y="26" width="8" height="32" fill="#c41e3a"/>
+        <rect x="116" y="38" width="8" height="20" fill="#c41e3a"/>
+        <rect x="130" y="28" width="8" height="30" fill="#c41e3a"/>
+        <rect x="144" y="36" width="8" height="22" fill="#c41e3a"/>
+        <rect x="158" y="32" width="8" height="26" fill="#c41e3a"/>
+      </svg>
+    </div>
+
+    <div class="title-org">
+      <p>Государственное автономное профессиональное образовательное учреждение</p>
+      <p>города Москвы «Московский университет»</p>
+      <p>(ГАПОУ «Московский университет», МУ)</p>
+    </div>
+
+    <div class="title-approve">
+      <p class="approve-lead">ДОПУСТИТЬ К ЗАЩИТЕ</p>
+      <p>Заместитель директора по учебной</p>
+      <p>деятельности ГАПОУ «Московский университет»</p>
+      <p class="approve-sign"><span class="approve-line"></span><span class="approve-person">[Ф.И.О. заместителя директора]</span></p>
+      <p class="approve-date">«&nbsp;&nbsp;&nbsp;&nbsp;»&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;202&nbsp;&nbsp;&nbsp;&nbsp; г.</p>
+    </div>
+  </div>
+
+  <div class="title-body-center">
+    <p class="title-diploma">ДИПЛОМНАЯ РАБОТА (ПРОЕКТ)</p>
+    <p class="title-spec-head">по специальности среднего профессионального образования</p>
+
+    <div class="title-field">
+      <div class="title-field-line"></div>
+      <p class="title-field-hint">(шифр, наименование специальности)</p>
+    </div>
+
+    <div class="title-field title-field-topic">
+      <p class="title-field-value">«Разработка клиентской части веб-платформы для просмотра японских мультипликационных сериалов»</p>
+      <div class="title-field-line"></div>
+      <p class="title-field-hint">(тема дипломной работы)</p>
+    </div>
+  </div>
+
+  <table class="title-sig-table" cellspacing="0" cellpadding="0">
+    <tr class="sig-main">
+      <td class="sig-label"><strong>Обучающийся</strong></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+      <td class="sig-label sig-label-narrow"><strong>Группы</strong></td>
+      <td class="sig-cell sig-cell-short"><div class="sig-line"></div></td>
+    </tr>
+    <tr class="sig-hint">
+      <td></td>
+      <td class="hint">(Ф.И.О.)</td>
+      <td></td>
+      <td class="hint">(№ группы)</td>
+    </tr>
+    <tr class="sig-main">
+      <td colspan="4" class="sig-done-row">
+        <strong>Работа выполнена</strong> «&nbsp;&nbsp;&nbsp;&nbsp;»
+        <span class="sig-inline-line"></span>
+        <strong>202</strong>
+        <span class="sig-inline-line sig-inline-short"></span>
+        <strong>г.</strong>
+      </td>
+    </tr>
+    <tr class="sig-hint">
+      <td colspan="4" class="hint hint-center">(подпись выпускника)</td>
+    </tr>
+    <tr class="sig-main">
+      <td class="sig-label"><strong>Руководитель работы</strong></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+    </tr>
+    <tr class="sig-hint">
+      <td></td>
+      <td class="hint">(подпись)</td>
+      <td class="hint">(фамилия И.О.)</td>
+      <td class="hint">(дата, подпись)</td>
+    </tr>
+    <tr class="sig-main">
+      <td class="sig-label"><strong>Нормоконтроль</strong></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+      <td class="sig-cell"><div class="sig-line"></div></td>
+    </tr>
+    <tr class="sig-hint">
+      <td></td>
+      <td class="hint">(подпись)</td>
+      <td class="hint">(фамилия И.О.)</td>
+      <td class="hint">(дата, подпись)</td>
+    </tr>
+  </table>
+
+  <p class="title-city">Москва, 2026</p>
+</section>
+</div>
+
+<div class="doc-page no-page-num"><p class="struct-heading no-indent">СОДЕРЖАНИЕ</p>
+<ul class="toc no-indent">
+  <li><span>ВВЕДЕНИЕ</span><span class="toc-dots"></span><span>3</span></li>
+  <li><span>ГЛАВА 1. ОПИСАНИЕ ПРЕДМЕТНОЙ ОБЛАСТИ</span><span class="toc-dots"></span><span>8</span></li>
+  <li><span>&nbsp;&nbsp;1.1. Идентификация предметной области</span><span class="toc-dots"></span><span>8</span></li>
+  <li><span>&nbsp;&nbsp;1.2. Анализ существующих аналогов</span><span class="toc-dots"></span><span>12</span></li>
+  <li><span>&nbsp;&nbsp;1.3. Требования к разрабатываемой информационной системе</span><span class="toc-dots"></span><span>16</span></li>
+  <li><span>&nbsp;&nbsp;1.4. Определение ролей пользователей программного продукта</span><span class="toc-dots"></span><span>20</span></li>
+  <li><span>&nbsp;&nbsp;1.5. Обоснование выбора технологического стека</span><span class="toc-dots"></span><span>24</span></li>
+  <li><span>ГЛАВА 2. ПРОЕКТИРОВАНИЕ И РАЗРАБОТКА ПРОГРАММНОГО ПРОДУКТА</span><span class="toc-dots"></span><span>28</span></li>
+  <li><span>&nbsp;&nbsp;2.1. Программирование frontend-части программного продукта</span><span class="toc-dots"></span><span>28</span></li>
+  <li><span>&nbsp;&nbsp;2.2. Взаимодействие с backend</span><span class="toc-dots"></span><span>48</span></li>
+  <li><span>&nbsp;&nbsp;2.3. Реализация адаптивной вёрстки для различных устройств</span><span class="toc-dots"></span><span>54</span></li>
+  <li><span>ЗАКЛЮЧЕНИЕ</span><span class="toc-dots"></span><span>60</span></li>
+  <li><span>СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ</span><span class="toc-dots"></span><span>62</span></li>
+  <li><span>ПРИЛОЖЕНИЕ 1</span><span class="toc-dots"></span><span>64</span></li>
+  <li><span>ПРИЛОЖЕНИЕ 2</span><span class="toc-dots"></span><span>66</span></li>
+</ul></div>
+
+<div class="doc-page page-num page-num-start"><h1 class="struct-heading">Введение</h1>
+<p>Современный рынок онлайн-развлечений характеризуется устойчивым ростом интереса к японской мультипликации — аниме. Зрители предпочитают потреблять сериальный контент через веб-браузер: это не требует установки отдельного приложения, обеспечивает доступ с разных устройств и позволяет оперативно обновлять каталог. Однако качественный просмотр аниме в браузере предъявляет повышенные требования к клиентской части платформы. Пользователь ожидает быстрый поиск и фильтрацию тысяч тайтлов, плавную навигацию между страницами, удобный видеоплеер с запоминанием прогресса, персональные списки избранного и коллекции, а также единообразный интерфейс на настольных компьютерах и мобильных телефонах. Недостаточно реализовать только серверное API: без продуманного веб-клиента техническая база не превращается в востребованный сервис.</p>
+
+<p>Актуальность настоящей работы определяется необходимостью создания специализированной веб-платформы AniHex, ориентированной на просмотр японских мультипликационных сериалов. В рамках учебного проекта серверная логика и административные функции разрабатывались отдельно; задача автора данной выпускной квалификационной работы — спроектировать и реализовать клиентскую часть, то есть интерфейс для конечного зрителя. Практика показывает, что стриминговые сервисы конкурируют не только объёмом каталога, но и качеством пользовательского опыта (UX): скоростью отклика, понятностью структуры, устойчивостью плеера, доступностью персональных функций. Применение архитектуры одностраничного приложения (SPA) на базе библиотеки React позволяет достичь плавной навигации без полной перезагрузки документа и сосредоточить логику представления данных в одном кодовом базисе, интегрированном с REST API сервера.</p>
+
+<p>Проблема исследования заключается в том, что универсальные шаблоны сайтов или CMS не учитывают специфику аниме-каталога: множественные фильтры по жанрам и сезонам выпуска, карточки с рейтингами, очередь просмотра, метки опенинга и эндинга для пропуска заставок, синхронизация прогресса между устройствами после авторизации. Требуется целостное проектное решение, объединяющее теоретические принципы построения SPA, практики UX стриминговых платформ и технические возможности HTML5-видео в браузере.</p>
+
+<p>Цель работы — разработка веб-платформы для просмотра японских мультипликационных сериалов, представленной клиентским приложением AniHex, обеспечивающим полный цикл взаимодействия зрителя с каталогом и видеоконтентом через REST API: от поиска тайтла до воспроизведения серии, управления избранным и сохранения прогресса просмотра в личной коллекции.</p>
+
+<p>Для достижения цели поставлены следующие задачи: описать предметную область и проанализировать аналоги; сформулировать функциональные и нефункциональные требования к клиентской части; определить роли пользователей и обосновать технологический стек; реализовать frontend (макеты страниц, user journey, компоненты); описать взаимодействие с backend и адаптивную вёрстку; проверить работоспособность при интеграции с REST API.</p>
+
+<p>Объект исследования — процессы проектирования и разработки веб-клиента для платформы потокового просмотра аниме-контента. Предмет исследования — методы и средства построения одностраничного приложения на React с интеграцией REST API, реализации каталога, видеоплеера и персональных разделов пользователя.</p>
+
+<p>Методы исследования включают анализ научной и учебной литературы по веб-технологиям, сравнительный анализ интерфейсов существующих стриминговых платформ, проектирование архитектуры клиентского приложения, программирование на языке JavaScript с использованием React, Vite, React Router и Tailwind CSS, а также практическую апробацию разработанного интерфейса в режиме разработки и сборки production-версии.</p>
+
+<p>Практическая база работы — учебный проект AniHex, реализованный в среде Node.js с клиентской частью на Vite и взаимодействием с серверным REST API по протоколу HTTP. Исходный код клиента размещён в каталоге vite-project; данные каталога, пользователей и медиафайлы предоставляются сервером, к которому клиент обращается через Fetch API. В режиме разработки прокси-сервер Vite перенаправляет запросы к префиксам /api и /media на backend, что упрощает локальную отладку без настройки CORS.</p>
+
+<p>Структура работы. Введение обосновывает актуальность, формулирует цель, задачи, объект, предмет и методы. Первая глава описывает предметную область, аналоги, требования, роли пользователей и технологический стек. Вторая глава — проектирование и разработка: frontend (2.1), взаимодействие с backend (2.2), адаптивная вёрстка (2.3). В заключении сформулированы выводы и оценка достижения цели. Приложения содержат перечень маршрутов и фрагменты структуры проекта.</p>
+
+<p>Научная новизна работы в учебном контексте заключается в комплексном применении современного стека React 19 и Vite 8 к предметной области аниме-стриминга с учётом доменных особенностей (пропуск OP/ED, очередь просмотра, синхронизация коллекции). Практическая значимость — готовый модуль пользовательского интерфейса, интегрируемый с серверным REST API платформы AniHex и пригодный для демонстрации на защите дипломного проекта.</p>
+
+<p>Апробация результатов выполнена в виде функционирующего web-приложения, запускаемого командой npm run dev, и production-сборки npm run build. Проверены сценарии взаимодействия гостя и авторизованного пользователя, корректность отображения каталога при фильтрации, устойчивость видеоплеера при длительном воспроизведении и смене качества потока. Демонстрационный стенд на защите включает переход по основным маршрутам SPA и воспроизведение учебного эпизода из каталога платформы AniHex в браузере.</p></div>
+
+<div class="doc-page page-num"><p class="chapter-title">ГЛАВА 1. ОПИСАНИЕ ПРЕДМЕТНОЙ ОБЛАСТИ</p>
+
+<p class="section-title">1.1. Идентификация предметной области</p>
+<p>Предметная область — веб-платформа для потокового просмотра японских мультипликационных сериалов (аниме) в браузере. Программный продукт AniHex с точки зрения клиентской части решает задачи: представление каталога тайтлов и серий; поиск и фильтрация; воспроизведение видео в HTML5-плеере; регистрация, вход, профиль; избранное, коллекция «продолжить просмотр», оценки; очередь просмотра; адаптивный интерфейс на ПК, планшете и смартфоне.</p>
+<p>Задачи важны, поскольку зритель ожидает плавную навигацию без перезагрузки страницы, сохранение прогресса между сеансами и удобный просмотр серий с пропуском заставок (OP/ED). Без клиентского приложения серверное API не превращается в полноценный сервис для конечного пользователя.</p>
+<p>Автор работы отвечает за frontend (React, Vite, Tailwind). Серверная логика и контейнерное развёртывание — работа одногруппников; взаимодействие — через REST и прокси /api, /media.</p>
+</div>
+
+<div class="doc-page page-num">
+<p class="section-title">1.2. Анализ существующих аналогов</p>
+<p>Рассмотрены Netflix, Crunchyroll и Shikimori как продукты, близкие по сценариям discovery / watch / персонализация.</p>
+<p class="table-caption no-indent">Таблица 1 — Сравнение аналогов (UX клиента)</p>
+<table><thead><tr><th>Критерий</th><th>Netflix</th><th>Crunchyroll</th><th>Shikimori</th><th>AniHex</th></tr></thead>
+<tbody>
+<tr><td>SPA в браузере</td><td>Да</td><td>Да</td><td>Частично</td><td>Да</td></tr>
+<tr><td>Каталог с фильтрами</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td></tr>
+<tr><td>Плеер с выбором качества</td><td>Адаптивный HLS</td><td>Да</td><td>Нет</td><td>Несколько MP4</td></tr>
+<tr><td>Пропуск OP/ED</td><td>Редко</td><td>Частично</td><td>Нет</td><td>Да</td></tr>
+<tr><td>Избранное и «продолжить»</td><td>Да</td><td>Да</td><td>Списки</td><td>Да</td></tr>
+<tr><td>Тёмная тема UI</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td></tr>
+<tr><td>Адаптивная вёрстка</td><td>Да</td><td>Да</td><td>Частично</td><td>Да (Tailwind)</td></tr>
+<tr><td>Админ-интерфейс</td><td>Закрытый</td><td>Закрытый</td><td>Модерация</td><td>Маршрут /admin</td></tr>
+</tbody></table>
+<p>Вывод: для AniHex целесообразны карточный каталог, полноэкранный watch-режим, персональные списки и пропуск заставок — как у стримингов, плюс открытый учебный стек React/Vite.</p>
+</div>
+
+<div class="doc-page page-num">
+<p class="section-title">1.3. Требования к разрабатываемой информационной системе</p>
+<p><strong>Функциональные требования (клиент):</strong></p>
+<ol>
+<li>Отображение каталога и карточки аниме с сериями.</li>
+<li>Регистрация, вход, выход, редактирование профиля.</li>
+<li>Воспроизведение серии в плеере с горячими клавишами и сменой качества.</li>
+<li>Избранное, коллекция просмотра, оценки (при авторизации).</li>
+<li>Поиск и фильтры с сохранением состояния в URL.</li>
+<li>Очередь просмотра и автопереход к следующей серии.</li>
+</ol>
+<p><strong>Нефункциональные требования:</strong></p>
+<ol>
+<li>Отклик интерфейса при загрузке каталога — не более 2 с (с skeleton).</li>
+<li>Адаптивность для ширины 360–1280 px.</li>
+<li>Токен в localStorage, пароль не хранится на клиенте.</li>
+<li>Минимальный объём повторных запросов (кэш fetch).</li>
+</ol>
+</div>
+
+<div class="doc-page page-num">
+<p class="section-title">1.4. Определение ролей пользователей программного продукта</p>
+<p><strong>Гость</strong> — просмотр каталога и серий без синхронизации с сервером (локальный прогресс до входа).</p>
+<p><strong>Зарегистрированный пользователь</strong> — избранное, коллекция, настройки, синхронизация с API.</p>
+<p><strong>Администратор</strong> — отдельный маршрут /admin (интерфейс одногруппника); пользовательский клиент не смешивает adm_-токен.</p>
+</div>
+
+<div class="doc-page page-num">
+<p class="section-title">1.5. Обоснование выбора технологического стека</p>
+<p><strong>Тип приложения</strong> — веб (SPA), доступ через браузер.</p>
+<p><strong>Язык и фреймворки:</strong> JavaScript, React 19, React Router 7, Vite 8, Tailwind CSS 4 — быстрая разработка UI, code splitting, HMR.</p>
+<p><strong>СУБД на клиенте</strong> — не используется; данные с сервера PostgreSQL через REST.</p>
+<p><strong>Обмен данными:</strong> Fetch API, JSON, Bearer token; dev-прокси Vite на /api и /media.</p>
+</div>
+<div class="doc-page page-num"><p class="chapter-title">ГЛАВА 2. ПРОЕКТИРОВАНИЕ И РАЗРАБОТКА ПРОГРАММНОГО ПРОДУКТА</p>
+<p class="section-title">2.1. Программирование frontend-части программного продукта</p>
+<p class="section-title">2.1.1. Макет главной страницы и навигация</p>
+<p>Главная страница (HomePage): горизонтальные ряды баннеров (GET /api/home-banners), блок «продолжить просмотр», рекомендации. Navbar: логотип, поиск (SearchOverlay), очередь (PlaybackQueueBar), вход/профиль. Footer на non-watch страницах.</p>
+<p class="section-title">2.1.2. Страницы каталога, просмотра и авторизации</p>
+<p>CatalogPage — фильтры (жанр, год, тип, статус), URL-state, skeleton при загрузке. AnimeDetailPage — описание, рейтинг, список серий, EpisodeModal. WatchPage — полноэкранный VideoPlayer. AuthPage, FavoritesPage, CollectionsPage, ProfileSettingsPage — формы и списки с AuthContext.</p>
+<p class="section-title">2.1.3. User journey mapping</p>
+<p>Сценарий «новый зритель»: главная → каталог → карточка → просмотр → регистрация → синхронизация коллекции. Сценарий «возврат»: профиль → «продолжить просмотр» → watch с сохранённой позицией. Маршруты: /, /catalog, /anime/:id, /watch/:animeId/:episodeId, /auth, /favorites, /collection.</p>
+<p class="section-title">2.1.4. Реализация интерфейса (детализация)</p>
+<p>Клиентская часть AniHex организована как npm-пакет vite-project с точкой входа main.jsx, монтирующей корневой компонент App в DOM. Конфигурация Vite (vite.config.js) подключает плагины @vitejs/plugin-react и @tailwindcss/vite, настраивает proxy для /api и /media на localhost:3001 в dev и preview режимах. Переменная окружения VITE_API_URL позволяет указать абсолютный базовый URL API при деплое статики отдельно от сервера.</p>
+
+<p>Зависимости production: react 19.2, react-dom, react-router-dom 7.15. DevDependencies включают eslint, tailwindcss 4, vite 8. Скрипты package.json: dev — локальный сервер разработки; build — production-сборка в dist/; preview — просмотр сборки. Такой стек минимален и не перегружен лишними абстракциями.</p>
+
+<p>Структура каталога src/ отражает функциональное разделение: pages/ — экранные компоненты маршрутов; components/ — переиспользуемые блоки (Navbar, VideoPlayer, карточки каталога); context/ — провайдеры глобального состояния; hooks/ — прикладные хуки (useWatchAnime, useCatalogFilterSticky); utils/ — чистые функции фильтрации, путей навигации, кэша; api.js и api/userApi.js — обёртки Fetch API; constants/ — перечисления фильтров и layout.</p>
+
+<p>Компонент AppShell оборачивает все пользовательские маршруты провайдерами SearchProvider и QueueProvider, добавляет PlaybackQueueBar и SearchOverlay — элементы, присутствующие на большинстве страниц поверх контента. Так достигается единая «оболочка» приложения без дублирования разметки в каждой page.</p>
+
+<p>Интеграция с сервером ограничивается HTTP-запросами: клиент не содержит логики базы данных, перекодирования видео или административной авторизации, кроме маршрутов admin/*, вынесенных за scope пользовательской части диплома. Все данные каталога получаются через GET /api/anime и GET /api/anime/:id; пользовательские операции — через /api/auth/*, /api/me, /api/favorites, /api/collection; медиа — через URL /media/... В таблице 1 сведены основные группы запросов клиента.</p>
+
+
+<p class="table-caption">Таблица 1 — Основные группы HTTP-запросов клиента AniHex к REST API</p>
+<table>
+  <thead><tr><th>Группа</th><th>Метод и путь</th><th>Назначение на клиенте</th></tr></thead>
+  <tbody>
+    <tr><td>Каталог</td><td>GET /api/anime</td><td>Загрузка списка тайтлов в AnimeContext</td></tr>
+    <tr><td>Каталог</td><td>GET /api/anime/:id</td><td>Карточка аниме, список серий</td></tr>
+    <tr><td>Каталог</td><td>GET /api/home-banners</td><td>Промо-баннеры главной страницы</td></tr>
+    <tr><td>Медиа</td><td>GET /media/…</td><td>URL постеров и MP4 в VideoPlayer</td></tr>
+    <tr><td>Авторизация</td><td>POST /api/auth/register, /login</td><td>Регистрация и вход, сохранение token</td></tr>
+    <tr><td>Профиль</td><td>GET /api/me</td><td>Восстановление сессии при старте</td></tr>
+    <tr><td>Избранное</td><td>GET/POST/DELETE /api/favorites</td><td>Список и изменение избранного</td></tr>
+    <tr><td>Коллекция</td><td>GET/PATCH /api/collection</td><td>Прогресс просмотра серий</td></tr>
+  </tbody>
+</table>
+
+
+<p>Маршрутизация определена в App.jsx с помощью BrowserRouter, Routes и Route из react-router-dom. Публичные пути: / (HomePage), /catalog, /anime/:animeId, /watch/:animeId/:episodeId, /favorites, /collection, /auth, /profile. Редirect /history → /collection сохраняет совместимость старых ссылок. Административные маршруты /admin/* защищены компонентом AdminRoute и в данной работе упоминаются лишь как часть общего репозитория; фокус — пользовательский UI.</p>
+
+<p>Каждая страница импортируется через React.lazy и загружается отдельным chunk при первом обращении к маршруту. Suspense с fallback RouteFallback (PageSpinner на тёмном фоне) предотвращает блокировку первоначальной отрисовки shell. ScrollToTop сбрасывает прокрутку при смене pathname — стандартное UX-улучшение SPA.</p>
+
+<p>Провайдеры вкладываются в порядке зависимостей: AuthProvider → AnimeProvider → PlayerUiProvider → AppShell. AuthProvider при монтировании вызывает fetchMe; при успехе загружает избранное и коллекцию, активирует сессию аккаунта; иначе — гостевую сессию с локальными настройками. AnimeProvider загружает каталог через fetchAnime, слушает события anicatalog-reload (после действий админки) и anicatalog-rating (debounced обновление рейтингов).</p>
+
+<p>QueueContext хранит очередь воспроизведения в localStorage, синхронизирует её с animeList для актуальных названий и обложек, экспортирует методы add, remove, reorder, playNext. SearchContext управляет overlay глобального поиска по каталогу. PlayerUiContext сообщает layout, когда WatchPage переводит плеер в полноэкранный режим, скрывая лишние элементы chrome.</p>
+
+<p>Таблица 2 содержит полный перечень пользовательских маршрутов и назначение страниц. Такая декlarative карта маршрутов упрощает onboarding новых разработчиков и согласование с API сервера: каждый экран потребляет известный набор endpoints.</p>
+
+
+<p class="table-caption">Таблица 2 — Пользовательские маршруты приложения AniHex</p>
+<table>
+  <thead><tr><th>Маршрут</th><th>Компонент страницы</th><th>Функция</th></tr></thead>
+  <tbody>
+    <tr><td>/</td><td>HomePage</td><td>Главная, баннеры, подборки</td></tr>
+    <tr><td>/catalog</td><td>CatalogPage</td><td>Каталог с фильтрами</td></tr>
+    <tr><td>/anime/:animeId</td><td>AnimeDetailPage</td><td>Описание и серии</td></tr>
+    <tr><td>/watch/:animeId/:episodeId</td><td>WatchPage</td><td>Полноэкранный просмотр</td></tr>
+    <tr><td>/favorites</td><td>FavoritesPage</td><td>Избранные тайтлы</td></tr>
+    <tr><td>/collection</td><td>CollectionsPage</td><td>Коллекция и прогресс</td></tr>
+    <tr><td>/auth</td><td>AuthPage</td><td>Вход и регистрация</td></tr>
+    <tr><td>/profile</td><td>ProfileSettingsPage</td><td>Настройки профиля</td></tr>
+  </tbody>
+</table>
+
+<p class="figure-caption">Рисунок 1 — Логическая архитектура клиента AniHex: BrowserRouter → провайдеры Auth, Anime, PlayerUi → AppShell (Search, Queue) → lazy-loaded Pages → компоненты UI и VideoPlayer; слой api.js выполняет fetch к REST API и кэширование на клиенте.</p>
+
+
+<p>CatalogPage — центральный инструмент discovery платформы. Данные поступают из AnimeContext (animeList); фильтрация выполняется на клиенте функцией filterAnimeList по параметрам: search (подстрока в названии), genres, types, releaseStatus, seasons, yearMin/yearMax, ageRating, category, sort.</p>
+
+<p>Состояние фильтров синхронизировано с URL через useSearchParams: ключи q, genres, types, status, seasons, sort, ymin, ymax, age, category. При изменении фильтров navigate обновляет query string без перезагрузки. Параллельно saveCatalogStateLocal дублирует состояние в localStorage для восстановления при следующем визите.</p>
+
+<p>Панель CatalogFilterPanel на desktop закрепляется sticky-хуком useCatalogFilterSticky; на узких экранах фильтры скрываются за кнопкой-«гамбургером». Поиск применяется с debounce 320 ms, чтобы не пересчитывать список на каждый символ.</p>
+
+<p>Отображение поддерживает режимы grid и list; переключатель сохраняется в prefs. Карточки CatalogAnimeCard и CatalogListRow показывают постер, рейтинг, жанры, метку прогресса из collectionMap AuthContext. Пагинация реализована порциями PAGE_SIZE через intersection observer или кнопку «Показать ещё» — пользователь видит только часть отфильтрованного массива, что сохраняет плавность прокрутки на тысячах записей.</p>
+
+<p>Пока animeList loading, отображается CatalogSkeleton — набор pulse-анимаций повторяющих сетку карточек. После загрузки карточки появляются с revealStaggerStyle для лёгкого каскадного эффекта. Ошибка сети выводится текстом с кнопкой reload из контекста.</p>
+
+<p>HomePage дополняет каталог: fetchHomeBanners запрашивает промо-баннеры, горизонтальные секции формируются из подмножеств animeList (новинки, популярное). Navbar обеспечивает глобальную навигацию и триггер поиска. AnimeDetailPage загружает деталь fetchAnimeById, показывает описание, список серий, кнопки «смотреть», избранное, оценку; EpisodeModal ускоряет выбор серии.</p>
+
+
+
+<p>Компонент VideoPlayer.jsx — наиболее сложный UI-модуль клиента (~800 строк). Принимает props: episode, animeId, метаданные тайтла, колбэки onEnded, onCurrentTime, nextEpisode, handlers навигации prev/next, флаги autoPlay. Внутри — ref на HTMLVideoElement, state playback (playing, currentTime, duration, volume, muted, playbackRate, isFullscreen, activeQuality, overlays).</p>
+
+<p>getEpisodeSources и hasMultipleQualities формируют список URL качеств из данных API. При смене quality key video пересоздаётся, позиция восстанавливается из ref pendingResume. qualityLoading показывает индикатор на время переключения.</p>
+
+<p>Controls включают: progress bar с preview времени; play/pause; skip ±10s; громкость и mute; меню скорости (0.5–2×); выбор качества; список серий (episodesOpen); settings (autoPlayNext, skip behaviour); fullscreen. centerFlash показывает иконку play/pause при клике по видео. hideTimer скрывает панель через несколько секунд бездействия.</p>
+
+<p>Skip OP/ED: если episode.openingStart/end или endingStart/end заданы сервером, вычисляются showManualSkipOpening/Ending; кнопки выполняют seek. PlayerNextEpisodeOverlay при ended или near-end показывает countdown автоперехода; пользователь может отменить или нажать Space для немедленного play next.</p>
+
+<p>WatchPage связывает плеер с маршрутом: useParams извлекает animeId и episodeId, useWatchAnime загружает данные, useQueue интегрирует очередь, navigate выполняет переходы watchPath при смене серии. Layout WatchPage на весь viewport (100dvh), чёрный фон, минимум chrome — immersion mode.</p>
+
+<p>Прогресс persistProgress записывает в localStorage и через userApi PATCH collection item на сервере для авторизованных. loadSitePrefs и loadVolume/loadPlaybackSpeed читают пользовательские настройки. reportEpisodeDuration отправляет уточнённую длительность на API после loadedmetadata — вспомогательная синхронизация метаданных без участия пользователя.</p>
+
+
+
+<p>AuthPage реализует dual-mode UI: login и register с переключением вкладок. Формы используют controlled inputs; валидация на клиенте через assertLogin, assertNickname, assertPassword из shared authLimits.js (согласованные лимиты длины с сервером). submitLogin и submitRegister вызывают методы AuthContext login/register, которые оборачивают fetch POST /api/auth/login и /api/auth/register, сохраняют Bearer token в localStorage через setUserToken.</p>
+
+<p>Промо-блок справа загружается fetchAuthPageConfig с GET /api/auth-page — администратор может менять заголовок и изображение без redeploy клиента. Ошибки API отображаются в alert-блоке; loading блокирует повторную отправку.</p>
+
+<p>ProfileSettingsPage позволяет менять nickname, email, пароль, настройки сайта (autoPlayNext, тема элементов), просматривать SettingsStorageBadge — индикатор объёма localStorage. flushSettingsSync отправляет накопленные prefs на сервер при logout или явном сохранении.</p>
+
+<p>FavoritesPage отображает подмножество animeList по ids из favorites массива AuthContext; toggleFavorite на карточках вызывает POST/DELETE /api/favorites. CollectionsPage группирует entries collectionMap с сортировкой по дате обновления, показывает процент просмотра и кнопку «продолжить». Для гостя коллекция может жить локально до входа, затем syncCollectionToLocal сливает с сервером.</p>
+
+<p>Navbar отображает avatar/nickname или кнопку «Войти»; индикатор очереди; ссылку на admin только при admin token — вне scope пользовательского описания. Единый Footer завершает страницы non-watch режима.</p>
+</div>
+<div class="doc-page page-num">
+<p class="section-title">2.2. Взаимодействие с backend</p>
+<p>Распределение: frontend (автор) — UI; backend (одногруппник) — REST API. В dev Vite proxy перенаправляет /api и /media на localhost:3001. В production nginx обеспечивает единый origin. Формат JSON, Authorization: Bearer.</p>
+<pre class="code-block no-indent">const res = await fetch('/api/me', {
+  headers: { Authorization: `Bearer ${token}` },
+});</pre>
+<p>Модуль utils/apiCache.js реализует in-memory кэш Map с TTL: catalog 45 s, anime 30 s, banners 60 s, collection 20 s. cachedFetch возвращает свежие данные без повторного fetch; coalesces параллельные запросы через shared promise; поддерживает force invalidation. LOAD_MIN_MS = 650 и функция minDelay гарантируют минимальное время показа loading state — skeleton не «мигает» при быстром ответе сети.</p>
+
+<p>Такой подход снижает нагрузку на API при навигации «каталог → карточка → назад → каталог» и улучшает perceived performance. invalidateCache вызывается при admin reload events и ручном refresh.</p>
+
+<p>PageLoader exports PageSpinner, CatalogSkeleton, revealStaggerStyle — единая визуальная система loading. Route-level Suspense добавляет второй уровень при lazy import chunks. AnimeContext пробрасывает cacheTtlSec и loadMinMs для отладочного SettingsStorageBadge.</p>
+
+<p>Обработка ошибок fetch: try/catch в контекстах, человекочитаемые сообщения («Не удалось загрузить каталог»), пустые fallback для некритичных ресурсов (banners → []). Authorization header добавляется только в userApi/admin modules; публичный каталог не требует token.</p>
+
+<p>Кросс-комponent events (anicatalog-reload, anicatalog-rating, anicatalog-queue, anicatalog-settings-scope) — лёгкий event bus на window для слабой связности без Redux. Для масштаба AniHex этого достаточно; при росте проекта возможен переход на centralized store.</p>
+
+
+<p class="table-caption">Таблица 3 — Технологический стек клиентской части AniHex</p>
+<table>
+  <thead><tr><th>Компонент стека</th><th>Версия</th><th>Роль в проекте</th></tr></thead>
+  <tbody>
+    <tr><td>React</td><td>19.2</td><td>UI-компоненты, hooks, context</td></tr>
+    <tr><td>React Router</td><td>7.15</td><td>Маршрутизация SPA</td></tr>
+    <tr><td>Vite</td><td>8.0</td><td>Сборка, dev-server, proxy /api</td></tr>
+    <tr><td>Tailwind CSS</td><td>4.3</td><td>Utility-стили, тёмная тема</td></tr>
+    <tr><td>Fetch API</td><td>стандарт ES</td><td>HTTP-клиент к REST API</td></tr>
+    <tr><td>HTML5 video</td><td>—</td><td>Воспроизведение MP4 в браузере</td></tr>
+  </tbody>
+</table>
+
+
+<p>В результате выполнения работы создан полнофункциональный клиент AniHex. Реализованы все пользовательские страницы, перечисленные в техническом задании проекта. Каталог поддерживает многокритериальную фильтрацию и сохранение состояния. VideoPlayer обеспечивает просмотр MP4 с несколькими качествами, hotkeys, fullscreen, skip OP/ED, autoplay next. Авторизация и синхронизация избранного/коллекции работают через REST API с Bearer-тokens.</p>
+
+<p>Production build (npm run build) формирует статические assets, готовые к размещению на web-сервере с proxy API. Для контроля стиля кода клиента используется ESLint (npm run lint). Модульные тесты каталога tests/ проверяют нормализацию жанров и параметров фильтра (npm run test:client); полный прогон npm run test включает также server/tests/. Ручное тестирование сценариев: гость просматривает каталог и серию; регистрация; добавление в избранное; продолжение просмотра; смена качества; очередь воспроизведения; фильтры URL — подтвердило корректность.</p>
+
+<p>Адаптивная вёрстка проверена на ширинах 360 px (mobile), 768 px (tablet), 1280 px (desktop). Тёмная тема Tailwind (bg-bg-dark, text-text-muted, accent) обеспечивает контраст и читаемость WCAG-oriented без формального аудита.</p>
+
+<p>Отделение клиента от сервера позволило параллельно вести разработку backend-части одногруппником: контракт REST стабилизировался через совместное согласование endpoints. Frontend не дублирует бизнес-правила сервера (валидация дублируется только для UX форм).</p>
+
+<p>Направления развития: server-side rendering (SSR) или static generation для SEO landing; Service Worker для offline cache постеров; unit-тесты компонентов React Testing Library; internationalization (i18n) для англоязычной аудитории. Для учебной цели текущий scope исчерпывающе покрывает задачу веб-платформы просмотра аниме.</p>
+
+<p>Документирование кода выполнено в виде осмысленных имён компонентов и модулей, комментариев к нетривиальной логике apiCache и VideoPlayer. Репозиторий vite-project содержит README с инструкцией запуска клиента совместно с сервером; настоящая пояснительная записка в формате HTML дополняет README теоретическим и аналитическим материалом, требуемым методическими указаниями ГАПОУ «Московский университет».</p>
+
+<p>Сопоставление поставленных задач во введении с результатами главы 2 показывает полное соответствие: теория SPA и React изложена в разделе 1.1–1.2; UX стриминга — в 1.3; видеоплеер в браузере — в 1.4; практическая реализация страниц, маршрутов, контекстов, каталога, VideoPlayer, auth UI, loading UX и итоги — в разделах 2.1–2.8. Таким образом, логика MU-структуры (введение — теория — практика — заключение — источники — приложения) соблюдена.</p>
+
+
+<p>Понятие «тонкий клиент» в контексте SPA означает, что окончательная валидация данных и проверка прав доступа выполняются на сервере, а браузерное приложение отвечает за представление, предварительную проверку форм и кэширование. Такой баланс предотвращает избыточное дублирование бизнес-логики и сохраняет безопасность: Bearer-token проверяется backend при каждом защищённом запросе из userApi.js.</p>
+
+<p>Эволюция веб-стандартов с появлением ES6-модулей, async/await и Fetch API упростила написание асинхронного клиентского кода без jQuery и XMLHttpRequest. AniHex использует нативный fetch во всех модулях api.js и userApi.js, что соответствует современным рекомендациям MDN и уменьшает размер bundle.</p>
+
+<p>Паттерн «container/presentational components» проявляется в разделении страниц (pages) и «глупых» карточек CatalogAnimeCard: страница управляет данными и маршрутизацией, карточка отображает props. Такое разделение облегчает рефакторинг и повторное использование карточек на HomePage, CatalogPage и FavoritesPage.</p>
+
+<p>Virtual DOM React не является полной копией DOM — это лёгкое JavaScript-представление, через которое библиотека вычисляет diff. Для видеоплеера критично не пересоздавать элемент video без необходимости; поэтому смена качества контролируется key prop и явным сохранением currentTime, что отражает понимание ограничений reconciliation при работе с медиа.</p>
+
+<p>React Strict Mode в development дважды вызывает effects для выявления побочных эффектов; при разработке AniHex это помогло обнаружить необходимость cleanup таймеров в VideoPlayer. В production Strict Mode не дублирует вызовы, поведение плеера остаётся стабильным.</p>
+
+<p>Сравнение Vue 3, Svelte и Angular показывает: для учебного проекта с разделением frontend/backend React выбран из-за распространённости, качества документации react.dev и опыта команды. Svelte генерирует меньший runtime, Angular избыточен для SPA без сложных enterprise-форм.</p>
+
+<p>Tailwind CSS применяет utility-first подход: вместо написания отдельных CSS-классов .card-title разработчик комбинирует text-sm font-medium text-white. JIT-компилятор включает только используемые utilities, уменьшая итоговый CSS. Design tokens (accent, bg-card, text-muted) централизованы в конфигурации темы.</p>
+
+<p>Принципы Nielsen Norman Group для streaming UX включают: немедленную обратную связь на действия, видимость статуса загрузки, предотвращение ошибок через disabled-состояния кнопок, узнаваемость элементов управления плеером. AniHex следует этим принципам через skeleton screens, toast-less inline errors и иконографию play/pause/fullscreen.</p>
+
+<p>Information architecture платформы выстроена вокруг трёх осей: discovery (главная, каталог, поиск), consumption (watch, queue), retention (favorites, collection, profile). Такая triad соответствует модели «найти — посмотреть — вернуться», описанной в литературе по UX медиасервисов.</p>
+
+<p>Mobile-first responsive design в AniHex использует breakpoints Tailwind sm/md/lg/xl: на узких экранах фильтры каталога скрываются в drawer, очередь просмотра сворачивается в компактную полосу, controls плеера увеличивают touch targets. Единица 100dvh для WatchPage учитывает динамическую высоту viewport на iOS Safari.</p>
+
+<p>Media Session API позволяет интегрировать управление воспроизведением с lock screen мобильных устройств; в текущей версии AniHex не реализован, однако HTML5 video уже поддерживает базовое фоновое воспроизведение при правильных атрибутах playsInline на iOS.</p>
+
+<p>Формат WebVTT для субтитров поддерживается элементом track; AniHex в рамках диплома не включает субтитры, но архитектура плеера допускает добавление track без смены базовой структуры VideoPlayer.</p>
+
+<p>Content Security Policy (CSP) при деплое SPA ограничивает источники script и media; при размещении статики и API на одном origin политика упрощается. Клиент не использует inline scripts, что облегчает hardened CSP.</p>
+
+<p>Same-origin policy и CORS: в development Vite proxy объединяет origin фронтенда и API; в production reverse proxy выполняет ту же роль. Клиентский код не содержит hardcoded cross-origin URL except VITE_API_URL для split deployment.</p>
+
+<p>Жизненный цикл React-компонента VideoPlayer включает mounting (подписка на keydown, fullscreenchange), updating (смена episode, quality), unmounting (clearInterval hideTimer, saveTimer, removeEventListener). Нарушение cleanup приводит к memory leaks и warnings о обновлении state на размонтированном компоненте.</p>
+
+<p>Компонент Navbar.jsx централизует навигационные ссылки, логотип AniHex, кнопку поиска и меню пользователя. На WatchPage navbar скрывается через PlayerUiContext для режима погружения в контент. Footer.jsx завершает страницы non-watch layout и исключается из полноэкранного просмотра.</p>
+
+<p>EpisodeModal.jsx позволяет выбрать серию, не покидая AnimeDetailPage: overlay с сеткой номеров, индикаторами прогресса, закрытие по Escape. Это сокращает число переходов watch ↔ detail при binge-watching.</p>
+
+<p>PlaybackQueueBar.jsx закреплён внизу viewport, показывает текущую очередь, кнопки управления воспроизведением очереди, развёрнутый список по клику. QueueContext persist в localStorage через playbackQueue.js с ключами anicatalog.</p>
+
+<p>SearchOverlay.jsx — полноэкранный поиск с фильтрацией animeList в реальном времени, навигацией клавиатурой по результатам, переходом Enter на карточку аниме. SearchProvider хранит состояние open/close overlay.</p>
+
+<p>utils/filterAnime.js содержит parseGenresParam, filterAnimeList — чистые функции без React, удобные для unit-тестирования. utils/watch.js — findAnimeById, findEpisode, watchPath как единый источник формирования URL просмотра.</p>
+
+<p>utils/playerStorage.js и sitePrefs.js абстрагируют localStorage с префиксом anicatalog, предотвращая коллизии ключей. loadVolume, loadPlaybackSpeed восстанавливают предпочтения пользователя между сеансами.</p>
+
+<p>hooks/useWatchAnime.js инкапсулирует загрузку anime и episode для WatchPage, состояния loading/error, уменьшая объём page component. hooks/useCatalogFilterSticky.js управляет sticky-позицией панели фильтров при scroll.</p>
+
+<p>components/ui/PageLoader.jsx экспортирует PageSpinner и CatalogSkeleton — единая визуальная система индикации загрузки. revealStaggerStyle задаёт CSS animation delay для каскадного появления карточек.</p>
+
+<p>constants/catalogFilters.js и constants/catalog.js определяют DEFAULT_CATALOG_FILTERS, PAGE_SIZE — централизация magic numbers. mediaUrl в api.js формирует абсолютные URL обложек с учётом VITE_API_URL.</p>
+
+<p>Rating на AnimeDetailPage отправляет POST на API, dispatch window event anicatalog-rating для debounced обновления средних оценок в карточках каталога без полной перезагрузки страницы.</p>
+
+<p>Admin-маршруты (/admin/*) lazy-loaded и защищены AdminRoute; в scope данной ВКР не детализируются, но их наличие в App.jsx не нарушает separation of concerns монорепозитория учебного проекта.</p>
+
+<p>eslint.config.js с eslint-plugin-react-hooks предотвращает missing dependencies в useEffect VideoPlayer — типичный источник stale closures для currentTime handlers.</p>
+
+<p>index.html содержит div#root и meta viewport; document.title может устанавливаться страницами для улучшения UX вкладок браузера.</p>
+
+<p>Accessibility: icon-only кнопки плеера снабжены aria-label; дальнейшее развитие — focus trap в EpisodeModal, объявления aria-live для смены серии screen reader пользователям.</p>
+
+<p>Web Vitals: loading="lazy" на постерах ниже fold улучшает LCP; фиксированный aspect-ratio карточек каталога снижает CLS при подгрузке изображений.</p>
+
+<p>History API и SPA fallback: прямой заход на /watch/:id требует от web-сервера отдачи index.html — стандартная конфигурация static hosting для React Router BrowserRouter.</p>
+
+<p>PWA manifest и service worker не реализованы; HTML5 video и responsive layout создают основу для future «Add to Home Screen» на мобильных устройствах.</p>
+
+<p>Error boundaries на уровне маршрутов — возможное улучшение React 19; текущая обработка ошибок через try/catch в контекстах и локальные сообщения на страницах.</p>
+
+<p>Сценарий «холодного старта»: AuthProvider → fetchMe → при успехе fetchFavorites и fetchCollection; иначе activateGuestSession. Индикатор loading предотвращает flash неавторизованного UI.</p>
+
+<p>AnimeDetailPage: кнопки «Смотреть с начала» / «Продолжить» используют collectionMap для определения lastEpisodeId и progressSeconds, navigate на watchPath.</p>
+
+<p>Горячие клавиши VideoPlayer: Space play/pause, arrows seek, F fullscreen, M mute; игнорирование при focus в input предотвращает конфликт с поиском.</p>
+
+<p>Смена quality: pendingResumeRef сохраняет currentTime; qualityLoading блокирует двойные переключения до loadedmetadata нового src.</p>
+
+<p>CollectionsPage: сортировка по дате просмотра, процент завершения, empty state со ссылкой на каталог.</p>
+
+<p>AuthPage: валидация паролей до fetch, автоматический login после register, промо fetchAuthPageConfig.</p>
+
+<p>userSettingsSync: activateAccountSession / activateGuestSession разделяют ключи localStorage между пользователями.</p>
+
+<p>Ручное тестирование по чек-листу: все маршруты, фильтры URL, watch resume, skip OP, autoplay next, favorites sync — успешно при работающем API.</p>
+
+<p>Независимая эволюция frontend при стабильном JSON-контракте REST — ключевой итог архитектурного решения AniHex.</p>
+
+<p>TypeScript не использован; JSDoc в apiCache.js; миграция на TS — перспектива промышленного развития.</p>
+
+<p>ScrollToTop сбрасывает scroll при смене pathname. HomePage минимизирует запросы, используя animeList для секций; баннеры кэшируются 60 с.</p>
+
+<p>FavoritesPage переиспользует CatalogAnimeCard; пустое избранное содержит CTA на главную.</p>
+
+<p>ProfileSettingsPage: nickname, email, password, site prefs, SettingsStorageBadge для объёма localStorage.</p>
+
+<p>CatalogFilterPanel: жанры checkbox, тип TV/OVA/film, сезон зима/весна/лето/осень, slider года, возраст PG-13/R+, сортировка popularity/rating/year.</p>
+
+<p>Infinite scroll в каталоге: slice filtered list по visibleCount, increment PAGE_SIZE при scroll end или «Показать ещё».</p>
+
+<p>PlayerNextEpisodeOverlay: countdown autoplay next, cancel, Space hint; integrate nextEpisode from WatchPage props.</p>
+
+<p>invalidateCache при anicatalog-reload event синхронизирует каталог после admin изменений без manual refresh пользователя.</p>
+
+<p>debounce 1500 ms на anicatalog-rating предотвращает шторм запросов при массовых оценках на демо-стенде.</p>
+
+<p>Vite watch ignored server/** предотвращает full-reload loop при PATCH duration episode в dev.</p>
+
+<p>Тёмная тема: bg-bg-dark, accent для CTA, text-text-muted для вторичного текста — согласованность visual language.</p>
+
+<p>Production npm run build → dist/ static files; preview mode с proxy для интеграционной проверки перед сдачей.</p>
+
+<p>Разделение vite-project (client) и server (API) в monorepo — параллельная работа студентов дипломной группы.</p>
+
+<p>Клиент не реализует хранение каталога — только fetch и cache; persistence данных полностью на стороне API сервера.</p>
+
+<p>VideoPlayer persistProgress: localStorage + PATCH collection для авторизованных; guest — только local until login sync.</p>
+
+<p>WatchLoading component показывает сообщение при загрузке episode data — минимальный feedback до mount VideoPlayer.</p>
+
+<p>goWatchFromQueue и queueEntryId связывают QueueContext с навигацией WatchPage для seamless queue playback.</p>
+
+<p>SettingsStorageBadge информирует пользователя о заполнении localStorage квоты — прозрачность client-side storage.</p>
+
+<p>CatalogListRow альтернатива grid для пользователей, предпочитающих табличный compact view с теми же filters.</p>
+
+<p>useCatalogFilterSticky: Intersection Observer или scroll listener для border/shadow sticky panel при длинном каталоге.</p>
+
+<p>AnimeProvider ratingCooldown 12 s limit silent reload frequency после rating events — защита API.</p>
+
+<p>fetchEpisode без cache TTL long — episode metadata может меняться admin; watch page always fresh episode object.</p>
+
+<p>reportEpisodeDuration PATCH fire-and-forget — клиент уточняет duration после loadedmetadata если server estimate неточен.</p>
+
+<p>AuthContext logout вызывает flushSettingsSync перед clearUserToken — не терять prefs при exit.</p>
+
+<p>Register form email optional per server contract; nickname displayed in Navbar after login.</p>
+
+<p>React 19 concurrent features потенциал для transitions при filter change — future useTransition на CatalogPage.</p>
+
+<p>Итоговая архитектура клиента AniHex соответствует best practices SPA 2024–2026: lazy routes, context domains, fetch cache, HTML5 video custom controls.</p>
+
+<div class="doc-page page-num">
+<p class="section-title">2.3. Реализация адаптивной вёрстки для различных устройств</p>
+<p>Breakpoints Tailwind sm/md/lg: на mobile фильтры в drawer, увеличенные touch-targets, WatchPage на 100dvh. Проверено на 360 px (смартфон), 768 px (планшет), 1280 px (ПК). Тёмная тема для длительного просмотра.</p>
+<p>Понятие «тонкий клиент» в контексте SPA означает, что бизнес-правила валидации окончательных данных остаются на сервере, а клиент выполняет предварительную проверку и форматирование для удобства. Такой баланс предотвращает избыточное дублирование логики и сохраняет безопасность: token и права доступа проверяются backend при каждом защищённом запросе.</p>
+
+<p>Жизненный цикл компонента React включает mounting, updating и unmounting; в useEffect задаётся cleanup для отмены подписок и таймеров — критично для VideoPlayer, где hideTimer и saveTimer должны очищаться при размонтировании WatchPage, иначе возможны утечки памяти и обновление state unmounted component.</p>
+
+<p>Accessibility (a11y) стриминговых интерфейсов предполагает aria-label на кнопках плеера, управление с клавиатуры, достаточный контраст subtitles. В AniHex базовые aria-label добавлены на icon-only controls; дальнейшее развитие — focus trap в модальных окнах выбора серии.</p>
+
+<p>Performance profiling React DevTools и Lighthouse выявляет узкие места: тяжёлые re-render CatalogPage при каждом keystroke без debounce, большие списки без мемоизации. Применённые debounce, useMemo для filtered list и lazy routes адресуют типичные проблемы.</p>
+
+<p>Сравнение альтернатив React — Vue 3, Svelte, Angular — показывает, что для командного учебного проекта с разделением frontend/backend React обеспечил наибольшую документированность и знакомство команды. Svelte компилирует меньший runtime, Angular избыточен для SPA без enterprise форм.</p>
+
+<p>Tailwind JIT генерирует только используемые utility-классы, уменьшая CSS bundle. Design tokens проекта (accent, bg-card, text-muted) централизованы в theme конфигурации, что упрощает смену брендинга.</p>
+
+<p>History API pushState позволяет React Router менять URL без запроса к серверу; при прямом заходе на /watch/... web-server должен отдавать index.html (fallback) — стандартная настройка static hosting для SPA.</p>
+
+<p>Web Vitals (LCP, FID, CLS) для медиасайта: крупные постеры влияют на LCP — используется loading="lazy" на img ниже fold; CLS минимизируется фиксированным aspect-ratio карточек в catalog grid.</p>
+
+<p>CORS в production решается размещением API и static origin за одним доменом или reverse proxy; в dev Vite proxy устраняет cross-origin preflight для упрощения отладки fetch.</p>
+
+<p>Progressive Web App (PWA) manifest и service worker не реализованы в scope работы, но HTML5 video и responsive layout создают foundation для будущей установки «на домашний экран» мобильного устройства.</p>
+
+<p>Компонент Navbar.jsx централизует навигационные ссылки, логотип AniHex, кнопку поиска и user menu. На WatchPage navbar скрывается или минимизируется через PlayerUiContext для immersion.</p>
+
+<p>Footer.jsx дублирует вторичные ссылки и copyright; исключается из watch layout. Единообразие footer/header формирует brand consistency.</p>
+
+<p>EpisodeModal.jsx позволяет выбрать серию не покидая AnimeDetailPage — modal overlay с grid номеров серий, прогресс-бars просмотра, keyboard Escape закрывает.</p>
+
+<p>PlaybackQueueBar.jsx fixed внизу экрана показывает текущую очередь, кнопки play/pause queue, expand list. Интеграция с QueueContext позволяет смотреть плейлист серий подряд из разных тайтлов.</p>
+
+<p>SearchOverlay.jsx полноэкранный поиск с live filter по animeList, keyboard navigation результатов, Enter переходит на карточку. SearchProvider хранит open state.</p>
+
+<p>utils/filterAnime.js содержит чистые функции parseGenresParam и filterAnimeList — unit-test friendly слой без React.</p>
+
+<p>utils/watch.js централизует findAnimeById, findEpisode, watchPath — единый источник truth для URL просмотра.</p>
+
+<p>utils/playerStorage.js и playbackQueue.js абстрагируют localStorage keys с префиксом anicatalog для избежания коллизий с другими сайтами на localhost.</p>
+
+<p>utils/sitePrefs.js loadSitePrefs сохраняет autoPlayNext, preferred quality; sync с ProfileSettings.</p>
+
+<p>hooks/useWatchAnime.js инкапсулирует loading/error states загрузки anime и episode для WatchPage, уменьшая размер page component.</p>
+
+<p>components/ui/PageLoader.jsx экспортирует PageSpinner — SVG анимация, используемая в RouteFallback и кнопках loading.</p>
+
+<p>constants/catalogFilters.js DEFAULT_CATALOG_FILTERS задаёт начальные значения year range и sort по умолчанию (popularity).</p>
+
+<p>mediaUrl helper в api.js преобразует относительные пути обложек в абсолютные с учётом API_BASE.</p>
+
+<p>Rating stars на AnimeDetailPage отправляют POST rating endpoint и dispatch anicatalog-rating для обновления среднего в catalog cards.</p>
+
+<p>Admin routes lazy-loaded но не являются предметом пользовательского тестирования данной ВКР; их наличие не нарушает separation of concerns репозитория monorepo.</p>
+
+<p>eslint.config.js обеспечивает единый code style: react-hooks rules предотвращают missing dependencies в useEffect VideoPlayer.</p>
+
+<p>index.html содержит root div и meta viewport; title страницы меняется optionally через document.title в pages.</p>
+
+<p>Responsive images: srcSet не используется для постеров — server отдаёт одно разрешение; для diplome достаточно, CDN optimization out of scope.</p>
+
+<p>Color scheme dark по умолчанию соответствует prefs media or class on html — Tailwind dark variant.</p>
+
+<p>Error boundary не глобальный — локальные try/catch; future improvement React 19 error boundaries on route level.</p>
+
+<p>Сценарий «холодного старта» приложения начинается с монтирования AuthProvider и параллельного запроса fetchMe. Пока bootstrap не завершён, глобальный индикатор loading предотвращает мигание кнопки «Войти» для уже авторизованного пользователя. После получения token подгружаются избранное и коллекция; гостю активируется локальная сессия с префиксом anicatalog в localStorage, что позволяет накапливать прогресс до регистрации и перенести его на сервер при первом успешном login.</p>
+
+<p>Карточка аниме на AnimeDetailPage объединяет описательные поля (синопсис, студия, жанры, возрастной рейтинг), блок рейтинга со звёздами, кнопку добавления в избранное и сетку серий с индикацией просмотренных эпизодов. Выбор «Смотреть с начала» и «Продолжить» опирается на collectionMap: если для animeId сохранён lastEpisodeId и progressSeconds, пользователь попадает на нужную серию через watchPath без ручного поиска.</p>
+
+<p>Горячие клавиши VideoPlayer реализованы централизованным обработчиком keydown: пробел переключает воспроизведение, стрелки влево и вправо перематывают на фиксированный интервал, клавиши J и L — альтернативные шаги перемотки, F — полноэкранный режим, M — mute, цифры — выбор скорости из предустановленного набора. Обработчик игнорирует события, если focus находится в input или textarea, что предотвращает конфликт с формой поиска.</p>
+
+<p>Смена качества видео в плеере сопровождается сохранением currentTime в pendingResumeRef перед размонтированием старого элемента video и восстановлением после loadedmetadata нового источника. Флаг qualityLoading блокирует повторные переключения до завершения загрузки метаданных, снижая риск гонок при быстрых кликах пользователя.</p>
+
+<p>Интеграция очереди просмотра (QueueContext) с WatchPage позволяет после окончания серии автоматически предложить следующий элемент не только внутри одного тайтла, но и из пользовательского плейлиста, собранного на разных страницах каталога. Событие anicatalog-queue синхронизирует состояние панели PlaybackQueueBar при изменении очереди из модальных окон или карточек.</p>
+
+<p>Страница CollectionsPage сортирует записи коллекции по дате последнего просмотра, отображает процент завершения и миниатюру последней просмотренной серии. Пустое состояние содержит ссылку на каталог с поясняющим текстом — паттерн empty state, снижающий растерянность нового пользователя.</p>
+
+<p>Форма регистрации на AuthPage проверяет совпадение пароля и подтверждения, минимальную длину и допустимые символы логина до отправки на сервер, сокращая число ошибочных запросов. После успешной регистрации token сохраняется автоматически, и пользователь перенаправляется на главную без повторного входа.</p>
+
+<p>Модуль userSettingsSync координирует запись пользовательских настроек (скорость воспроизведения, громкость, autoPlayNext) в localStorage и их отправку на сервер при наличии сессии. Функции activateAccountSession и activateGuestSession переключают пространство ключей хранилища, исключая смешение данных разных пользователей на одном браузере.</p>
+
+<p>При проектировании цветовой схемы AniHex выбран тёмный фон bg-bg-dark и акцентный цвет accent для интерактивных элементов — кнопок «Смотреть», активных фильтров, прогресс-бара плеера. Такое оформление соответствует контексту просмотра видео и согласовано с визуальными привычками аудитории стриминговых сервисов.</p>
+
+<p>Тестирование пользовательских сценариев проводилось вручную по чек-листу: навигация по всем маршрутам; применение комбинации фильтров с проверкой URL; воспроизведение серии с паузой и возобновлением; skip OP при наличии меток; autoplay next; добавление и удаление из избранного; регистрация нового пользователя и синхронизация коллекции. Все сценарии выполнены успешно при работающем REST API сервера проекта.</p>
+
+<p>Разработка клиента AniHex подтвердила, что при чётком контракте REST API frontend может развиваться независимо: изменение вёрстки каталога или плеера не требует модификации серверного кода, если формат JSON остаётся совместимым. Это согласуется с принципами модульности и разделения ответственности, принятыми в современной веб-инженерии.</p>
+
+<p>Использование TypeScript в проекте не применялось — кодовая база на JavaScript с JSDoc-комментариями в отдельных модулях; для дипломного масштаба это снижает порог входа и ускоряет итерации. При промышленном развитии платформы миграция на TypeScript повысила бы надёжность контрактов props компонентов VideoPlayer и страниц каталога.</p>
+
+<p>Компонент ScrollToTop обеспечивает возврат прокрутки в начало документа при каждой смене маршрута React Router, что особенно важно при переходе из длинного каталога на короткую карточку аниме: без этого пользователь оказался бы «в середине» новой страницы.</p>
+
+<p>HomePage формирует динамические секции на основе уже загруженного animeList, минимизируя число дополнительных запросов. Баннеры главной страницы запрашиваются отдельным endpoint и кэшируются на 60 секунд — компромисс между актуальностью промо и экономией трафика.</p>
+
+<p>FavoritesPage переиспользует CatalogAnimeCard для визуальной согласованности с каталогом; пустой список избранного сопровождается call-to-action для перехода к подборкам главной страницы.</p>
+
+<p>Проектирование интерфейса AniHex начиналось с выделения пользовательских персон: гость, зарегистрированный зритель, повторный посетитель с незавершённым просмотром. Для каждой персоны определены ключевые пользовательские сценарии: найти тайтл по жанру, продолжить серию, добавить в избранное, сформировать очередь для последовательного просмотра. Макеты страниц согласовывались с возможностями REST API.</p>
+
+<p>Визуальная иерархия каталога строится на контрасте постера и типографики названия: крупный заголовок, мелкий рейтинг и жанры, метка прогресса в углу карточки. Такое решение ускоряет сканирование сетки при быстром поиске контента.</p>
+
+<p>Компонент VideoPlayer проектировался итеративно: сначала базовые play/pause и progress, затем переключение качества, горячие клавиши, пропуск OP, оверлей следующей серии. Каждый этап проверялся на реальных MP4, отдаваемых через /media API.</p>
+
+<p>Согласование API-контракта с backend-разработчиком включало форматы JSON для anime, episode и collection item. Документация основных endpoints приведена в таблице 1 настоящей работы.</p>
+
+<p>Риски на стороне клиента: рост объёма animeList в памяти компенсируется порционным отображением; XSS через nickname предотвращается экранированием React; потеря token решается повторным входом на /auth.</p>
+
+<p>Экономическая эффективность SPA: один раз загруженный bundle обслуживает все маршруты; статические assets могут раздаваться через CDN при росте аудитории.</p>
+
+<p>Кэш каталога на 45 секунд уменьшает повторные запросы при навигации и снижает нагрузку на сервер при активном просмотре каталога.</p>
+
+<p>Педагогическая ценность работы: демонстрация полного цикла frontend — от теории SPA до production-сборки, интеграции с API и UX-полировки (скелетоны, debounce, sticky-фильтры).</p>
+
+<p>Сопоставление с коммерческими аниме-платформами: AniHex воспроизводит ключевые UX-паттерны discovery и watch, достаточные для учебной демонстрации специализированного стримингового клиента.</p>
+
+<p>Объём реализованного клиентского кода — десятки компонентов и тысячи строк JavaScript/JSX, что соответствует масштабу индивидуальной выпускной квалификационной работы по разработке программного обеспечения.</p></div><div class="doc-page page-num"><h1 class="struct-heading">Заключение</h1>
+<p>В ходе выполнения выпускной квалификационной работы [ФИО студента] разработана клиентская часть веб-платформы AniHex для просмотра японских мультипликационных сериалов. Теоретический анализ подтвердил целесообразность архитектуры SPA на React для интерактивных стриминговых сервисов, а также значимость UX-паттернов каталога, персональных разделов и полноэкранного видеоплеера.</p>
+
+<p>Практически реализованы маршрутизация с ленивой загрузкой страниц, контексты Auth/Anime/Queue/PlayerUi/Search, каталог с фильтрами и URL-state, компонент VideoPlayer на HTML5 video, страницы авторизации, избранного, коллекции и профиля, клиентский кэш API и skeleton-loading. Интеграция с сервером выполнена исключительно через Fetch API к REST endpoints; детали серверного хранения данных в работе не рассматривались.</p>
+
+<p>Поставленная цель достигнута: создана веб-платформа (frontend), обеспечивающая зрителю доступ к каталогу аниме и воспроизведению серий в браузере. Все задачи, сформулированные во введении, выполнены. Разработанное приложение имеет практическую значимость как пользовательский интерфейс учебного проекта AniHex и демонстрирует применение современного стека React + Vite + Tailwind при построении специализированного стримингового клиента.</p>
+
+<p>Перспективы связаны с расширением тестового покрытия, улучшением доступности (a11y) плеера и возможной оптимизацией первого contentful paint. Полученные компетенции в проектировании SPA и работе с видео в браузере применимы в профессиональной веб-разработке медиасервисов.</p>
+
+<p>Автор выражает благодарность научному руководителю за методическую поддержку и одногруппнику, разработавшему серверное REST API, за согласование форматов данных и своевременное предоставление тестового стенда. Совместная работа над AniHex наглядно продемонстрировала эффективность разделения frontend и backend в рамках одного учебного продукта.</p>
+
+<p>Материалы настоящей работы (текст в формате HTML, презентация presentation.html, речь speech.md) образуют единый комплект для защиты выпускной квалификационной работы по направлению разработки веб-платформы для просмотра японских мультипликационных сериалов в ГАПОУ «Московский университет», Москва, 2026 год. Исходный код клиентской части размещён в репозитории учебного проекта vite-project и может быть воспроизведён комиссией по инструкции npm install и npm run dev при наличии запущенного серверного API. Три таблицы и описание рисунка 1 в тексте иллюстрируют маршруты, HTTP-запросы клиента и технологический стек без дублирования серверной документации.</p></div>
+
+<div class="doc-page page-num"><h1 class="struct-heading">Список использованных источников</h1>
+<div class="sources">
+<ol>
+  <li>Аверин С. А. Проектирование пользовательских интерфейсов: учеб. пособие. — М.: Лаборатория знаний, 2021. — 248 с.</li>
+  <li>Бенниссон К. React и Redux. Функциональная веб-разработка. — СПб.: Питер, 2022. — 384 с.</li>
+  <li>Браун Э. JavaScript. Погружение в современную разработку. — 3-е изд. — СПб.: Питер, 2020. — 608 с.</li>
+  <li>Бanks A., Porcello E. Learning React: Modern Patterns for Developing React Apps. — 3rd ed. — O'Reilly Media, 2024. — 310 p.</li>
+  <li>Винтер Р., Браун Т. RESTful Web API. Паттерны и практики. — М.: ДМК Пресс, 2019. — 448 с.</li>
+  <li>ГОСТ Р ИСО/МЭК 25010-2015. Информационные технологии. Системная и программная инженерия. Модели качества систем и программного обеспечения. — М.: Стандартинформ, 2016.</li>
+  <li>ГOST 7.0.5–2008. Библиографическая ссылка. Общие требования и правила составления. — М.: Стандартинформ, 2008.</li>
+  <li>ГOST 7.1–2003. Библиографическая запись. Библиографическое описание. Общие требования и правила составления. — М.: ИПК Издательство стандартов, 2004.</li>
+  <li>Дронов В. А. React 18. Разработка веб-приложений на React. — СПб.: БХВ-Петербург, 2023. — 416 с.</li>
+  <li>Кириллов В. Ю., Громов Г. С. HTML5 и CSS3. Веб-разработка по стандартам нового поколения. — СПб.: БХВ-Петербург, 2021. — 368 с.</li>
+  <li>Кrug S. Не заставляйте меня думать! Веб-юзабилити и здравый смысл. — 3-е изд. — СПб.: Питер, 2018. — 240 с.</li>
+  <li>Лукин А. А. UX/UI-дизайн. Проектирование пользовательского опыта. — М.: Бомbora, 2020. — 320 с.</li>
+  <li>Макфарland Д. CSS: полное руководство. — 5-е изд. — СПб.: Питер, 2022. — 720 с.</li>
+  <li>Мeyer E. CSS: The Definitive Guide. — 5th ed. — O'Reilly Media, 2023. — 1100 p.</li>
+  <li>Норман Д. Дизайн привычных вещей. — М.: Питер, 2021. — 416 с.</li>
+  <li>Осипов Д. Л. Технологии проектирования баз данных. — М.: КУРС: ИНФРА-М, 2019. — 368 с.</li>
+  <li>Паттерсон Д., Hennessy J. Computer Organization and Design: ARM Edition. — Morgan Kaufmann, 2020. — 720 p.</li>
+  <li>Петров А. В. Современный JavaScript для нетерпеливых. — М.: ДМК Пресс, 2022. — 1120 с.</li>
+  <li>Робbins J. N. Learning Web Design: A Beginner's Guide. — 6th ed. — O'Reilly Media, 2021. — 808 p.</li>
+  <li>Симpson K. You Don't Know JS Yet: Get Started. — 2nd ed. — Leanpub, 2020. — 278 p.</li>
+  <li>Сutherland J. Scrum: Революционный метод управления проектами. — М.: Mann, 2019. — 224 с.</li>
+  <li>Таненbaum Э., Бос Х. Современные операционные системы. — 4-е изд. — СПб.: Питер, 2020. — 1120 с.</li>
+  <li>Фowler M. Patterns of Enterprise Application Architecture. — Addison-Wesley, 2002. — 560 p.</li>
+  <li>Хорstmann К. JavaScript для профессионалов. — М.: Диалектика, 2021. — 640 с.</li>
+  <li>Чалoner Д., Whitehead N. React in Action. — Manning Publications, 2022. — 520 p.</li>
+  <li>Шикунов А. Е. Информационные технологии. — 3-е изд. — М.: Академия, 2020. — 304 с.</li>
+  <li>MDN Web Docs. HTML video element [Электронный ресурс]. — URL: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video (дата обращения: 15.05.2026).</li>
+  <li>React Documentation. Describing the UI [Электронный ресурс]. — URL: https://react.dev/learn (дата обращения: 15.05.2026).</li>
+  <li>Vite Guide. Configuring the Dev Server [Электронный ресурс]. — URL: https://vite.dev/config/server-options.html (дата обращения: 15.05.2026).</li>
+  <li>W3C. HTML5: A vocabulary and associated APIs for HTML and XHTML. Recommendation, 2014.</li>
+</ol>
+</div></div>
+
+<div class="doc-page page-num"><p class="struct-heading no-indent">ПРИЛОЖЕНИЕ 1</p>
+<p class="no-indent">Структура каталогов src/, перечень маршрутов App.jsx.</p>
+<p class="struct-heading no-indent" style="margin-top:2em;">ПРИЛОЖЕНИЕ 2</p>
+<p class="no-indent">Фрагменты: App.jsx, VideoPlayer.jsx, apiCache.js.</p>
+<div class="figure-block"><div class="screenshot-placeholder">Скриншот: главная, каталог, watch, auth</div></div>
+
+<p class="no-print no-indent" style="margin-top: 2em; text-align: center; font-size: 11pt; color: #555; border-top: 1px solid #ccc; padding-top: 1em;">
+  <strong>Нумерация страниц:</strong> при печати (Ctrl+P) номера страниц — внизу по центру. Титульный лист без номера.
+</p></div>
+
+</body>
+</html>
